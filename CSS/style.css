@@ -1,0 +1,136 @@
+/* General Styles */
+body {
+  background-color: #FEFBF6;
+  color: #000000;
+  font-family: "Mitr", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.8em;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  margin: 0;
+  padding: 0;
+}
+
+/* Headings */
+h1, h2, h3, span {
+  font-family: "Mitr", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Full Layout */
+.layout {
+  display: flex;
+}
+
+/* Left Sidebar (Fixed Navigation) */
+.layout .left-menu {
+  width: 220px; /* Set the sidebar width */
+  height: 100vh;
+  background-color: #fff; /* Background color for the sidebar */
+  position: fixed;
+  left: 0;
+  top: 0;
+  overflow-y: auto;
+  text-align: center;
+  box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+  padding-top: 20px;
+}
+
+/* Right Main Content */
+.layout .right-main {
+  margin-top: 8%;
+  margin-left: 220px; /* Push content to the right to match sidebar width */
+  width: calc(100% - 220px); /* Adjust width dynamically */
+  padding: 20px;
+}
+
+/* Content Wrapper */
+.layout .right-main .content {
+  padding: 40px;
+}
+
+/* Ensure Main Content Row Does Not Overlap */
+.layout .right-main .content .row {
+  min-height: calc(100vh - 75px);
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Grid Layout for Images */
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 items per row */
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Image Card */
+.image-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  max-width: 300px;
+  text-align: center;
+}
+
+/* Image Styling */
+.image-card img {
+  width: 80%; /* Prevents images from being too large */
+  height: auto;
+  border-radius: 10px;
+}
+
+/* Text Section Inside Image Card */
+.image-details {
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 1024px) {
+  .layout .left-menu {
+      width: 180px; /* Reduce sidebar size on smaller screens */
+  }
+  .layout .right-main {
+      margin-left: 180px;
+      width: calc(100% - 180px);
+  }
+  .content-grid {
+      grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .layout .left-menu {
+      width: 150px; /* Smaller sidebar */
+  }
+  .layout .right-main {
+      margin-left: 150px;
+      width: calc(100% - 150px);
+  }
+  .content-grid {
+      grid-template-columns: repeat(2, 1fr); /* 2 columns on smaller screens */
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .layout .left-menu {
+      display: none; /* Hide sidebar on mobile */
+  }
+  .layout .right-main {
+      margin-left: 0;
+      width: 100%;
+  }
+  .content-grid {
+      grid-template-columns: repeat(1, 1fr); /* 1 column on mobile */
+  }
+}

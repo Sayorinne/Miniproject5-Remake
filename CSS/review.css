@@ -1,0 +1,118 @@
+
+/* content */
+
+.right-main .main-content {
+  width: 100%;
+  margin: 30px auto 30px;
+}
+
+.right-main .main-content .post-section {
+  width: 100%;
+  float: left;
+}
+
+.right-main .main-content .post-section .post-content {
+  width: 95%;
+  height: 270px;
+  margin: 10px auto;
+  border-radius: 5px;
+  background: #f6dcaf;
+  position: relative;
+}
+
+.right-main .main-content .post-section .read-more {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.right-main .main-content .post-section .post-content .post-image {
+widows: 40%;
+margin-top: 30px;
+margin-left: 20px;
+height: 200px;
+
+}
+
+
+.right-main .main-content .post-section .post-content .post-content-preview {
+width: 60%;
+height: 100%;
+float: right;
+text-align: left;
+}
+
+
+.right-main .main-content .post-section .post-content .post-content-preview .preview-title{
+  margin: 10px;
+}
+
+.post-btn {
+  padding: .5rem 1rem;
+  background: transparent;
+  border: 1px solid black;
+  border-radius: .25rem;
+  color: rgb(0, 0, 0);
+}
+.post-btn:hover {
+  color: white !important;
+  background: #B67352;
+}
+
+
+/*side bar */
+
+.rightcolumn .side-bar {
+    width: 70%;
+    float: left;
+    height: 100%;
+    margin: 10px 0;
+}
+
+.rightcolumn img.popular-post-picture {
+  height: 30px;
+  width: 30px;
+  float: left;
+  margin-right: 10px;
+}
+.rightcolumn .side-bar .section {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.post {
+  border-top: 1px solid rgb(0, 0, 0);
+  margin-top: 10px;
+  padding-top: 10px;
+  text-align: left;
+}
+
+/* side-bar tag */
+
+.section.topics .title {
+  margin: 1rem 0 1rem 0;
+
+}
+
+.side-bar .section.topics ul {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  text-align: left;
+  font-size: large;
+}
+
+.side-bar .section.topics ul li a{
+  display: block;
+  padding: 15px 0px 15px 0px;
+  border-bottom: 1px solid #e0e0e0;
+  transition: all 0.5s;
+}
+
+.side-bar .section.topics ul li a:hover {
+  padding-left: 20px;
+  transition: all 0.3s;
+  color: rgb(84, 54, 255);
+}

@@ -1,0 +1,33 @@
+.admin-content {
+    font-family: Arial, sans-serif;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  h1, h2 {
+    color: #32325d;
+  }
+  .card {
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    margin-bottom: 20px;
+    padding: 20px;
+  }
+  #balance {
+    font-size: 24px;
+    font-weight: bold;
+    color: #24b47e;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th, td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+  th {
+    background-color: #f6f9fc;
+  }

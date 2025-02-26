@@ -1,0 +1,43 @@
+/* Container for the content section */
+.content-container {
+    margin-left: 220px; /* Offset for left menu */
+    padding: 20px; /* Padding around the content */
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap into the next row */
+    gap: 20px; /* Space between each item */
+}
+
+/* Small card style for each item */
+.small-card {
+    flex: 1 1 calc(33% - 20px); /* Flex grow, shrink, and width calculation for 3 items per row */
+    max-width: 250px; /* Prevents items from being too big */
+    background-color: #f4f4f4; /* Background color for each card */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow on hover */
+    padding: 20px; /* Padding inside the card */
+    box-sizing: border-box;
+    transition: box-shadow 0.3s ease-in-out; /* Smooth hover effect */
+}
+
+.small-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* Larger shadow on hover */
+}
+
+/* Image inside the card */
+.small-card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* Adjust layout for smaller screens */
+@media (max-width: 768px) {
+    .small-card {
+        flex: 1 1 calc(50% - 20px); /* 2 items per row on tablets */
+    }
+}
+
+@media (max-width: 480px) {
+    .small-card {
+        flex: 1 1 100%; /* 1 item per row on mobile */
+    }
+}
