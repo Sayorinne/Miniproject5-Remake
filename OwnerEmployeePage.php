@@ -1,7 +1,7 @@
 <?php
 session_start();
 include "database.php";
-$sql = "SELECT * FROM employees";
+$sql = "SELECT * FROM employee";
 $result = mysqli_query($conn, $sql);
 ?>
 
@@ -56,7 +56,6 @@ $result = mysqli_query($conn, $sql);
                                 <tr>
                                     <th>ID</th>
                                     <th>ชื่อ</th>
-                                    <th>ตำแหน่ง</th>
                                     <th>อีเมล</th>
                                     <th>กระบวนการ</th>
                                 </tr>
@@ -65,13 +64,12 @@ $result = mysqli_query($conn, $sql);
                             <?php 
                                 while ($row = mysqli_fetch_assoc($result)) {
                                     echo "<tr>";
-                                    echo "<td>" . $row['employee_ID'] . "</td>";
-                                    echo "<td>" . $row['name'] . "</td>";
-                                    echo "<td>" . $row['position'] . "</td>";
+                                    echo "<td>" . $row['Employee_ID'] . "</td>";
+                                    echo "<td>" . $row['Username_employee'] . "</td>";
                                     echo "<td>" . $row['email'] . "</td>";
-                                    echo "<td><a href='EditEmployee.php?id=" . $row['employee_ID'] . "' class='edit'>แก้ไข</a> | ";
+                                    echo "<td><a href='EditEmployee.php?id=" . $row['Employee_ID'] . "' class='edit'>แก้ไข</a> | ";
                                     echo "<form method='post' action='DeleteEmployee.php' style='display:inline;'>";
-                                    echo "<input type='hidden' name='id' value='" . $row['employee_ID'] . "'>";
+                                    echo "<input type='hidden' name='id' value='" . $row['Employee_ID'] . "'>";
                                     echo "<input type='submit' value='ลบ' class='delete' onclick='return confirm(\"คุณแน่ใจหรือไม่?\")'>";
                                     echo "</form></td>";
                                     echo "</tr>";
