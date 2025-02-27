@@ -36,7 +36,7 @@ session_start();
         <div class="left-menu">
             <div class="logo">
                 <a href="#"> 
-                    <img src="Picture/LOGO.png" style="width: 200px;"> 
+                    <img src="Picture/logoframeart.png" style="width: 200px;"> 
                 </a>
                 <hr>
                 <div class="left-menu-content">
@@ -49,6 +49,7 @@ session_start();
                         </a>
                         <a href="#">
                             <span class="nav-link"><span>งานศิลป์</span></span>
+                            
                         </a>
                         <a href="#">
                             <span class="nav-link"><span>จองคิว</span></span>

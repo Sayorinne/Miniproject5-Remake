@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 ?>
@@ -104,64 +105,24 @@ session_start();
                     </div>
                 </div>
             </div>
-            
- <!-- Main Content Row -->
- <div class="w3-container content-container">
-    <div class="content-flex">
-        <!-- Image 1 -->
-        <div class="image-card">
-            <img src="Picture/3gok.jpg" class="w3-image w3-card-4">
-            <h5>Image 1 Name</h5>
-            <p><strong>Price:</strong> $20</p>
+            <!DOCTYPE html>
+            <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>จองบริการ</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <main>
+        <h1>จองบริการ</h1>
+        <div class="service-container">
+            <button class="service-btn">ซ่อมกรอบรูป</button>
+            <button class="service-btn">ทำกรอบแบบสั่งทำ</button>
         </div>
-
-        <!-- Image 2 -->
-        <div class="image-card">
-            <img src="Picture/3gok.jpg" class="w3-image w3-card-4">
-            <h5>Image 2 Name</h5>
-            <p><strong>Price:</strong> $25</p>
-        </div>
-
-        <!-- Image 3 -->
-        <div class="image-card">
-            <img src="Picture/3gok.jpg" class="w3-image w3-card-4">
-            <h5>Image 3 Name</h5>
-            <p><strong>Price:</strong> $30</p>
-        </div>
-
-        <!-- Image 4 -->
-        <div class="image-card">
-            <img src="Picture/3gok.jpg" class="w3-image w3-card-4">
-            <h5>Image 4 Name</h5>
-            <p><strong>Price:</strong> $35</p>
-        </div>
-
-        <!-- Image 5 -->
-        <div class="image-card">
-            <img src="Picture/3gok.jpg" class="w3-image w3-card-4">
-            <h5>Image 5 Name</h5>
-            <p><strong>Price:</strong> $40</p>
-        </div>
-
-        <!-- Image 6 -->
-        <div class="image-card">
-            <img src="Picture/3gok.jpg" class="w3-image w3-card-4">
-            <h5>Image 6 Name</h5>
-            <p><strong>Price:</strong> $45</p>
-        </div>
-    </div>
-</div>
-
-        
-    </div>
-    </div>
-</div>
-</div>
-
-
-
-    </div>
-    </div>
-    </div>
+    </main>
 </body>
 </html>
+

@@ -27,9 +27,7 @@ session_start();
     <script src="JS/popular.js" defer></script>
     <script src="JS/profile.js" defer></script>
 </head>
-<body>
-
-    <div class="layout expanded home-page">
+<body><div class="layout expanded home-page">
         <!-- Left Menu -->
         <div class="left-menu">
             <div class="logo">
@@ -61,7 +59,7 @@ session_start();
         <div class="right-main">
             <div class="top-nav">
                 <div class="inside">
-                    <h1 style="padding-right: 70%;">กรอบรูป</h1>
+                    <h1 style="padding-right: 60%;">รายละเอียดงานศิลปะ</h1>
                     <div class="shopping-cart-icon">
                         <h5 style="padding-right: 10% ;">คำสั่งซื้อทั้งหมด</h5>
                     </div>
@@ -106,51 +104,41 @@ session_start();
             </div>
             
  <!-- Main Content Row -->
- <div class="w3-container content-container">
-    <div class="content-flex">
-        <!-- Image 1 -->
-        <div class="image-card">
-            <img src="Picture/3gok.jpg" class="w3-image w3-card-4">
-            <h5>Image 1 Name</h5>
-            <p><strong>Price:</strong> $20</p>
-        </div>
+ <!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สินค้า</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+    <main>
+        <section class="product">
+            <div class="product-image">
+                <img src="Picture/3gok.jpg" alt="รูปสินค้า">
+            </div>
+            <div class="product-details">
+                <h2>ชื่องานศิลปะ</h2>
 
-        <!-- Image 2 -->
-        <div class="image-card">
-            <img src="Picture/3gok.jpg" class="w3-image w3-card-4">
-            <h5>Image 2 Name</h5>
-            <p><strong>Price:</strong> $25</p>
-        </div>
+                <div class="options">
+                    <p>ขนาด: A4 </p>
+                    
+                <p class="price">ราคา: $100.00 - $200.00</p>
 
-        <!-- Image 3 -->
-        <div class="image-card">
-            <img src="Picture/3gok.jpg" class="w3-image w3-card-4">
-            <h5>Image 3 Name</h5>
-            <p><strong>Price:</strong> $30</p>
-        </div>
+                <p>รายละเอียดแรงบัลดาลใจ : </p>
 
-        <!-- Image 4 -->
-        <div class="image-card">
-            <img src="Picture/3gok.jpg" class="w3-image w3-card-4">
-            <h5>Image 4 Name</h5>
-            <p><strong>Price:</strong> $35</p>
-        </div>
 
-        <!-- Image 5 -->
-        <div class="image-card">
-            <img src="Picture/3gok.jpg" class="w3-image w3-card-4">
-            <h5>Image 5 Name</h5>
-            <p><strong>Price:</strong> $40</p>
-        </div>
-
-        <!-- Image 6 -->
-        <div class="image-card">
-            <img src="Picture/3gok.jpg" class="w3-image w3-card-4">
-            <h5>Image 6 Name</h5>
-            <p><strong>Price:</strong> $45</p>
-        </div>
-    </div>
-</div>
+                <div class="actions">
+                    <button class="buy-btn">สั่งซื้อ</button>
+                    <button class="add-cart-btn">เพิ่มสินค้า</button>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
 
         
     </div>
@@ -164,4 +152,4 @@ session_start();
     </div>
     </div>
 </body>
-</html>
+</html></body>

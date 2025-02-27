@@ -61,7 +61,7 @@ session_start();
         <div class="right-main">
             <div class="top-nav">
                 <div class="inside">
-                    <h1 style="padding-right: 70%;">กรอบรูป</h1>
+                    <h1 style="padding-right: 60%;">กรอบรูป</h1>
                     <div class="shopping-cart-icon">
                         <h5 style="padding-right: 10% ;">คำสั่งซื้อทั้งหมด</h5>
                     </div>
@@ -157,8 +157,6 @@ session_start();
     </div>
 </div>
 </div>
-
-
 
     </div>
     </div>
