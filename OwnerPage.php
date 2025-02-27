@@ -40,11 +40,7 @@ session_start();
 
 
     <?php
-    // เชื่อมต่อกับฐานข้อมูล
     include "database.php";
-    // คำสั่ง SQL SELECT เพื่อดึงข้อมูลจากตาราง "topic"
-    $sql = "SELECT * FROM review";
-    $result = mysqli_query($conn, $sql);
     ?>
 
 
@@ -55,16 +51,16 @@ session_start();
                     <!-- <input type="text" name="search" placeholder="Search.."> -->
                     <div class="left-icon">
                         <!-- Account validate -->
-                        <?php if(isset($_SESSION['Admin_ID'])): ?>
+                        <?php if(isset($_SESSION['Owner_ID'])): ?>
                             <div class="profile-button">
-                            <p class =" fa fa-user" style= "margin: 10px" onclick="toggloeMenu()"> <?php echo $_SESSION['username_admin']; ?> </p>
+                            <p class =" fa fa-user" style= "margin: 10px" onclick="toggloeMenu()"> <?php echo $_SESSION['Username_Owner']; ?> </p>
                             </div>
                             <div class="sub-menu-wrap" id="subMenu">
                                 <div class="sub-menu">
                                     <div class="user-info">
                                         <img src="Picture/Sihba_07.jpg" >
-                                        <h2><?php echo $_SESSION['username_admin']; ?></h2>
-                                        <h3>ID:<?php echo $_SESSION['Admin_ID']; ?></h3>
+                                        <h2><?php echo $_SESSION['Username_Owner']; ?></h2>
+                                        <h3>ID:<?php echo $_SESSION['Owner_ID']; ?></h3>
                                     </div>
                                     
                                     <hr>

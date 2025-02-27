@@ -71,7 +71,7 @@
             <h2>Registration Form</h2>
             <form id="signupForm" method="POST" action="signup.php" onsubmit="return validateForm()">
                 <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required />
+                <input type="text" id="username" name="Username" required />
     
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required />
@@ -82,12 +82,8 @@
                 <label for="repassword">Re-type Password:</label>
                 <input type="password" id="repassword" name="repassword" required />
     
-                <label for="gender">Gender:</label>
-                <select id="gender" name="gender" required>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                </select>
+                <label for="Tel">Telephone number:</label>
+                <input type="text" id="Tel" name="Tel" required pattern="\d{10}" title="Enter a valid 10-digit phone number" >
                 <button type="submit">Register</button>
             </form>
 
@@ -108,6 +104,12 @@
             function validateForm() {
                 const password = document.getElementById('password').value;
                 const repassword = document.getElementById('repassword').value;
+                const tel = document.getElementById('Tel').value;
+
+                if (!/^\d{10}$/.test(tel)) {
+                    alert('Enter a valid 10-digit phone number.');
+                    return false;
+                }
     
                 if (!/^[a-zA-Z0-9]+$/.test(password)) {
                     alert('Password must contain only alphabets and numbers.');
