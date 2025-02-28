@@ -64,7 +64,7 @@ session_start();
                                     <hr>
                                     <a href="#" class="sub-menu-link">
                                         <img src="images/profile.png">
-                                        <p>Edit Profile12</p>
+                                        <p>Edit Profile</p>
                                         <span></span>
                                     </a>
 
