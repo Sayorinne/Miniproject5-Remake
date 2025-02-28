@@ -7,7 +7,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Backdoor - Edit Post</title>
+    <title>Owner Dashboard</title>
     
     <!-- External CSS -->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -48,7 +48,6 @@ session_start();
         <div class="right-main">
             <div class="top-nav">
                 <div class="inside">
-                    <!-- <input type="text" name="search" placeholder="Search.."> -->
                     <div class="left-icon">
                         <!-- Account validate -->
                         <?php if(isset($_SESSION['Owner_ID'])): ?>
@@ -98,6 +97,10 @@ session_start();
                     <div class="ms-auto nav">
                     <a aria-current="page" class href="OwnerPage.php">
                             <span class="nav-link"><span>แดชบอร์ด</span></span>
+                        </a>
+
+                        <a href="OwnerHistory.php">
+                            <span class="nav-link"><span>ประวัติการทำรายการ</span></span>
                         </a>
 
                         <a class href="OwnerEmployeePage.php">
@@ -189,14 +192,14 @@ session_start();
 
         // Display balance
         const balanceElement = document.getElementById('balance');
-        balanceElement.textContent = `Available balance: $${data.balance.available[0].amount / 100} ${data.balance.available[0].currency}`;
+        balanceElement.textContent = `Available balance: ${data.balance.available[0].amount / 100} ${data.balance.available[0].currency}`;
 
         // Display payments
         const paymentsBody = document.querySelector('#payments-table tbody');
         data.payments.forEach(payment => {
           const row = paymentsBody.insertRow();
           row.insertCell(0).textContent = payment.id;
-          row.insertCell(1).textContent = `$${payment.amount / 100} ${payment.currency}`;
+          row.insertCell(1).textContent = `${payment.amount / 100} ${payment.currency}`;
           
           // Get customer name from billing details or customer object
           let customerName = 'N/A';
@@ -205,9 +208,14 @@ session_start();
           } else if (payment.customer && payment.customer.name) {
             customerName = payment.customer.name;
           }
+          let customerEmail = 'N/A';
+          if (payment.payment_method && payment.payment_method.billing_details.email) {
+            customerEmail = payment.payment_method.billing_details.email;
+          } else if (payment.customer && payment.customer.email) {
+            customerEmail = payment.customer.email;
+          }
           row.insertCell(2).textContent = customerName;
-          
-          row.insertCell(3).textContent = payment.customer ? payment.customer.email : 'N/A';
+          row.insertCell(3).textContent = customerEmail;
           row.insertCell(4).textContent = payment.status;
         });
 

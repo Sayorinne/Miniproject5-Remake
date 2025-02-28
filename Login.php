@@ -10,7 +10,7 @@
 <body>
     <form action="signin.php" method="POST">
     <div class="main">
-        <h1>FeramArt</h1>
+        <h1>FrameArt</h1>
         <form action="">
             <label for="first">
                   Username:
@@ -42,7 +42,7 @@
             </a>
         </p>
         <p>Join as Guest
-            <a href="Homepage.php"
+            <a href="CustomerHomepage.php"
             style="text-decoration:none;">
             Go to Homepage
             </a>

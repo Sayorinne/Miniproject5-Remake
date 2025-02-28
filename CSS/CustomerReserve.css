@@ -1,0 +1,211 @@
+.service-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin-top: 50px;
+}
+
+.service-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 20px 40px;
+    margin: 10px;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.service-btn a {
+    color: white;
+    text-decoration: none;
+}
+
+.service-btn:hover {
+    background-color: #0056b3;
+}
+
+
+/* ปฏิทิน */
+
+.schedule-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background: antiquewhite;
+    border: 5px;
+    border-radius: 20px;
+    padding: 3%;
+    box-shadow:0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+.schedule-box, .time-box {
+    width: 45%;
+}
+
+.schedule-grid, .time-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+}
+
+.schedule-btn, .time-btn {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border: none;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow:0px 4px 8px rgba(0, 0, 0, 0.1)
+}
+
+.schedule-btn:hover, .time-btn:hover {
+    background-color: #aeff7f;
+}
+
+.month-btn, .year-btn {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.month-btn.active, .year-btn.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.month-btn:hover, .year-btn:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+/* ปุ่มเลือกไม่ได้ */
+.month-btn, .year-btn {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border: #0056b3;
+    border-radius: 4px;
+    box-shadow:0px 4px 8px rgba(0, 0, 0, 0.1)
+}
+
+.month-btn.active, .year-btn.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.month-btn:hover:not(.active), .year-btn:hover:not(.active) {
+    background-color: #007bff;
+    color: white;
+}
+
+.month-btn:disabled, .year-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.schedule-btn.active, .time-btn.active {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+}
+
+.schedule-btn:disabled, .time-btn:disabled {
+    background-color: #ccc; /* Gray background for disabled buttons */
+    color: #666; /* Darker gray text for disabled buttons */
+}
+
+
+/* ปุ่มยกเลิก ยืนยัน */
+a.service-btn.accept {
+    background-color: #28a745;
+}
+
+a.service-btn.accept:hover {
+    background-color: #00ff3c;
+    transition-duration: 0.5 ms;
+}
+
+a.service-btn.return {
+    background-color: #ffc107;
+}
+
+a.service-btn.return:hover {
+    background-color: #c2c04b;
+    transition-duration: 0.5 ms;
+}
+
+button.service-btn.accept {
+    background-color: #28a745;
+}
+
+button.service-btn.accept:hover {
+    background-color: #00ff3c;
+    transition-duration: 0.5 ms;
+}
+
+/* แบบฟอร์มกรอกข้อมูล */
+
+.form-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: 'Mitr', sans-serif;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.form-group textarea {
+    resize: vertical;
+    height: 100px;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}

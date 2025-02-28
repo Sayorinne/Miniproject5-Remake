@@ -14,6 +14,8 @@ function getStripeData() {
         $subscriptions = \Stripe\Subscription::all(['limit' => 5, 'expand' => ['data.customer']]);
         $products = \Stripe\Product::all(['limit' => 5]);
         
+
+        
         return [
             'balance' => $balance,
             'payments' => $payments->data,

@@ -28,34 +28,71 @@ $result = mysqli_query($conn, $sql);
 <body>
     <div class="layout expanded home-page">
         <div class="right-main">
-            <div class="top-nav">
+        <div class="top-nav">
                 <div class="inside">
                     <div class="left-icon">
+                        <!-- Account validate -->
                         <?php if(isset($_SESSION['Owner_ID'])): ?>
                             <div class="profile-button">
-                                <p class="fa fa-user" style="margin: 10px" onclick="toggloeMenu()"> <?php echo $_SESSION['Username_Owner']; ?> </p>
+                            <p class =" fa fa-user" style= "margin: 10px" onclick="toggloeMenu()"> <?php echo $_SESSION['Username_Owner']; ?> </p>
+                            </div>
+                            <div class="sub-menu-wrap" id="subMenu">
+                                <div class="sub-menu">
+                                    <div class="user-info">
+                                        <img src="Picture/Sihba_07.jpg" >
+                                        <h2><?php echo $_SESSION['Username_Owner']; ?></h2>
+                                        <h3>ID:<?php echo $_SESSION['Owner_ID']; ?></h3>
+                                    </div>
+                                    
+                                    <hr>
+                                    <a href="#" class="sub-menu-link">
+                                        <img src="images/profile.png">
+                                        <p>Edit Profile</p>
+                                        <span></span>
+                                    </a>
+
+                                    <a href="logout.php" class="sub-menu-link">
+                                        <img src="images/profile.png">                                    
+                                        <p>Logout</p>
+                                        <span></span>
+                                    </a>
+                                </div>
                             </div>
                         <?php else: ?>
-                            <a href="login.php" class="login-button btn btn-primary"><span>Login</span></a>
-                            <a href="registration.php" class="login-button btn btn-primary"><span>Register</span></a>
+                            <a role="button" tabindex="0" href="login.php" class="login-button btn btn-primary">
+                                <span>Login</span>
+                            </a>
+                            <a role="button" tabindex="0" href="registration.php" class="login-button btn btn-primary">
+                                <span>Register</span>
+                            </a>
                         <?php endif; ?>
                     </div>
                 </div>
             </div>
+            
             <div class="admin-wrapper">
                 <div class="left-menu">
                     <hr>
                     <div class="left-menu-content">
                         <div class="ms-auto nav">
-                            <a href="OwnerPage.php"><span class="nav-link">แดชบอร์ด</span></a>
-                            <a href="OwnerEmployeePage.php"><span class="nav-link">จัดการ "พนักงาน"</span></a>
+                        <a  class href="OwnerPage.php">
+                            <span class="nav-link"><span>แดชบอร์ด</span></span>
+                        </a>
+
+                        <a href="OwnerHistory.php">
+                            <span class="nav-link"><span>ประวัติการทำรายการ</span></span>
+                        </a>
+
+                        <a aria-current="page" href="OwnerEmployeePage.php">
+                            <span class="nav-link"><span>จัดการ "พนักงาน"</span></span>
+                        </a>
                         </div>
                     <hr>
                     </div>
                 </div>
                 <div class="admin-content">
                     <div class="button-group">
-                        <a href="AddEmployee.php" class="btn btn-big">เพิ่มพนักงาน</a>
+                        <a href="OwnerAddEmployee.php" class="btn btn-big">เพิ่มพนักงาน</a>
                     </div>
                     <div class="content">
                         <h2 class="page-title">รายชื่อพนักงาน</h2>
@@ -75,7 +112,7 @@ $result = mysqli_query($conn, $sql);
                                     echo "<td>" . $row['Employee_ID'] . "</td>";
                                     echo "<td>" . $row['Username_employee'] . "</td>";
                                     echo "<td>" . $row['email'] . "</td>";
-                                    echo "<td><a href='EditEmployee.php?Employee_ID=" . $row['Employee_ID'] . "' class='edit'>แก้ไข</a> | ";
+                                    echo "<td><a href='OwnerEditEmployee.php?Employee_ID=" . $row['Employee_ID'] . "' class='edit'>แก้ไข</a> | ";
                                     echo "<form method='post' action='DeleteEmployee.php' style='display:inline;'>";
                                     echo "<input type='hidden' name='Employee_ID' value='" . $row['Employee_ID'] . "'>";
                                     echo "<input type='submit' name='DelEmp' value='ลบ' class='delete' onclick='return confirm(\"คุณแน่ใจหรือไม่?\")'>";

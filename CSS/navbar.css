@@ -1,28 +1,4 @@
-.layout .right-main .top-nav .inside .left-links {
-    margin-left: auto;
-    position: static;
-}
-
-.layout .right-main .top-nav .inside .login-button {
-    position: static;
-    margin-left: 50px;
-    margin-right: auto;
-}
-.btn.btn-primary {
-    font-family: "Mitr", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    background-color: #B67352;
-    border-color: #000000;
-    color: #ffffff;
-    font-weight: 500;
-}
-
-.btn {
-    border-radius: 0;
-    padding: 12px 18px;
-}
-
+/* Layout Styles */
 .layout .right-main .top-nav {
     background-color: #ECB159;
     border-bottom: 1px solid #33343a;
@@ -37,12 +13,23 @@
 .layout .right-main .top-nav .inside {
     align-items: center;
     display: flex;
+    justify-content: space-between; /* Add this line */
     height: 75px;
     padding: 15px 15px 15px 10px;
 }
 
+.layout .right-main .top-nav .inside .left-section {
+    display: flex;
+    align-items: center;
+}
 
-.left-menu {
+.layout .right-main .top-nav .inside .right-section {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* Add this line */
+}
+
+.layout .left-menu {
     background-color: #ffffff;
     border-right: 1px solid #000000;
     font-family: "Mitr", sans-serif;
@@ -51,44 +38,27 @@
     bottom: 0;
     position: fixed;
     top: 0;
-    width: 260px;
+    width: 220px;
     z-index: 10;
 }
 
-.left-menu .left-menu-content .nav a {
+.layout .left-menu .left-menu-content .nav a {
     color: hsla(0, 0%, 100%, 0.75);
     display: inline-block;
     font-size: 16px;
     padding: 10px 30px;
     width: 100%;
+    transition: background-color 50ms;
 }
 
-.left-menu .left-menu-content .nav a:hover {
+.layout .left-menu .left-menu-content .nav a:hover {
     background-color: hsla(207, 100%, 72%, 0.75);
-    display: inline-block;
-    font-size: 16px;
-    padding: 10px 30px;
-    width: 100%;
-    transition-duration: 50ms;
 }
 
-.layout .left-menu .left-menu-content .nav .nav-link{
+.layout .left-menu .left-menu-content .nav .nav-link {
     color: hsla(0, 0%, 0%, 0.75);
+}
 
-}
-.layout .left-menu .left-menu-content .nav a span {
-    padding: 0;
-    transition: .5s;
-}
-.nav-link span {
-    color: #000000;
-    display: block;
-    padding: .5rem 1rem;
-    text-decoration: none;
-    transition: color .5s ease-in-out;
-    background-color: .15s ease-in-out; 
-    border-color: .15s ease-in-out;
-}
 .layout .left-menu .left-menu-content .nav [aria-current] {
     background-color: #8CB9BD;
 }
@@ -97,9 +67,14 @@
     background-color: #00d9ff;
 }
 
+.left-menu .left-menu-content .nav a span {
+    padding: 0;
+    transition: color 0.5s;
+}
+
 .left-menu .left-menu-content .nav a span:hover {
-    color: hsla(273, 100%, 50%, 0.75); 
-    transition: 20ms;
+    color: hsla(273, 100%, 50%, 0.75);
+    transition: color 20ms;
 }
 
 .nav {
@@ -109,8 +84,9 @@
     margin-bottom: 0;
     padding-left: 0;
 }
+
 a, a:hover {
-    transition: 0.5s;
+    transition: color 0.5s;
 }
 
 a {
@@ -126,19 +102,35 @@ a:-webkit-any-link {
     cursor: pointer;
 }
 
-.profile-icon {
-position: right;
+/* Top Nav Styles */
+.top-nav h1 {
+    margin: 0;
 }
 
+.icons {
+    display: flex;
+    align-items: center;
+}
+
+.shopping-cart-icon, .profile-icon {
+    margin-left: 20px;
+}
+
+.profile-icon {
+    position: right;
+}
+
+/* Sub Menu Styles */
 .sub-menu-wrap {
     position: absolute;
     top: 100%;
-    right: 10%;
+    right: 1%;
     width: 320px;
     max-height: 0px;
     overflow: hidden;
     transition: max-height 0.5s;
 }
+
 .sub-menu-wrap.open-menu {
     max-height: 400px;
 }
@@ -148,11 +140,13 @@ position: right;
     padding: 20px;
     margin: 10px;
 }
+
 .user-info {
     display: flex;
     align-items: center;
 }
-.user-info h3{
+
+.user-info h3 {
     font-weight: 200;
     opacity: 50%;
     color: gray;
@@ -166,12 +160,12 @@ position: right;
     object-fit: contain;
 }
 
-.sub-menu hr{
+.sub-menu hr {
     border: 0;
     height: 1px;
     width: 100%;
     background: #ccc;
-    margin: 10px 0 10px;
+    margin: 10px 0;
 }
 
 .sub-menu-link {
@@ -182,26 +176,28 @@ position: right;
     margin: 12px 0;
 }
 
-.sub-menu-link p{
+.sub-menu-link p {
     width: 100%;
 }
 
-.sub-menu-link img{
+.sub-menu-link img {
     width: 40px;
     background: #e5e5e5;
     border-radius: 50%;
     padding: 8px;
-    margin-right:  15px;
+    margin-right: 15px;
 }
-.sub-menu-link span{
+
+.sub-menu-link span {
     font-size: 22px;
 }
-.sub-menu-link:hover span{
+
+.sub-menu-link:hover span {
     transform: translateX(5px);
 }
 
-.sub-menu-link:hover p{
-    font-weight: 600px;
+.sub-menu-link:hover p {
+    font-weight: 600;
 }
 
 .profile-image {
@@ -209,10 +205,42 @@ position: right;
     max-height: 100%;
 }
 
-
 .profile-image img {
     border-radius: 50%;
     width: 80px;
     height: 80px;
     object-fit: contain;
+}
+
+/* Button Styles */
+.login-button, .register-button, .logout-button {
+    padding: 8px 15px;
+    border: none;
+    background-color: #358C1B;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+    margin-left: 10px;
+    border-radius: 5px;
+}
+
+.layout .right-main .top-nav .inside .login-button {
+    position: static;
+    margin-left: 50px;
+    margin-right: auto;
+}
+
+.btn.btn-primary {
+    font-family: "Mitr", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    background-color: #B67352;
+    border-color: #000000;
+    color: #ffffff;
+    font-weight: 500;
+}
+
+.btn {
+    border-radius: 0;
+    padding: 12px 18px;
 }

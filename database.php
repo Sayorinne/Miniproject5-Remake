@@ -1,8 +1,8 @@
 <?php
 $host = 'localhost';
-$db   = 'bookmunity_db';
+$db   = 'frameart_db';
 $user = 'root';
-$pass = '';
+$pass = '26102540c';
 
 // Create connection
 $conn = new mysqli($host, $user, $pass, $db);

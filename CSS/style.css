@@ -79,7 +79,21 @@ h1, h2, h3, span {
   padding: 15px;
   max-width: 300px;
   text-align: center;
+  flex: 1 1 calc(33.333% - 10px);
+  box-sizing: border-box;
+  margin: 5px;
 }
+
+.content-flex {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 4 items per row */
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+  margin-left: 10%;
+}
+
+
 
 /* Image Styling */
 .image-card img {
@@ -94,6 +108,8 @@ h1, h2, h3, span {
   text-align: center;
   margin-top: 10px;
 }
+
+
 
 /* Responsive Adjustments */
 @media screen and (max-width: 1024px) {

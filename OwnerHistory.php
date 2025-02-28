@@ -2,11 +2,6 @@
 session_start();
 require_once('StripeHistory.php');
 
-// Check if user is logged in and has admin privileges
-if (!isset($_SESSION['Admin_ID'])) {
-    header("Location: login.php");
-    exit();
-}
 
 $transactions = StripeHistory::getTransactionHistory();
 ?>
@@ -15,7 +10,7 @@ $transactions = StripeHistory::getTransactionHistory();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Backdoor - Edit Post</title>
+    <title>Owner Dashboard - Transaction History</title>
     
     <!-- External CSS -->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -23,6 +18,7 @@ $transactions = StripeHistory::getTransactionHistory();
 
 
     <!-- Internal CSS -->
+    <link rel="stylesheet" href="CSS/ownerHistory.css">
     <link rel="stylesheet" href="CSS/ownerStyle.css">
     <link rel="stylesheet" href="CSS/ownerDashboard.css">
     <link rel="stylesheet" href="CSS/ownerNavbar.css">
@@ -48,31 +44,28 @@ $transactions = StripeHistory::getTransactionHistory();
 
 
     <?php
-    // เชื่อมต่อกับฐานข้อมูล
+
     include "database.php";
-    // คำสั่ง SQL SELECT เพื่อดึงข้อมูลจากตาราง "topic"
-    $sql = "SELECT * FROM review";
-    $result = mysqli_query($conn, $sql);
+
     ?>
 
 
         <!-- Right Main -->
         <div class="right-main">
-            <div class="top-nav">
+        <div class="top-nav">
                 <div class="inside">
-                    <!-- <input type="text" name="search" placeholder="Search.."> -->
                     <div class="left-icon">
                         <!-- Account validate -->
-                        <?php if(isset($_SESSION['Admin_ID'])): ?>
+                        <?php if(isset($_SESSION['Owner_ID'])): ?>
                             <div class="profile-button">
-                            <p class =" fa fa-user" style= "margin: 10px" onclick="toggloeMenu()"> <?php echo $_SESSION['username_admin']; ?> </p>
+                            <p class =" fa fa-user" style= "margin: 10px" onclick="toggloeMenu()"> <?php echo $_SESSION['Username_Owner']; ?> </p>
                             </div>
                             <div class="sub-menu-wrap" id="subMenu">
                                 <div class="sub-menu">
                                     <div class="user-info">
                                         <img src="Picture/Sihba_07.jpg" >
-                                        <h2><?php echo $_SESSION['username_admin']; ?></h2>
-                                        <h3>ID:<?php echo $_SESSION['Admin_ID']; ?></h3>
+                                        <h2><?php echo $_SESSION['Username_Owner']; ?></h2>
+                                        <h3>ID:<?php echo $_SESSION['Owner_ID']; ?></h3>
                                     </div>
                                     
                                     <hr>
@@ -108,11 +101,15 @@ $transactions = StripeHistory::getTransactionHistory();
             <hr>
                 <div class="left-menu-content">                   
                     <div class="ms-auto nav">
-                    <a aria-current="page" class href="OwnerPage.php">
+                    <a  class href="OwnerPage.php">
                             <span class="nav-link"><span>แดชบอร์ด</span></span>
                         </a>
 
-                        <a class href="OwnerEmployeePage.php">
+                        <a aria-current="page" href="OwnerHistory.php">
+                            <span class="nav-link"><span>ประวัติการทำรายการ</span></span>
+                        </a>
+
+                        <a href="OwnerEmployeePage.php">
                             <span class="nav-link"><span>จัดการ "พนักงาน"</span></span>
                         </a>
                     </div>
@@ -131,38 +128,43 @@ $transactions = StripeHistory::getTransactionHistory();
                 <p class="error"><?php echo htmlspecialchars($transactions['error']); ?></p>
             <?php else: ?>
                 <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Amount</th>
-                            <th>Status</th>
-                            <th>Date</th>
-                            <th>Customer Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Billing Address</th>
-                            <th>Payment Method</th>
-                            <th>Debug Info</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($transactions as $transaction): ?>
-                            <tr>
-                                <td><?php echo htmlspecialchars($transaction['id']); ?></td>
-                                <td><?php echo htmlspecialchars($transaction['amount'] . ' ' . $transaction['currency']); ?></td>
-                                <td><?php echo htmlspecialchars($transaction['status']); ?></td>
-                                <td><?php echo htmlspecialchars($transaction['date']); ?></td>
-                                <td><?php echo htmlspecialchars($transaction['customer_name']); ?></td>
-                                <td><?php echo htmlspecialchars($transaction['customer_email']); ?></td>
-                                <td><?php echo htmlspecialchars($transaction['customer_phone']); ?></td>
-                                <td><?php echo htmlspecialchars($transaction['billing_address']); ?></td>
-                                <td><?php echo htmlspecialchars($transaction['payment_method']); ?></td>
-                                <td>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th>Customer Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Billing Address</th>
+            <th>Payment Method</th>
+            <th>Transaction Receipt</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($transactions as $transaction): ?>
+            <tr>
+                <td><?php echo htmlspecialchars($transaction['id']); ?></td>
+                <td><?php echo htmlspecialchars($transaction['amount'] . ' ' . $transaction['currency']); ?></td>
+                <td><?php echo htmlspecialchars($transaction['status']); ?></td>
+                <td><?php echo htmlspecialchars($transaction['date']); ?></td>
+                <td><?php echo htmlspecialchars($transaction['customer_name']); ?></td>
+                <td><?php echo htmlspecialchars($transaction['customer_email']); ?></td>
+                <td><?php echo htmlspecialchars($transaction['customer_phone']); ?></td>
+                <td><?php echo htmlspecialchars($transaction['billing_address']); ?></td>
+                <td><?php echo htmlspecialchars($transaction['payment_method']); ?></td>
+                <td>
+                    <?php if (isset($transaction['receipt_url'])): ?>
+                        <a class="receipt-link" href="<?php echo htmlspecialchars($transaction['receipt_url']); ?>" target="_blank">View Receipt</a>
+                    <?php else: ?>
+                        N/A
+                    <?php endif; ?>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
             <?php endif; ?>
         </div>
             </div>

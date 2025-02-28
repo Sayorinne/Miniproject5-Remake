@@ -64,20 +64,20 @@
 
         <!-- Right Main -->
         <div class="right-main">
-            <div class="top-nav">
+        <div class="top-nav">
                 <div class="inside">
                     <div class="left-icon">
                         <!-- Account validate -->
-                        <?php if(isset($_SESSION['Admin_ID'])): ?>
+                        <?php if(isset($_SESSION['Employee_ID'])): ?>
                             <div class="profile-button">
-                            <p class =" fa fa-user" style= "margin: 10px" onclick="toggloeMenu()"> <?php echo $_SESSION['username_admin']; ?> </p>
+                            <p class =" fa fa-user" style= "margin: 10px" onclick="toggloeMenu()"> <?php echo $_SESSION['Username_employee']; ?> </p>
                             </div>
                             <div class="sub-menu-wrap" id="subMenu">
                                 <div class="sub-menu">
                                     <div class="user-info">
                                         <img src="Picture/Sihba_07.jpg" >
-                                        <h2><?php echo $_SESSION['username_admin']; ?></h2>
-                                        <h3>ID:<?php echo $_SESSION['Admin_ID']; ?></h3>
+                                        <h2><?php echo $_SESSION['Username_employee']; ?></h2>
+                                        <h3>ID:<?php echo $_SESSION['Employee_ID']; ?></h3>
                                     </div>
                                     
                                     <hr>
