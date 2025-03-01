@@ -29,9 +29,9 @@ if(isset($_POST['add'])) {
   // ตรวจสอบไฟล์ภาพ
   if (!empty($_FILES["image"]["name"])) {
     $target_filename = basename($_FILES["image"]["name"]);
-    move_uploaded_file($_FILES["image"]["tmp_name"], "uploads/" . $target_filename);
+    move_uploaded_file($_FILES["image"]["tmp_name"], "Picture/" . $target_filename);
   } else {
-    $target_filename = "default.jpg"; // ถ้าไม่มีอัปโหลด ให้ใช้รูป default
+    $target_filename = "eggRock.jpg"; // ถ้าไม่มีอัปโหลด ให้ใช้รูป default
   }
 
   // INSERT ข้อมูลลงฐานข้อมูล

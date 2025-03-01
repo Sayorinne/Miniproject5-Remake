@@ -17,7 +17,7 @@ if(isset($_POST['edit-product'])) {
     
     if (!empty($_FILES["image"]["name"])) {
         $target_filename = basename($_FILES["image"]["name"]);
-        move_uploaded_file($_FILES["image"]["tmp_name"], "uploads/" . $target_filename); // ย้ายไฟล์ไปที่โฟลเดอร์
+        move_uploaded_file($_FILES["image"]["tmp_name"], "Picture/" . $target_filename); // ย้ายไฟล์ไปที่โฟลเดอร์
     } else {
         $target_filename = $row['product_image']; // ถ้าไม่มีการอัปโหลดใหม่ ใช้ไฟล์เดิม
     }
