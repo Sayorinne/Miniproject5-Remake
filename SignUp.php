@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param('sssss',$userId, $username, $email, $password, $Tel);
 
     if ($stmt->execute()) {
-        header('Location: Login.php');
+        header('Location: Registration.php?status=success');
     } else {
         echo 'Error: Unable to register';
     }

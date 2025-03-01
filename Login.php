@@ -4,6 +4,9 @@
 <head>
     <title>Login</title>
     <link rel="stylesheet" href="CSS/login.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="JS/loginNotify.js"></script>
 </head>
 
 <body>

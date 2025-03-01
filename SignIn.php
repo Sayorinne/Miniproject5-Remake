@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($user && password_verify($password, $user['password'])) {
         $_SESSION['user_id'] = $user['User_ID'];
         $_SESSION['username'] = $user['Username'];
-        header('Location: CustomerHomepage.php');
+        header('Location: CustomerHomepage.php?status=success');
         exit();
     }
 
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($employee && password_verify($password, $employee['password'])) {
         $_SESSION['Employee_ID'] = $employee['Employee_ID']; 
         $_SESSION['Username_employee'] = $employee['Username_employee'];
-        header('Location: AdminPage.php');
+        header('Location: AdminPage.php?status=success');
         exit();
     }
 
@@ -36,10 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($owner && password_verify($password, $owner['password'])) {
         $_SESSION['Owner_ID'] = $owner['Owner_ID']; 
         $_SESSION['Username_Owner'] = $owner['Username_Owner'];
-        header('Location: OwnerPage.php');
+        header('Location: OwnerPage.php?status=success');
         exit();
     }
-
 
     echo 'Invalid username or password';
 }

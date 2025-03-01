@@ -1,33 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Form</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f3f3f3;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #71b7e6, #9b59b6);
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
+            overflow-y: auto;
         }
 
         .main {
             background-color: #fff;
             border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 350px;
+            text-align: center;
         }
 
         .main h2 {
-            color: #000000;
+            color: #333;
             margin-bottom: 20px;
+            font-size: 24px;
         }
 
         label {
@@ -35,6 +38,7 @@
             margin-bottom: 5px;
             color: #555;
             font-weight: bold;
+            text-align: left;
         }
 
         input[type="text"],
@@ -43,26 +47,44 @@
         select {
             width: 100%;
             margin-bottom: 15px;
-            padding: 10px;
+            padding: 12px;
             box-sizing: border-box;
             border: 1px solid #ddd;
             border-radius: 5px;
+            font-size: 14px;
         }
 
         button[type="submit"] {
             padding: 15px;
-            border-radius: 10px;
+            border-radius: 5px;
             border: none;
-            background-color: #00b306;
+            background-color: #5cb85c;
             color: white;
             cursor: pointer;
             width: 100%;
             font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #4cae4c;
+        }
+
+        p {
+            margin-top: 20px;
+            color: #555;
+        }
+
+        a {
+            color: #5cb85c;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
-
-
 <body>
     <div class="main">
         <h2>Registration Form</h2>
@@ -86,17 +108,12 @@
         </form>
 
         <p>Have an account?
-            <a href="login.php" style="text-decoration: none;">
-                <span>Return to login</span>
-            </a>
+            <a href="login.php">Return to login</a>
         </p>
         <p>Join as Guest
-            <a href="Homepage.php" style="text-decoration:none;">
-                Go to Homepage
-            </a>
+            <a href="Homepage.php">Go to Homepage</a>
         </p>
     </div>
-
 
     <script>
         function validateForm() {
@@ -122,6 +139,26 @@
             return true;
         }
     </script>
-</body>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('status') && urlParams.get('status') === 'success') {
+                document.body.style.overflow = 'hidden';
+                Swal.fire({
+                    title: 'Registration Successful!',
+                    text: 'Your account has been created successfully.',
+                    icon: 'success',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: true
+                }).then((result) => {
+                    if (result.isConfirmed || result.dismiss === Swal.DismissReason.backdrop) {
+                        window.location.href = 'Login.php';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
 </html>

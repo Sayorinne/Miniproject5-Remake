@@ -2,49 +2,60 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: sans-serif;
+    font-family: 'Roboto', sans-serif;
     line-height: 1.5;
     min-height: 100vh;
-    background: #f3f3f3;
+    background: linear-gradient(135deg, #e0e0e0, #cfcfcf);
     flex-direction: column;
     margin: 0;
 }
- 
+
 .main {
-    background-color: #fff;
+    background-color: #f9f9f9;
     border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-    padding: 10px 20px;
-    transition: transform 0.2s;
-    width: 500px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    padding: 30px 40px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    width: 400px;
     text-align: center;
 }
- 
-h1 {
-    color: #000000;
+
+.main:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
 }
- 
+
+h1 {
+    color: #444;
+    margin-bottom: 20px;
+}
+
 label {
     display: block;
     width: 100%;
     margin-top: 10px;
     margin-bottom: 5px;
     text-align: left;
-    color: #555;
+    color: #666;
     font-weight: bold;
 }
- 
- 
+
 input {
     display: block;
     width: 100%;
     margin-bottom: 15px;
     padding: 10px;
     box-sizing: border-box;
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
     border-radius: 5px;
+    transition: border-color 0.2s;
 }
- 
+
+input:focus {
+    border-color: #8bc34a;
+    outline: none;
+}
+
 button {
     padding: 15px;
     border-radius: 10px;
@@ -53,11 +64,17 @@ button {
     border: none;
     color: white;
     cursor: pointer;
-    background-color: #4CAF50;
+    background-color: #8bc34a;
     width: 100%;
     font-size: 16px;
+    transition: background-color 0.2s, transform 0.2s;
 }
- 
+
+button:hover {
+    background-color: #7cb342;
+    transform: translateY(-2px);
+}
+
 .wrap {
     display: flex;
     justify-content: center;
