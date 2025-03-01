@@ -40,7 +40,7 @@ session_start();
     // เชื่อมต่อกับฐานข้อมูล
     include "database.php";
     // คำสั่ง SQL SELECT เพื่อดึงข้อมูลจากตาราง "topic"
-    $sql = "SELECT * FROM topic";
+    $sql = "SELECT * FROM product_type";
     $result = mysqli_query($conn, $sql);
     ?>
         <!-- Right Main -->
@@ -135,22 +135,18 @@ session_start();
                             <?php 
                                 foreach ($result as $row) {
                                     echo "<tr>";
-                                    echo "<td>" . $row['topic_ID'] . "</td>";
-                                    echo "<td>" . $row['topic_name'] . "</td>"; 
-                                    echo "<td>" . substr($row['topic_description'],0,347) . "</td>"; 
-                                    echo "<td><a href='AdminEditTag.php?id=" . $row['topic_ID'] . "' class='edit'>แก้ไข</a></td>"; // Pass Tag_ID as parameter to the edit page
+                                    echo "<td>" . $row['Category_ID'] . "</td>";
+                                    echo "<td>" . $row['Category_name'] . "</td>"; 
+                                    echo "<td>" . substr($row['Category_detail'],0,347) . "</td>"; 
+                                    echo "<td><a href='AdminEditTag.php?id=" . $row['Category_ID'] . "' class='edit'>แก้ไข</a></td>"; // Pass Tag_ID as parameter to the edit page
                                     echo '<td><form method="post" action="DeleteTag.php">
-                                        <input type="hidden" name="id" value="'. $row['topic_ID'].'"> 
+                                        <input type="hidden" name="id" value="'. $row['Category_ID'].'"> 
                                         <input type="submit" value="ลบ" style= "border:none; background:none;"  class="delete" name="DelTag" onclick="return confirm(\'คุณแน่ใจหรือไม่ที่ต้องการลบ?\')"></form></td>';
                                     echo "</tr>";
                                 }
                             ?>
                         </table>
-
                     </div>
-
-
-
                 </div>
             </div>
         </div>

@@ -9,13 +9,16 @@ if(isset($_POST['add-tag'])) {
 
 
   // เพิ่มข้อมูลลงในฐานข้อมูล
-  $sql="INSERT INTO topic (topic_ID, topic_name, topic_description) 
+  $sql="INSERT INTO product_type (Category_ID, Category_name, Category_detail) 
         VALUES (NULL, '$topicname', '$topicdetail')";
 
   if ($conn->query($sql) === TRUE) {
-    echo "บันทึกข้อมูลสำเร็จ";
+    echo "<script>alert('บันทึกข้อมูลสำเร็จ');</script>";
+    echo '<meta http-equiv="refresh" content="0;url=AdminTagPage.php"> '; 
   } else {
-    echo "มีข้อผิดพลาดในการบันทึกข้อมูล: ".$conn->error;
+    echo "<script>alert('มีข้อผิดพลาดในการบันทึกข้อมูล');</script>";
+    echo '<meta http-equiv="refresh" content="0;url=AdminTagPage.php"> '; 
+
   }
   $conn->close();
 }

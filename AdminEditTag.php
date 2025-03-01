@@ -42,7 +42,7 @@
             // ดึงค่า id จาก GET parameter
             $id = $_GET['id'];
 
-            $sql = "SELECT * FROM topic WHERE topic_ID = '$id'" ;
+            $sql = "SELECT * FROM product_type WHERE Category_ID = '$id'" ;
             $result = mysqli_query($conn, $sql);
 
             // ตรวจสอบว่ามีข้อมูลที่สอดคล้องกับ id ที่ระบุหรือไม่
@@ -138,12 +138,12 @@
                         <form action="EditTag.php" method ="post">
                             <div>
                                 <label>ชื่อหมวดหมู่</label>
-                                <input type="text" name="tagname" id=""  class="text-input" value="<?php echo $topicID['topic_name']; ?>" >
+                                <input type="text" name="tagname" id=""  class="text-input" value="<?php echo $topicID['Category_name']; ?>" >
                             </div>
-                            <input type ="hidden" name="id" value="<?php echo $topicID['topic_ID']  ?> "> 
+                            <input type ="hidden" name="id" value="<?php echo $topicID['Category_ID']  ?> "> 
                             <div>
                                 <label>รายละเอียดหมวดหมู่</label>
-                                <textarea name="detail" id="description"><?php echo $topicID['topic_description']; ?> </textarea>
+                                <textarea name="detail" id="description"><?php echo $topicID['Category_detail']; ?> </textarea>
                             </div>
 
                             <div>

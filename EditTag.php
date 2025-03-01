@@ -2,7 +2,7 @@
 <?php session_start();
 include "database.php";
 
-$sql = "SELECT * FROM topic";
+$sql = "SELECT * FROM product_type";
 $result = mysqli_query($conn,$sql);
 $row = mysqli_fetch_assoc($result); 
 if(isset($_POST['edit-tag'])) {
@@ -12,15 +12,17 @@ if(isset($_POST['edit-tag'])) {
     $topicdetail = $_POST['detail'];
     $topic_ID = $_POST['id'];
     // เพิ่มข้อมูลลงในฐานข้อมูล
-    $sql="UPDATE topic 
-          SET   topic_name ='$topicname',
-                topic_description = '$topicdetail'
-          WHERE topic_ID = '$topic_ID'";
+    $sql="UPDATE product_type
+          SET   Category_name ='$topicname',
+                Category_detail = '$topicdetail'
+          WHERE Category_ID = '$topic_ID'";
   
     if ($conn->query($sql) === TRUE) {
-      echo "บันทึกข้อมูลสำเร็จ";
+      echo "<script>alert('Edit complete');</script>";
+      echo '<meta http-equiv="refresh" content="0;url=AdminTagPage.php"> '; 
     } else {
-      echo "มีข้อผิดพลาดในการบันทึกข้อมูล: ".$conn->error;
+      echo "<script>alert('มีข้อผิดพลาดในการบันทึกข้อมูล');</script>";
+      echo '<meta http-equiv="refresh" content="0;url=AdminTagPage.php"> '; 
     }
     $conn->close();
   }

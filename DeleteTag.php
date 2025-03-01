@@ -2,7 +2,7 @@
 include "database.php"; 
 if(isset($_POST["DelTag"])) {
     $id = $_POST["id"]; 
-    $sql = "DELETE FROM `topic` WHERE `topic_ID`= '$id'"; 
+    $sql = "DELETE FROM `product_type` WHERE `Category_ID`= '$id'"; 
     $result = mysqli_query($conn, $sql); 
 
     if($result) {

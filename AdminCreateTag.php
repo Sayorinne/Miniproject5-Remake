@@ -88,11 +88,16 @@ session_start();
 
             <hr>
                 <div class="left-menu-content">                   
-                    <div class="ms-auto nav">
+                <div class="ms-auto nav">
                         <a class href="AdminPage.php">
-                            <span class="nav-link"><span>จัดการ "บทความรีวิว"</span></span>
+                            <span class="nav-link"><span>จัดการ "สินค้ากรอบรูป"</span></span>
                         </a>
-                        <a aria-current="page" class href="AdminTagPage.php">
+
+                        <a class href="AdminArtPage.php">
+                            <span class="nav-link"><span>จัดการ "ภาพศิลป์"</span></span>
+                        </a>
+
+                        <a aria-current="page"  class href="AdminTagPage.php">
                             <span class="nav-link"><span>จัดการ "หมวดหมู่"</span></span>
                         </a>
                     </div>
