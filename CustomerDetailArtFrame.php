@@ -1,5 +1,26 @@
 <?php
 session_start();
+    include "database.php";
+    if(isset($_GET["id"])){
+        $id = intval($_GET["id"]);
+                
+      $sql="SELECT product.*, product_type.Category_name 
+            FROM product
+            JOIN product_type ON product.Category_ID = product_type.Category_ID
+            WHERE product.product_ID = '$id'";
+
+            $result = mysqli_query($conn,$sql);
+
+            if(mysqli_num_rows($result)>0){
+                $row = mysqli_fetch_assoc($result);
+            }else{
+                echo "No Product";
+                exit();
+            }
+        }else{
+            echo "No product_ID";
+            exit();
+        }     
 ?>
 
 <!DOCTYPE html>
@@ -111,23 +132,23 @@ session_start();
             <main class="content-container">
     <div class="product-detail-container">
         <!-- Left Box: Product Image -->
-        <div class="left-box">
+        <div class="left-box">       
             <div class="product-image">
-                <img src="Picture/3gok.jpg" alt="Product Image">
+                <img src="Picture/<?php echo htmlspecialchars($row['product_image']);?>" alt="Product Image">    
             </div>
         </div>
         
         <!-- Right Box: Product Information -->
         <div class="right-box">
             <div class="product-info">
-                <h2 class="product-title">ชื่อชนิดกรอบ</h2>
-                <p class="product-description">รายละเอียดสินค้า: กรอบรูปคุณภาพสูงสำหรับภาพขนาด A4</p>
-                <p class="product-specs">ขนาด: A4 | สี: ดำ</p>
+                <h2 class="product-title"><?php echo $row['product_name'];?></h2>
+                <p class="product-description">รายละเอียดสินค้า: <?php echo $row['detail'];?></p>
+                <p class="product-specs"><?php echo "ขนาด:" .$row['product_size'] ." | สี:" . $row['product_color'] ." | ประเภท:". $row['Category_name'];?></p>
             </div>
             
             <!-- Price and Availability -->
             <div class="product-pricing">
-                <div class="price">300฿</div>
+                <div class="price"><?php echo $row['product_price'];?> ฿</div>
             </div>
 
             <div>
@@ -144,31 +165,25 @@ session_start();
     </div>
     
     <!-- Below Box: Recommended Products -->
-    <div class="below-box">
-        <h3>Recommended Products</h3>
-        <div class="recommended-products">
-        <div class="product-card">
-            <img src="Picture/fanta.jpg" alt="Product 1">
-            <h4 class="product-name">Product 1</h4>
-            <p class="product-price">200฿</p>
+            <?php
+        // ดึงสินค้าที่เกี่ยวข้อง (ยกเว้นตัวเอง) จำนวน 4 รายการ
+        $related_sql = "SELECT product_ID, product_name, product_price, product_image 
+        FROM product WHERE product_ID != '$id' 
+        ORDER BY RAND() LIMIT 4";
+        $related_result = mysqli_query($conn, $related_sql);
+        ?>
+        <div class="below-box">
+            <h3>Recommended Products</h3>
+            <div class="recommended-products">
+                <?php while ($related_row = mysqli_fetch_assoc($related_result)): ?>
+                    <a href="CustomerDetailArtFrame.php?id=<?php echo $related_row['product_ID']; ?>" class="product-card">
+                        <img src="Picture/<?php echo htmlspecialchars($related_row['product_image']); ?>" alt="<?php echo htmlspecialchars($related_row['product_name']); ?>">
+                        <h4 class="product-name"><?php echo htmlspecialchars($related_row['product_name']); ?></h4>
+                        <p class="product-price"><?php echo number_format($related_row['product_price'],2); ?>฿</p>
+                    </a>
+                <?php endwhile; ?>
+            </div>
         </div>
-        <div class="product-card">
-            <img src="Picture/3gok.jpg" alt="Product 2">
-            <h4 class="product-name">Product 2</h4>
-            <p class="product-price">250฿</p>
-        </div>
-        <div class="product-card">
-            <img src="Picture/Cat_lifecoat.jpg" alt="Product 3">
-            <h4 class="product-name">Product 3</h4>
-            <p class="product-price">300฿</p>
-        </div>
-        <div class="product-card">
-            <img src="Picture/Sihba_07.jpg" alt="Product 4">
-            <h4 class="product-name">Product 4</h4>
-            <p class="product-price">350฿</p>
-        </div>
-        </div>
-    </div>
 </main>
 
         </div>
