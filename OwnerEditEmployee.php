@@ -57,16 +57,23 @@ if (isset($_GET['Employee_ID'])) {
                 <div class="left-menu">
                     <hr>
                     <div class="left-menu-content">
-                        <div class="ms-auto nav">
-                            <a href="OwnerPage.php"><span class="nav-link">แดชบอร์ด</span></a>
-                            <a href="OwnerEmployeePage.php"><span class="nav-link">จัดการ "พนักงาน"</span></a>
+                         <div class="ms-auto nav">
+                        <a  class href="OwnerPage.php">
+                            <span class="nav-link"><span>แดชบอร์ด</span></span>
+                        </a>
+                        <a href="OwnerHistory.php">
+                            <span class="nav-link"><span>ประวัติการทำรายการ</span></span>
+                        </a>
+                        <a aria-current="page" href="OwnerEmployeePage.php">
+                            <span class="nav-link"><span>จัดการ "พนักงาน"</span></span>
+                        </a>
                         </div>
                     <hr>
                     </div>
                 </div>
                 <div class="admin-content">
                     <div class="button-group">
-                        <a href="AddEmployee.php" class="btn btn-big">เพิ่มพนักงาน</a>
+                        <a href="OwnerAddEmployee.php" class="btn btn-big">เพิ่มพนักงาน</a>
                     </div>
                     <div class="content">
                         <h2 class="page-title">แก้ไขข้อมูลพนักงาน</h2>
