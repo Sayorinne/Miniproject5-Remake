@@ -2,6 +2,7 @@
 .layout .right-main .top-nav {
     background-color: #ECB159;
     border-bottom: 1px solid #33343a;
+    border-color: rgba(51, 52, 58, 0.5);
     height: 80px;
     left: 220px;
     position: fixed;
@@ -32,14 +33,27 @@
 .layout .left-menu {
     background-color: #ffffff;
     border-right: 1px solid #000000;
+    border-color: rgba(51, 52, 58, 0.5);
     font-family: "Mitr", sans-serif;
     font-weight: 400;
     font-style: normal;
     bottom: 0;
+    left: 0;
     position: fixed;
     top: 0;
     width: 220px;
     z-index: 10;
+    overflow-y: auto;
+    text-align: center;
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+    padding-top: 20px;
+    
+}
+
+.layout .left-menu .logo .img {
+    height: 80px;
+    image-resolution: from-image;
+    
 }
 
 .layout .left-menu .left-menu-content .nav a {
@@ -138,12 +152,19 @@ a:-webkit-any-link {
 .sub-menu {
     background: #fff;
     padding: 20px;
-    margin: 10px;
+    margin: 1px 10px 10px 10px;
+    box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.1);
 }
 
 .user-info {
     display: flex;
+    flex-direction: column;
     align-items: center;
+}
+
+.user-info h2 {
+    font-weight: 200;
+    height: 20px;
 }
 
 .user-info h3 {
@@ -238,6 +259,7 @@ a:-webkit-any-link {
     border-color: #000000;
     color: #ffffff;
     font-weight: 500;
+    border-radius: 8px;
 }
 
 .btn {

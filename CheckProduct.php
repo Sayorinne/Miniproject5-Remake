@@ -1,8 +1,8 @@
-<?php 
+<?php
 session_start();
 include "database.php";
 
-if(isset($_POST['add'])) {
+if (isset($_POST['add'])) {
   // รับข้อมูลจากฟอร์ม
   $product_name = $_POST['name'];
   $price = $_POST['price'];
@@ -11,7 +11,7 @@ if(isset($_POST['add'])) {
   $detail = $_POST['detail'];
 
   // หาหมวดหมู่แรกที่ยังมีอยู่
-  $query = "SELECT Category_ID FROM product_type ORDER BY Category_ID ASC LIMIT 1"; 
+  $query = "SELECT Category_ID FROM product_type ORDER BY Category_ID ASC LIMIT 1";
   $result = mysqli_query($conn, $query);
   $row = mysqli_fetch_assoc($result);
   $default_category_id = $row ? $row['Category_ID'] : NULL; // ถ้าไม่มีเลยให้เป็น NULL
@@ -40,10 +40,10 @@ if(isset($_POST['add'])) {
 
   if ($conn->query($sql) === TRUE) {
     echo "<script>alert('บันทึกข้อมูลสำเร็จ');</script>";
-    echo '<meta http-equiv="refresh" content="0;url=AdminPage.php">'; 
+    echo '<meta http-equiv="refresh" content="0;url=AdminPage.php">';
   } else {
     echo "<script>alert('มีข้อผิดพลาดในการบันทึกข้อมูล');</script>";
-    echo '<meta http-equiv="refresh" content="0;url=AdminPage.php">'; 
+    echo '<meta http-equiv="refresh" content="0;url=AdminPage.php">';
   }
 
   $conn->close();

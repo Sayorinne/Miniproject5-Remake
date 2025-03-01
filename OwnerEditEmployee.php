@@ -26,6 +26,7 @@ if (isset($_GET['Employee_ID'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,7 +35,8 @@ if (isset($_GET['Employee_ID'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="CSS/ownerStyle.css">
     <link rel="stylesheet" href="CSS/ownerNavbar.css">
-    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <!-- JQuery -->
 
@@ -44,24 +46,26 @@ if (isset($_GET['Employee_ID'])) {
     <script src="JS/profile.js" defer></script>
     <script src="JS/texteditor.js" defer></script>
 </head>
+
 <body>
     <div class="layout expanded home-page">
         <div class="right-main">
             <div class="top-nav">
                 <div class="inside">
                     <div class="left-icon">
-                    <?php if(isset($_SESSION['Owner_ID'])): ?>
+                        <?php if (isset($_SESSION['Owner_ID'])): ?>
                             <div class="profile-button">
-                            <p class =" fa fa-user" style= "margin: 10px" onclick="toggloeMenu()"> <?php echo $_SESSION['Username_Owner']; ?> </p>
+                                <p class=" fa fa-user" style="margin: 10px" onclick="toggloeMenu()">
+                                    <?php echo $_SESSION['Username_Owner']; ?> </p>
                             </div>
                             <div class="sub-menu-wrap" id="subMenu">
                                 <div class="sub-menu">
                                     <div class="user-info">
-                                        <img src="Picture/Sihba_07.jpg" >
+                                        <img src="Picture/Sihba_07.jpg">
                                         <h2><?php echo $_SESSION['Username_Owner']; ?></h2>
                                         <h3>ID:<?php echo $_SESSION['Owner_ID']; ?></h3>
                                     </div>
-                                    
+
                                     <hr>
                                     <a href="#" class="sub-menu-link">
                                         <img src="images/profile.png">
@@ -70,7 +74,7 @@ if (isset($_GET['Employee_ID'])) {
                                     </a>
 
                                     <a href="logout.php" class="sub-menu-link">
-                                        <img src="images/profile.png">                                    
+                                        <img src="images/profile.png">
                                         <p>Logout</p>
                                         <span></span>
                                     </a>
@@ -91,18 +95,18 @@ if (isset($_GET['Employee_ID'])) {
                 <div class="left-menu">
                     <hr>
                     <div class="left-menu-content">
-                         <div class="ms-auto nav">
-                        <a  class href="OwnerPage.php">
-                            <span class="nav-link"><span>แดชบอร์ด</span></span>
-                        </a>
-                        <a href="OwnerHistory.php">
-                            <span class="nav-link"><span>ประวัติการทำรายการ</span></span>
-                        </a>
-                        <a aria-current="page" href="OwnerEmployeePage.php">
-                            <span class="nav-link"><span>จัดการ "พนักงาน"</span></span>
-                        </a>
+                        <div class="ms-auto nav">
+                            <a class href="OwnerPage.php">
+                                <span class="nav-link"><span>แดชบอร์ด</span></span>
+                            </a>
+                            <a href="OwnerHistory.php">
+                                <span class="nav-link"><span>ประวัติการทำรายการ</span></span>
+                            </a>
+                            <a aria-current="page" href="OwnerEmployeePage.php">
+                                <span class="nav-link"><span>จัดการ "พนักงาน"</span></span>
+                            </a>
                         </div>
-                    <hr>
+                        <hr>
                     </div>
                 </div>
                 <div class="admin-content">
@@ -111,28 +115,32 @@ if (isset($_GET['Employee_ID'])) {
                     </div>
                     <div class="content">
                         <h2 class="page-title">แก้ไขข้อมูลพนักงาน</h2>
-                      
-                        <form action="editEmp.php" method ="post" enctype="multipart/form-data">
+
+                        <form action="editEmp.php" method="post" enctype="multipart/form-data">
                             <div>
                                 <label>Username:</label>
-                                <input type="text" name="Username_employee" id="" class="text-input" value="<?php echo $employee['Username_employee']  ?> ">
+                                <input type="text" name="Username_employee" id="" class="text-input"
+                                    value="<?php echo $employee['Username_employee'] ?> ">
                             </div>
                             <div>
                                 <label>Password</label>
-                                <input type="password" name="password" class="text-input" placeholder="ใส่รหัสผ่านใหม่ (ถ้าเปลี่ยน)">
-                                </div>
-                                <div>
-                                <label>Email:</label>
-                                <input type="text" name="email" id="" class="text-input" value="<?php echo $employee['email']  ?> ">
+                                <input type="password" name="password" class="text-input"
+                                    placeholder="ใส่รหัสผ่านใหม่ (ถ้าเปลี่ยน)">
                             </div>
-                                <input type ="hidden" name="Employee_ID" value="<?php echo $employee['Employee_ID']  ?> "> 
-                                <button type="submit" class="btn btn-big" name="addeditemp">แก้ไขข้อมูลพนักงาน</button>
+                            <div>
+                                <label>Email:</label>
+                                <input type="text" name="email" id="" class="text-input"
+                                    value="<?php echo $employee['email'] ?> ">
+                            </div>
+                            <input type="hidden" name="Employee_ID" value="<?php echo $employee['Employee_ID'] ?> ">
+                            <button type="submit" class="btn btn-big" name="addeditemp">แก้ไขข้อมูลพนักงาน</button>
                         </form>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    </div>
 </body>
+
 </html>

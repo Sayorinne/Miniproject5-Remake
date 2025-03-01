@@ -24,20 +24,6 @@ h1, h2, h3, span {
   display: flex;
 }
 
-/* Left Sidebar (Fixed Navigation) */
-.layout .left-menu {
-  width: 220px; /* Set the sidebar width */
-  height: 100vh;
-  background-color: #fff; /* Background color for the sidebar */
-  position: fixed;
-  left: 0;
-  top: 0;
-  overflow-y: auto;
-  text-align: center;
-  box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
-  padding-top: 20px;
-}
-
 /* Right Main Content */
 .layout .right-main {
   margin-top: 8%;

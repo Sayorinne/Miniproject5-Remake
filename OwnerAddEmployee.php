@@ -10,6 +10,7 @@ $result = mysqli_query($conn, $sql);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +19,8 @@ $result = mysqli_query($conn, $sql);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="CSS/ownerStyle.css">
     <link rel="stylesheet" href="CSS/ownerNavbar.css">
-    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <!-- JQuery -->
 
@@ -28,24 +30,26 @@ $result = mysqli_query($conn, $sql);
     <script src="JS/profile.js" defer></script>
     <script src="JS/texteditor.js" defer></script>
 </head>
+
 <body>
     <div class="layout expanded home-page">
         <div class="right-main">
             <div class="top-nav">
                 <div class="inside">
                     <div class="left-icon">
-                    <?php if(isset($_SESSION['Owner_ID'])): ?>
+                        <?php if (isset($_SESSION['Owner_ID'])): ?>
                             <div class="profile-button">
-                            <p class =" fa fa-user" style= "margin: 10px" onclick="toggloeMenu()"> <?php echo $_SESSION['Username_Owner']; ?> </p>
+                                <p class=" fa fa-user" style="margin: 10px" onclick="toggloeMenu()">
+                                    <?php echo $_SESSION['Username_Owner']; ?> </p>
                             </div>
                             <div class="sub-menu-wrap" id="subMenu">
                                 <div class="sub-menu">
                                     <div class="user-info">
-                                        <img src="Picture/Sihba_07.jpg" >
+                                        <img src="Picture/Sihba_07.jpg">
                                         <h2><?php echo $_SESSION['Username_Owner']; ?></h2>
                                         <h3>ID:<?php echo $_SESSION['Owner_ID']; ?></h3>
                                     </div>
-                                    
+
                                     <hr>
                                     <a href="#" class="sub-menu-link">
                                         <img src="images/profile.png">
@@ -54,7 +58,7 @@ $result = mysqli_query($conn, $sql);
                                     </a>
 
                                     <a href="logout.php" class="sub-menu-link">
-                                        <img src="images/profile.png">                                    
+                                        <img src="images/profile.png">
                                         <p>Logout</p>
                                         <span></span>
                                     </a>
@@ -76,32 +80,32 @@ $result = mysqli_query($conn, $sql);
                     <hr>
                     <div class="left-menu-content">
                         <div class="ms-auto nav">
-                        <a  class href="OwnerPage.php">
-                            <span class="nav-link"><span>แดชบอร์ด</span></span>
-                        </a>
+                            <a class href="OwnerPage.php">
+                                <span class="nav-link"><span>แดชบอร์ด</span></span>
+                            </a>
 
-                        <a href="OwnerHistory.php">
-                            <span class="nav-link"><span>ประวัติการทำรายการ</span></span>
-                        </a>
+                            <a href="OwnerHistory.php">
+                                <span class="nav-link"><span>ประวัติการทำรายการ</span></span>
+                            </a>
 
-                        <a aria-current="page" href="OwnerEmployeePage.php">
-                            <span class="nav-link"><span>จัดการ "พนักงาน"</span></span>
-                        </a>
+                            <a aria-current="page" href="OwnerEmployeePage.php">
+                                <span class="nav-link"><span>จัดการ "พนักงาน"</span></span>
+                            </a>
                         </div>
-                    <hr>
+                        <hr>
                     </div>
                 </div>
                 <div class="admin-content">
                     <div class="button-group">
                         <a href="OwnerAddEmployee.php" class="btn btn-big">เพิ่มพนักงาน</a>
                     </div>
-                    
+
                     <div class="content">
                         <h2 class="page-title">เพิ่มข้อมูลพนักงาน</h2>
                         <form action="SignUp_EM.php" method="POST">
                             <label for="Username_employee">Username:</label>
                             <input type="text" name="Username_employee" required><br>
-                            
+
                             <label for="password">Password:</label>
                             <input type="password" name="password" required><br>
 
@@ -118,4 +122,5 @@ $result = mysqli_query($conn, $sql);
         </div>
     </div>
 </body>
+
 </html>

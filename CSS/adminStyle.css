@@ -8,11 +8,10 @@
 .admin-wrapper .left-sidebar {
     flex: 2;
     height: 100%;
-    border: 1px solid red;
 }
 
 .admin-wrapper .admin-content {
-    border: 1px solid rgb(42, 19, 255);
+
     flex: 8;
     min-height: calc(100vh - 75px);
     padding: 100px 75px 20px;

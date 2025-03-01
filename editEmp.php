@@ -1,10 +1,10 @@
-<?php 
+<?php
 session_start();
 include "database.php";
 
-if(isset($_POST['addeditemp'])) {
-    if(isset($_POST['Employee_ID'])) {  
-        $employee_id = $_POST['Employee_ID'];  
+if (isset($_POST['addeditemp'])) {
+    if (isset($_POST['Employee_ID'])) {
+        $employee_id = $_POST['Employee_ID'];
         $username = $_POST['Username_employee'];
         $email = $_POST['email'];
 
@@ -17,7 +17,7 @@ if(isset($_POST['addeditemp'])) {
             $result_password = mysqli_query($conn, $sql_password);
             if ($result_password && mysqli_num_rows($result_password) > 0) {
                 $row = mysqli_fetch_assoc($result_password);
-                $password = $row['password']; 
+                $password = $row['password'];
             } else {
                 die("❌ ไม่พบรหัสผ่านเก่าในฐานข้อมูล");
             }
@@ -28,7 +28,7 @@ if(isset($_POST['addeditemp'])) {
                 Username_employee = '$username',
                 email = '$email',
                 password = '$password'
-                WHERE Employee_ID = '$employee_id'";  
+                WHERE Employee_ID = '$employee_id'";
 
         if (mysqli_query($conn, $sql_update)) {
             echo "✅ บันทึกข้อมูลสำเร็จ!";
