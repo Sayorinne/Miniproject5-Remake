@@ -18,8 +18,15 @@ $result = mysqli_query($conn, $sql);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="CSS/ownerStyle.css">
     <link rel="stylesheet" href="CSS/ownerNavbar.css">
-    <link rel="stylesheet" href="CSS/ownerAddEmployee.css">
     <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- JQuery -->
+
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
+
+    <!-- JavaScript -->
+    <script src="JS/profile.js" defer></script>
+    <script src="JS/texteditor.js" defer></script>
 </head>
 <body>
     <div class="layout expanded home-page">
@@ -27,17 +34,18 @@ $result = mysqli_query($conn, $sql);
             <div class="top-nav">
                 <div class="inside">
                     <div class="left-icon">
-                        <?php if(isset($_SESSION['Owner_ID'])): ?>
+                    <?php if(isset($_SESSION['Owner_ID'])): ?>
                             <div class="profile-button">
-                            <p class="fa fa-user" style="margin: 10px" onclick="toggloeMenu()"> <?php echo $_SESSION['Username_Owner']; ?> </p>
+                            <p class =" fa fa-user" style= "margin: 10px" onclick="toggloeMenu()"> <?php echo $_SESSION['Username_Owner']; ?> </p>
                             </div>
                             <div class="sub-menu-wrap" id="subMenu">
                                 <div class="sub-menu">
                                     <div class="user-info">
-                                        <img src="Images/profile.jpg" alt="profile">
+                                        <img src="Picture/Sihba_07.jpg" >
                                         <h2><?php echo $_SESSION['Username_Owner']; ?></h2>
-                                        <h3><?php echo $_SESSION['Owner_ID']; ?></h3>
+                                        <h3>ID:<?php echo $_SESSION['Owner_ID']; ?></h3>
                                     </div>
+                                    
                                     <hr>
                                     <a href="#" class="sub-menu-link">
                                         <img src="images/profile.png">
@@ -53,8 +61,12 @@ $result = mysqli_query($conn, $sql);
                                 </div>
                             </div>
                         <?php else: ?>
-                            <a href="login.php" class="login-button btn btn-primary"><span>Login</span></a>
-                            <a href="registration.php" class="login-button btn btn-primary"><span>Register</span></a>
+                            <a role="button" tabindex="0" href="login.php" class="login-button btn btn-primary">
+                                <span>Login</span>
+                            </a>
+                            <a role="button" tabindex="0" href="registration.php" class="login-button btn btn-primary">
+                                <span>Register</span>
+                            </a>
                         <?php endif; ?>
                     </div>
                 </div>
