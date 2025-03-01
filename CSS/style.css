@@ -86,7 +86,7 @@ h1, h2, h3, span {
 
 .content-flex {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 4 items per row */
+  grid-template-columns: repeat(3, 1fr); /* 3 items per row */
   gap: 20px;
   justify-content: center;
   padding: 20px;
@@ -98,7 +98,8 @@ h1, h2, h3, span {
 /* Image Styling */
 .image-card img {
   width: 80%; /* Prevents images from being too large */
-  height: auto;
+  height: 250px; 
+  object-fit:  scale-down;
   border-radius: 10px;
 }
 

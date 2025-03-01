@@ -117,7 +117,7 @@ session_start();
             $result = mysqli_query($conn, $sql);
 
             if(mysqli_num_rows($result)>0){
-                echo '<div class="content-flex">';
+
                 while($row = mysqli_fetch_assoc($result)){
                     echo '<div class="image-card">';
                     echo '<img src="Picture/'.$row['product_image'].'" class="w3-image w3-card-4" alt = "product Image">';
@@ -125,8 +125,7 @@ session_start();
                     echo '<p><strong>Price:</strong> ฿'.number_format($row['product_price'] ,2).'</p>';
                     echo '<a href="CustomerDetailArtFrame.php?id='.$row['product_ID'].'"class= "btn btn-primary">รายละเอียด</a>';
                     echo '</div>';
-                }
-                echo'</div>';
+                };
             }else{
                 echo '<p>ไม่พบสินค้า</p>';
             }

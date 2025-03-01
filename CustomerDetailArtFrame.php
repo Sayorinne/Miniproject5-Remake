@@ -1,26 +1,27 @@
 <?php
 session_start();
-    include "database.php";
-    if(isset($_GET["id"])){
-        $id = intval($_GET["id"]);
-                
-      $sql="SELECT product.*, product_type.Category_name 
+include "database.php";
+
+if (isset($_GET["id"])) {
+    $id = intval($_GET["id"]);
+
+    $sql = "SELECT product.*, product_type.Category_name 
             FROM product
             JOIN product_type ON product.Category_ID = product_type.Category_ID
             WHERE product.product_ID = '$id'";
 
-            $result = mysqli_query($conn,$sql);
+    $result = mysqli_query($conn, $sql);
 
-            if(mysqli_num_rows($result)>0){
-                $row = mysqli_fetch_assoc($result);
-            }else{
-                echo "No Product";
-                exit();
-            }
-        }else{
-            echo "No product_ID";
-            exit();
-        }     
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+    } else {
+        echo "No Product";
+        exit();
+    }
+} else {
+    echo "No product_ID";
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -165,13 +166,16 @@ session_start();
     </div>
     
     <!-- Below Box: Recommended Products -->
-            <?php
-        // ดึงสินค้าที่เกี่ยวข้อง (ยกเว้นตัวเอง) จำนวน 4 รายการ
-        $related_sql = "SELECT product_ID, product_name, product_price, product_image 
-        FROM product WHERE product_ID != '$id' 
-        ORDER BY RAND() LIMIT 4";
-        $related_result = mysqli_query($conn, $related_sql);
-        ?>
+    <?php
+    // ดึงสินค้าที่เกี่ยวข้อง (ยกเว้นตัวเอง) จำนวน 4 รายการ
+    $related_sql = "SELECT product_ID, product_name, product_price, product_image 
+                    FROM product 
+                    WHERE product_ID != '$id' 
+                    ORDER BY RAND() 
+                    LIMIT 4";
+    $related_result = mysqli_query($conn, $related_sql);
+
+    if ($related_result && mysqli_num_rows($related_result) > 0): ?>
         <div class="below-box">
             <h3>Recommended Products</h3>
             <div class="recommended-products">
@@ -179,11 +183,14 @@ session_start();
                     <a href="CustomerDetailArtFrame.php?id=<?php echo $related_row['product_ID']; ?>" class="product-card">
                         <img src="Picture/<?php echo htmlspecialchars($related_row['product_image']); ?>" alt="<?php echo htmlspecialchars($related_row['product_name']); ?>">
                         <h4 class="product-name"><?php echo htmlspecialchars($related_row['product_name']); ?></h4>
-                        <p class="product-price"><?php echo number_format($related_row['product_price'],2); ?>฿</p>
+                        <p class="product-price"><?php echo number_format($related_row['product_price'], 2); ?>฿</p>
                     </a>
                 <?php endwhile; ?>
             </div>
         </div>
+    <?php else: ?>
+        <p>No recommended products found.</p>
+    <?php endif; ?>
 </main>
 
         </div>
