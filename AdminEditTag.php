@@ -125,19 +125,13 @@
                 <hr>
             </div>
         </div>
-        
-
-
                 <div class="admin-content"> 
                     <div class="button-group">
                         <a href="AdminCreateTag.php" class="btn btn-big">สร้างหมวดหมู่</a>
                         <a href="AdminTagPage.php" class="btn btn-big">จัดการหมวดหมู่</a>
                     </div>
-
                     <div class ="content">
-                        
                         <h2 class="page-title">แก้ไขหมวดหมู่</h2>
-
                         <form action="EditTag.php" method ="post">
                             <div>
                                 <label>ชื่อหมวดหมู่</label>
@@ -148,14 +142,11 @@
                                 <label>รายละเอียดหมวดหมู่</label>
                                 <textarea name="detail" id="description"><?php echo $topicID['Category_detail']; ?> </textarea>
                             </div>
-
                             <div>
                                 <button type="submit" name= "edit-tag" class="btn btn-big"->แก้หมวดหมู่</button>
                             </div>
                     </div>
                         </from>
-
-
                 </div>
             </div>
         </div>
