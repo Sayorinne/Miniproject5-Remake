@@ -133,7 +133,7 @@ session_start();
                             <h3>เลือกปี</h3>
                             <?php
                             $currentYear = date('Y');
-                            for ($y = $currentYear; $y <= $currentYear + 5; $y++) {
+                            for ($y = $currentYear; $y <= $currentYear + 2; $y++) {
                                 echo "<button class='year-btn' data-year='$y'>$y</button>";
                             }
                             ?>

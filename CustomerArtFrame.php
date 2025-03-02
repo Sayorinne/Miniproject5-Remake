@@ -125,28 +125,23 @@ session_start();
 
                             while ($row = mysqli_fetch_assoc($result)) {
                                 echo '<div class="image-card">';
-                                echo '<img src="Picture/' . $row['product_image'] . '" class="w3-image w3-card-4" alt = "product Image">';
+                                echo '<a href="CustomerDetailArtFrame.php?id=' . $row['product_ID'] . '">';
+                                echo '<img src="Picture/' . $row['product_image'] . '" class="w3-image w3-card-4" alt="product Image">';
                                 echo '<h5>' . $row['product_name'] . '</h5>';
                                 echo '<p><strong>Price:</strong> ฿' . number_format($row['product_price'], 2) . '</p>';
-                                echo '<a href="CustomerDetailArtFrame.php?id=' . $row['product_ID'] . '"class= "btn btn-primary">รายละเอียด</a>';
+                                echo '</a>';
                                 echo '</div>';
                             }
-                            ;
                         } else {
                             echo '<p>ไม่พบสินค้า</p>';
                         }
                         mysqli_close($conn);
                         ?>
                     </div>
-            </main>
+            </div>
+        </main>
         </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
+        </div>
 </body>
 
 </html>

@@ -14,6 +14,7 @@
     <!-- Internal CSS -->
     <link rel="stylesheet" href="CSS/adminStyle.css">
     <link rel="stylesheet" href="CSS/adminNavbar.css">
+    <link rel="stylesheet" href="CSS/adminForm.css">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -76,7 +77,8 @@
                         <?php if (isset($_SESSION['Employee_ID'])): ?>
                             <div class="profile-button">
                                 <p class=" fa fa-user" style="margin: 10px" onclick="toggloeMenu()">
-                                    <?php echo $_SESSION['Username_employee']; ?> </p>
+                                    <?php echo $_SESSION['Username_employee']; ?>
+                                </p>
                             </div>
                             <div class="sub-menu-wrap" id="subMenu">
                                 <div class="sub-menu">
@@ -145,35 +147,41 @@
                         <h2 class="page-title">ข้อมูลกรอบรูป</h2>
 
                         <form action="editProduct.php" method="post" enctype="multipart/form-data">
-                            <div>
-                                <label>ชื่อกรอบรูป</label>
-                                <input type="text" name="name" id="" class="text-input"
+
+                            <div class="form-group">
+                                <label for="name">ชื่อกรอบรูป</label>
+                                <input type="text" name="name" id="name" class="text-input"
                                     value="<?php echo $product_ID['product_name']; ?>">
                             </div>
+
                             <input type="hidden" name="id" value="<?php echo $product_ID['product_ID']; ?>">
-                            <div>
-                                <label>ราคาสินค้า</label>
-                                <input type="number" name="price" class="text-input" min="0" step="0.25" required
-                                    value="<?php echo $product_ID['product_price']; ?>">
+
+                            <div class="form-group">
+                                <label for="price">ราคาสินค้า</label>
+                                <input type="number" name="price" id="price" class="text-input" min="0" step="0.25"
+                                    required value="<?php echo $product_ID['product_price']; ?>">
                             </div>
-                            <div>
-                                <label>สี</label>
-                                <input type="text" name="color" id="" class="text-input"
+
+                            <div class="form-group">
+                                <label for="color">สี</label>
+                                <input type="text" name="color" id="color" class="text-input"
                                     value="<?php echo $product_ID['product_color']; ?>">
                             </div>
-                            <div>
-                                <label>ขนาด</label>
-                                <input type="text" name="size" id="" class="text-input"
+
+                            <div class="form-group">
+                                <label for="size">ขนาด</label>
+                                <input type="text" name="size" id="size" class="text-input"
                                     value="<?php echo $product_ID['product_size']; ?>">
                             </div>
 
-                            <div>
-                                <label>เนื้อหา</label>
-                                <textarea name="detail" id="description"><?php echo $product_ID['detail'] ?> </textarea>
+                            <div class="form-group">
+                                <label for="description">เนื้อหา</label>
+                                <textarea name="detail" id="description"><?php echo $product_ID['detail']; ?></textarea>
                             </div>
-                            <div>
-                                <label>หมวดหมู่</label>
-                                <select name="tagname">
+
+                            <div class="form-group">
+                                <label for="tagname">หมวดหมู่</label>
+                                <select name="tagname" id="tagname">
                                     <?php
                                     // ดึงข้อมูลหมวดหมู่ทั้งหมดจากฐานข้อมูล
                                     $sql = "SELECT * FROM product_type";
@@ -181,7 +189,6 @@
 
                                     if (mysqli_num_rows($result) > 0) {
                                         echo "<option disabled selected>เลือกหมวดหมู่</option>";
-                                        // วนลูปผ่านผลลัพธ์ของคำสั่ง SQL SELECT เพื่อสร้างตัวเลือกใน dropdown
                                         while ($row = mysqli_fetch_assoc($result)) {
                                             echo "<option value='" . $row['Category_ID'] . "'>" . $row['Category_name'] . "</option>";
                                         }
@@ -191,23 +198,24 @@
                                     ?>
                                 </select>
                             </div>
-                            <?php
-                            // ปิดการเชื่อมต่อกับฐานข้อมูล
-                            mysqli_close($conn);
-                            ?>
-                            <div>
-                                <label>รูปประกอบ</label><br>
-                                <input type="file" name="image" id="picture">
+
+                            <div class="form-group">
+                                <label for="picture">รูปประกอบ</label><br>
+                                <img src="Picture/<?php echo $product_ID['product_image']; ?>" id="image-preview"
+                                    style="max-width: 200px; margin-bottom: 10px;">
+                                <input type="file" name="image" id="picture" class="text-input"
+                                    onchange="previewImage(event)">
                             </div>
-                            <div>
+
+                            <div class="form-group">
                                 <button type="submit" class="btn btn-big" name="edit-product">แก้ไขสินค้า</button>
                             </div>
+                        </form>
+
                     </div>
-                    </form>
                 </div>
             </div>
         </div>
-    </div>
     </div>
     </div>
 </body>

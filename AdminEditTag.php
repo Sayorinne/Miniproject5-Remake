@@ -14,6 +14,7 @@
     <!-- Internal CSS -->
     <link rel="stylesheet" href="CSS/adminStyle.css">
     <link rel="stylesheet" href="CSS/adminNavbar.css">
+    <link rel="stylesheet" href="CSS/adminForm.css">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -147,11 +148,11 @@
                                 <textarea name="detail"
                                     id="description"><?php echo $topicID['Category_detail']; ?> </textarea>
                             </div>
-                            <div>
+                            <div class="form-group">
                                 <button type="submit" name="edit-tag" class="btn btn-big" ->แก้หมวดหมู่</button>
                             </div>
+                    </form>
                     </div>
-                    </from>
                 </div>
             </div>
         </div>

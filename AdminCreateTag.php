@@ -19,6 +19,7 @@ session_start();
     <!-- Internal CSS -->
     <link rel="stylesheet" href="CSS/adminStyle.css">
     <link rel="stylesheet" href="CSS/adminNavbar.css">
+    <link rel="stylesheet" href="CSS/adminForm.css">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -132,7 +133,7 @@ session_start();
                                 <textarea name="detail" id="description"> </textarea>
                             </div>
 
-                            <div>
+                            <div class="form-group">
                                 <button type="submit" name="add-tag" class="btn btn-big" ->เพิ่มหมวดหมู่</button>
                             </div>
                     </div>

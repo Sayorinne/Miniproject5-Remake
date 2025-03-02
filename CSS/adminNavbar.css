@@ -127,24 +127,6 @@ a:-webkit-any-link {
     cursor: pointer;
 }
 
-input[type=text] {
-    width: 50%;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: white;
-    background-image: url("Picture/searchicon.png");
-    background-size: 20px 20px;
-    background-position: 10px 10px; 
-    background-repeat: no-repeat;
-    padding: 5px 10px 6px 50px;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
-    margin-left: 50px;
-    margin-right: 150px;
-  }
-
 .sub-menu-wrap {
     position: absolute;
     top: 100%;

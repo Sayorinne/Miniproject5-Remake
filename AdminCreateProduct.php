@@ -18,6 +18,7 @@ session_start();
     <!-- Internal CSS -->
     <link rel="stylesheet" href="CSS/adminStyle.css">
     <link rel="stylesheet" href="CSS/adminNavbar.css">
+    <link rel="stylesheet" href="CSS/adminForm.css">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -171,7 +172,7 @@ session_start();
                                 <label>รูปประกอบ</label><br>
                                 <input type="file" name="image" id="picture">
                             </div>
-                            <div>
+                            <div class="form-group">
                                 <button type="submit" class="btn btn-big" name="add">เพิ่มสินค้า</button>
                             </div>
                     </div>

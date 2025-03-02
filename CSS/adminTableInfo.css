@@ -1,0 +1,58 @@
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: left;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+table thead th {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 15px;
+    border-bottom: 2px solid #ddd;
+}
+
+table tbody tr {
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s ease;
+}
+
+table tbody tr:nth-of-type(even) {
+    background-color: #f2f2f2;
+}
+
+table tbody tr:hover {
+    background-color: #e9e9e9;
+}
+
+table tbody td {
+    padding: 12px 15px;
+}
+
+table tbody td a.edit {
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+table tbody td a.edit:hover {
+    text-decoration: underline;
+}
+
+table tbody td form input.delete {
+    color: #f44336;
+    cursor: pointer;
+    font-weight: bold;
+    background: none;
+    border: none;
+}
+
+table tbody td form input.delete:hover {
+    text-decoration: underline;
+}

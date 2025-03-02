@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "database.php";
+require 'vendor/autoload.php';
 
 if (isset($_GET["id"])) {
     $id = intval($_GET["id"]);
@@ -22,7 +23,34 @@ if (isset($_GET["id"])) {
     echo "No product_ID";
     exit();
 }
+
+
+\Stripe\Stripe::setApiKey('sk_test_51QomvwR3rIyanQnHomFEx3J6p3lztGZBJ7VmcwuEh8rM7ayIo4VSfCL0ZHHd38py9lypcq5BiLid2nMnn2tsjsLh00ST1xNI1v');
+
+$session = \Stripe\Checkout\Session::create([
+    'payment_method_types' => ['card'],
+    'line_items' => [
+        [
+            'price_data' => [
+                'currency' => 'thb',
+                'product_data' => [
+                    'name' => $row['product_name'],
+                ],
+                'unit_amount' => $row['product_price'] * 100,
+            ],
+            'quantity' => 1,
+        ]
+    ],
+    'mode' => 'payment',
+    'success_url' => 'http://localhost/success.php',
+    'cancel_url' => 'http://localhost/cancel.php',
+]);
+
+echo json_encode(['id' => $session->id]);
+
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -48,9 +76,9 @@ if (isset($_GET["id"])) {
         rel="stylesheet">
 
     <!-- JavaScript -->
-    <script src="JS/slideshow.js" defer></script>
-    <script src="JS/popular.js" defer></script>
     <script src="JS/profile.js" defer></script>
+    <script src="https://js.stripe.com/v3/"></script>
+
 </head>
 
 <body>
@@ -90,12 +118,14 @@ if (isset($_GET["id"])) {
                         <h1>กรอบรูป "<?php echo $row['product_name']; ?>"</h1>
                     </div>
                     <div class="right-section">
+                        <div class="shopping-cart-icon">
+                            <?php if (isset($_SESSION['user_id'])): ?>
+                                <h5>คำสั่งซื้อทั้งหมด</h5>
+                            <?php endif; ?>
+                        </div>
                         <div class="profile-icon">
                             <!-- Account validate -->
                             <?php if (isset($_SESSION['user_id'])): ?>
-                                <div class="shopping-cart-icon">
-                                    <h5>คำสั่งซื้อทั้งหมด</h5>
-                                </div>
                                 <div class="profile-image">
                                     <img src="Picture/sayo.png" onclick="toggloeMenu()">
                                 </div>
@@ -166,7 +196,7 @@ if (isset($_GET["id"])) {
                         <!-- Actions -->
                         <div class="action-buttons">
                             <button class="add-to-cart">เพิ่มตะกร้า</button>
-                            <a href="#" class="buy-now">ซื้อสินค้า</a>
+                            <button id="checkout-button" class="buy-now">ซื้อสินค้า</button>
                         </div>
                     </div>
                 </div>
@@ -203,6 +233,31 @@ if (isset($_GET["id"])) {
 
         </div>
     </div>
+
+    <script>
+        var stripe = Stripe('pk_test_51QomvwR3rIyanQnHkPyYWIyo5FnRCpgpenwgL03fcXqaPxeQLhkGgBu6zf0d0NqDUWwVLJ1utdFWI3nN943s16zX00OgH5GqTv');
+        var checkoutButton = document.getElementById('checkout-button');
+
+        checkoutButton.addEventListener('click', function () {
+            fetch('./create-checkout-session.php?id=<?php echo $id; ?>', {
+                method: 'POST',
+            })
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (session) {
+                    return stripe.redirectToCheckout({ sessionId: session.id });
+                })
+                .then(function (result) {
+                    if (result.error) {
+                        alert(result.error.message);
+                    }
+                })
+                .catch(function (error) {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
 </body>
 
 </html>

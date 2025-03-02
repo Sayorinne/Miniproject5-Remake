@@ -18,13 +18,14 @@ session_start();
     <!-- Internal CSS -->
     <link rel="stylesheet" href="CSS/adminStyle.css">
     <link rel="stylesheet" href="CSS/adminNavbar.css">
+    
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;400;500;600;700&display=swap"
         rel="stylesheet">
-
+        <link rel="stylesheet" href="CSS/adminTableinfo.css">
     <!-- JQuery -->
 
     <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>

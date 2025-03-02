@@ -1,0 +1,92 @@
+form {
+    width: 100%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    max-width: none;
+    margin: 30px auto;
+    font-family: 'Mitr', sans-serif;
+}
+
+.text-input,
+textarea,
+select {
+    width: 100%;
+    max-width: none; /* Ensure it takes full width */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+form .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+form .form-group label {
+    margin-bottom: 6px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #444;
+}
+
+form .form-group input,
+form .form-group select,
+form .form-group textarea {
+    padding: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+form .form-group input:focus,
+form .form-group select:focus,
+form .form-group textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+form .form-group textarea {
+    resize: vertical;
+    height: 130px;
+}
+
+form .form-group input[type="file"] {
+    padding: 8px;
+}
+
+form .form-group button {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 6px;
+    background-color: #007bff;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease-in-out;
+}
+
+form .form-group button:hover {
+    background-color: #0056b3;
+    transform: scale(1.02);
+}
+
+#image-preview {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}

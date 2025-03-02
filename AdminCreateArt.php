@@ -8,7 +8,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee Art Manage</title>
+    <title>Admin Backdoor - Add Post</title>
 
     <!-- External CSS -->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -18,7 +18,7 @@ session_start();
     <!-- Internal CSS -->
     <link rel="stylesheet" href="CSS/adminStyle.css">
     <link rel="stylesheet" href="CSS/adminNavbar.css">
-    <link rel="stylesheet" href="CSS/adminTableinfo.css">
+    <link rel="stylesheet" href="CSS/adminForm.css">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,26 +35,22 @@ session_start();
     <script src="JS/profile.js" defer></script>
     <script src="JS/texteditor.js" defer></script>
 
-
 </head>
 
 <body>
     <div class="layout expanded home-page">
-
-
         <?php
         // เชื่อมต่อกับฐานข้อมูล
         include "database.php";
-        // คำสั่ง SQL SELECT เพื่อดึงข้อมูลจากตาราง "topic"
-        $sql = "SELECT * FROM review";
+
+        $sql = "SELECT * FROM product_type";
         $result = mysqli_query($conn, $sql);
         ?>
-
-
         <!-- Right Main -->
         <div class="right-main">
             <div class="top-nav">
                 <div class="inside">
+                    <!-- <input type="text" name="search" placeholder="Search.."> -->
                     <div class="left-icon">
                         <!-- Account validate -->
                         <?php if (isset($_SESSION['Employee_ID'])): ?>
@@ -100,18 +96,15 @@ session_start();
             <div class="admin-wrapper">
                 <div class="left-menu">
 
-
+                    <hr>
                     <div class="left-menu-content">
-                        <hr>
                         <div class="ms-auto nav">
-                            <a class href="AdminPage.php">
+                            <a aria-current="page" class href="AdminPage.php">
                                 <span class="nav-link"><span>จัดการ "สินค้ากรอบรูป"</span></span>
                             </a>
-
-                            <a aria-current="page" class href="AdminArtPage.php">
+                            <a class href="AdminArtPage.php">
                                 <span class="nav-link"><span>จัดการ "ภาพศิลป์"</span></span>
                             </a>
-
                             <a class href="AdminTagPage.php">
                                 <span class="nav-link"><span>จัดการ "หมวดหมู่"</span></span>
                             </a>
@@ -122,60 +115,68 @@ session_start();
 
 
 
-
-
                 <div class="admin-content">
                     <div class="button-group">
-                        <a href="AdminCreateArt.php" class="btn btn-big">สร้างสินค้าภาพศิลป์</a>
-                        <a href="AdminArtPage.php" class="btn btn-big">จัดการภาพศิลป์</a>
+                        <a href="AdminCreateProduct.php" class="btn btn-big">สร้างสินค้า</a>
+                        <a href="AdminPage.php" class="btn btn-big">จัดการสินค้ากรอบรูป</a>
                     </div>
 
                     <div class="content">
 
-                        <h2 class="page-title">รายการกรอบรูป</h2>
+                        <h2 class="page-title">ข้อมูลกรอบรูป</h2>
 
-                        <table>
-                            <thead>
-                                <th>Art_ID</th>
-                                <th>ชื่อภาพศิลป์</th>
-                                <th>ราคา</th>
-                                <th>ประเภทสี</th>
-                                <th>ขนาด</th>
-                                <th colspan="2">กระบวนการ</th>
-                            </thead>
-                            <tr>
-                                <?php
-                                include "database.php";
-                                $sql = "SELECT * From product";
-                                $result = mysqli_query($conn, $sql);
-                                ?>
-                                <?php $result = mysqli_query($conn, $sql);
-                                if (mysqli_num_rows($result) > 0) {
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        if (isset($row['Art_ID'])) {
-                                            echo '<td>' . $row['Art_ID'] . '</td>';
-                                            echo '<td>' . $row['Art_name'] . '</td>';
-                                            echo '<td>' . $row['Art_price'] . '</td>';
-                                            echo '<td>' . $row['Art_color'] . '</td>';
-                                            echo '<td>' . $row['Art_size'] . '</td>';
-                                            echo "<td><a href='AdminEditArt.php?id=" . $row['Art_ID'] . "' class='edit'>แก้ไข</a></td>"; // Pass Tag_ID as parameter to the edit page
-                                            echo '<td><form method="post" action="DeleteProduct.php">
-                                                <input type="hidden" name="id" value="' . $row['Art_ID'] . '"> 
-                                                <input type="submit" value="ลบ" style= "border:none; background:none;"  class="delete" name="DelArt" onclick="return confirm(\'คุณแน่ใจหรือไม่ที่ต้องการลบ?\')"></form></td>';
-                                            echo '</tr>';
+                        <form action="CheckProduct.php" method="post" enctype="multipart/form-data">
+                            <div>
+                                <label>ชื่อกรอบรูป</label>
+                                <input type="text" name="name" id="" class="text-input">
+                            </div>
+                            <div>
+                                <label>ราคาสินค้า</label>
+                                <input type="number" name="price" class="text-input" min="0" step="0.25" required>
+                            </div>
+                            <div>
+                                <label>สี</label>
+                                <input type="text" name="color" id="" class="text-input">
+                            </div>
+                            <div>
+                                <label>ขนาด</label>
+                                <input type="text" name="size" id="" class="text-input">
+                            </div>
+
+                            <div>
+                                <label>เนื้อหา</label>
+                                <textarea name="detail" id="description"> </textarea>
+                            </div>
+
+                            <div>
+                                <label>หมวดหมู่</label>
+                                <select name="tagname">
+                                    <?php
+                                    if (mysqli_num_rows($result) > 0) {
+                                        echo "<option disabled selected>เลือกหมวดหมู่</option>";
+                                        // วนลูปผ่านผลลัพธ์ของคำสั่ง SQL SELECT เพื่อสร้างตัวเลือกใน dropdown
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            echo "<option value='" . $row['Category_ID'] . "'>" . $row['Category_name'] . "</option>";
                                         }
+                                    } else {
+                                        echo "<option disabled selected>ไม่สามารถใส่ข้อมูลได้</option>";
                                     }
-                                } else {
-                                    echo "ไม่พบข้อมูล";
-                                }
-                                ?>
-
-
-
-                        </table>
-
+                                    ?>
+                                </select>
+                            </div>
+                            <?php
+                            // ปิดการเชื่อมต่อกับฐานข้อมูล
+                            mysqli_close($conn);
+                            ?>
+                            <div>
+                                <label>รูปประกอบ</label><br>
+                                <input type="file" name="image" id="picture">
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-big" name="add">เพิ่มสินค้า</button>
+                            </div>
                     </div>
-
+                    </form>
 
                 </div>
             </div>
