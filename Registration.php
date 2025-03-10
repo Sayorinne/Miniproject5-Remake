@@ -107,11 +107,11 @@
             <button type="submit">Register</button>
         </form>
 
-        <p>Have an account?
-            <a href="login.php">Return to login</a>
+        <p>มีบัญชีแล้วใช่ไหม?
+            <a href="login.php">กลับสู่หน้า</a>
         </p>
-        <p>Join as Guest
-            <a href="Homepage.php">Go to Homepage</a>
+        <p>เข้าแบบไม่ระบุตัวตน
+            <a href="Homepage.php">ไปสู่หน้าหลัก</a>
         </p>
     </div>
 

@@ -179,18 +179,13 @@ echo json_encode(['id' => $session->id]);
                             <h2 class="product-title"><?php echo $row['product_name']; ?></h2>
                             <p class="product-description">รายละเอียดสินค้า: <?php echo $row['detail']; ?></p>
                             <p class="product-specs">
-                                <?php echo "ขนาด:" . $row['product_size'] . " | สี:" . $row['product_color'] . " | ประเภท:" . $row['Category_name']; ?>
+                                <?php echo "ขนาด : " . $row['product_size'] . " | สี : " . $row['product_color'] . " | ประเภท : " . $row['Category_name']; ?>
                             </p>
                         </div>
 
                         <!-- Price and Availability -->
                         <div class="product-pricing">
                             <div class="price"><?php echo $row['product_price']; ?> ฿</div>
-                        </div>
-
-                        <div>
-                            <label for="quantity">จำนวน:</label>
-                            <input type="number" id="quantity" name="quantity" value="1" min="1" max="10">
                         </div>
 
                         <!-- Actions -->

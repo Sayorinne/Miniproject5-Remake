@@ -30,6 +30,7 @@
     <!-- JavaScript -->
     <script src="JS/profile.js" defer></script>
     <script src="JS/texteditor.js" defer></script>
+    <script src="JS/previewImage.js" defer></script>
 
 
 </head>
@@ -144,7 +145,7 @@
 
                     <div class="content">
 
-                        <h2 class="page-title">ข้อมูลกรอบรูป</h2>
+                        <h2 class="page-title">แก้ไขข้อมูลกรอบรูป</h2>
 
                         <form action="editProduct.php" method="post" enctype="multipart/form-data">
 
@@ -180,24 +181,26 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="tagname">หมวดหมู่</label>
-                                <select name="tagname" id="tagname">
-                                    <?php
-                                    // ดึงข้อมูลหมวดหมู่ทั้งหมดจากฐานข้อมูล
-                                    $sql = "SELECT * FROM product_type";
-                                    $result = mysqli_query($conn, $sql);
+    <label for="tagname">หมวดหมู่</label>
+    <select name="tagname" id="tagname">
+        <?php
+        // ดึงข้อมูลหมวดหมู่ทั้งหมดจากฐานข้อมูล
+        $sql = "SELECT * FROM product_type";
+        $result = mysqli_query($conn, $sql);
 
-                                    if (mysqli_num_rows($result) > 0) {
-                                        echo "<option disabled selected>เลือกหมวดหมู่</option>";
-                                        while ($row = mysqli_fetch_assoc($result)) {
-                                            echo "<option value='" . $row['Category_ID'] . "'>" . $row['Category_name'] . "</option>";
-                                        }
-                                    } else {
-                                        echo "<option disabled selected>ไม่สามารถใส่ข้อมูลได้</option>";
-                                    }
-                                    ?>
-                                </select>
-                            </div>
+        if (mysqli_num_rows($result) > 0) {
+            echo "<option disabled>เลือกหมวดหมู่</option>";
+            while ($row = mysqli_fetch_assoc($result)) {
+                // ตรวจสอบว่าเป็นหมวดหมู่ที่เลือกอยู่หรือไม่
+                $selected = ($row['Category_ID'] == $product_ID['Category_ID']) ? "selected" : "";
+                echo "<option value='" . $row['Category_ID'] . "' $selected>" . $row['Category_name'] . "</option>";
+            }
+        } else {
+            echo "<option disabled selected>ไม่สามารถใส่ข้อมูลได้</option>";
+        }
+        ?>
+    </select>
+</div>
 
                             <div class="form-group">
                                 <label for="picture">รูปประกอบ</label><br>
@@ -205,6 +208,8 @@
                                     style="max-width: 200px; margin-bottom: 10px;">
                                 <input type="file" name="image" id="picture" class="text-input"
                                     onchange="previewImage(event)">
+
+                                    <p id="file-name"><?php echo "ภาพที่เลือก : " . $product_ID['product_image']; ?></p>
                             </div>
 
                             <div class="form-group">

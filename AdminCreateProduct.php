@@ -34,6 +34,7 @@ session_start();
     <!-- JavaScript -->
     <script src="JS/profile.js" defer></script>
     <script src="JS/texteditor.js" defer></script>
+    <script src="JS/previewImage.js" defer></script>
 
 </head>
 
@@ -56,7 +57,8 @@ session_start();
                         <?php if (isset($_SESSION['Employee_ID'])): ?>
                             <div class="profile-button">
                                 <p class=" fa fa-user" style="margin: 10px" onclick="toggloeMenu()">
-                                    <?php echo $_SESSION['Username_employee']; ?> </p>
+                                    <?php echo $_SESSION['Username_employee']; ?>
+                                </p>
                             </div>
                             <div class="sub-menu-wrap" id="subMenu">
                                 <div class="sub-menu">
@@ -123,7 +125,7 @@ session_start();
 
                     <div class="content">
 
-                        <h2 class="page-title">ข้อมูลกรอบรูป</h2>
+                        <h2 class="page-title">เพิ่มข้อมูลกรอบรูป</h2>
 
                         <form action="CheckProduct.php" method="post" enctype="multipart/form-data">
                             <div>
@@ -170,7 +172,9 @@ session_start();
                             ?>
                             <div>
                                 <label>รูปประกอบ</label><br>
-                                <input type="file" name="image" id="picture">
+                                <img src="" id="image-preview" style="max-width: 200px; margin-bottom: 10px;">
+                                <input type="file" name="image" id="picture" class="text-input"
+                                    onchange="previewImage(event)">
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-big" name="add">เพิ่มสินค้า</button>

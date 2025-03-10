@@ -158,9 +158,10 @@ session_start();
                                             echo '<td>' . $row['Art_price'] . '</td>';
                                             echo '<td>' . $row['Art_color'] . '</td>';
                                             echo '<td>' . $row['Art_size'] . '</td>';
-                                            echo "<td><a href='AdminEditArt.php?id=" . $row['Art_ID'] . "' class='edit'>แก้ไข</a></td>"; // Pass Tag_ID as parameter to the edit page
+                                            echo "<td><a href='AdminEditArt.php?id=" . $row['Art_ID'] . "' class='edit'>แก้ไข</a></td>";
                                             echo '<td><form method="post" action="DeleteProduct.php">
                                                 <input type="hidden" name="id" value="' . $row['Art_ID'] . '"> 
+                                                <input type="hidden" name="type" value="artwork"> 
                                                 <input type="submit" value="ลบ" style= "border:none; background:none;"  class="delete" name="DelArt" onclick="return confirm(\'คุณแน่ใจหรือไม่ที่ต้องการลบ?\')"></form></td>';
                                             echo '</tr>';
                                         }

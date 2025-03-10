@@ -21,6 +21,7 @@ $result = mysqli_query($conn, $sql);
     <link rel="stylesheet" href="CSS/ownerNavbar.css">
     <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;400;500;600;700&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="CSS/ownerForm.css">
 
     <!-- JQuery -->
 
@@ -29,6 +30,7 @@ $result = mysqli_query($conn, $sql);
     <!-- JavaScript -->
     <script src="JS/profile.js" defer></script>
     <script src="JS/texteditor.js" defer></script>
+
 </head>
 
 <body>
@@ -40,7 +42,8 @@ $result = mysqli_query($conn, $sql);
                         <?php if (isset($_SESSION['Owner_ID'])): ?>
                             <div class="profile-button">
                                 <p class=" fa fa-user" style="margin: 10px" onclick="toggloeMenu()">
-                                    <?php echo $_SESSION['Username_Owner']; ?> </p>
+                                    <?php echo $_SESSION['Username_Owner']; ?>
+                                </p>
                             </div>
                             <div class="sub-menu-wrap" id="subMenu">
                                 <div class="sub-menu">
@@ -103,17 +106,23 @@ $result = mysqli_query($conn, $sql);
                     <div class="content">
                         <h2 class="page-title">เพิ่มข้อมูลพนักงาน</h2>
                         <form action="SignUp_EM.php" method="POST">
-                            <label for="Username_employee">Username:</label>
-                            <input type="text" name="Username_employee" required><br>
+                            <div>
+                                <label for="Username_employee">Username:</label>
+                                <input type="text" name="Username_employee" class="text-input" required><br>
+                            </div>
+                            <div>
+                                <label for="password">Password:</label>
+                                <input type="password" name="password" class="text-input" required><br>
+                            </div>
+                            <div>
+                                <label for="email">Email:</label>
+                                <input type="email" name="email" class="text-input" required><br>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-big" name="Add Employee">Add Employee
 
-                            <label for="password">Password:</label>
-                            <input type="password" name="password" required><br>
-
-                            <label for="email">Email:</label>
-                            <input type="email" name="email" required><br>
-
-
-                            <input type="submit" value="Add Employee">
+                                </button>
+                            </div>
                         </form>
 
                     </div>

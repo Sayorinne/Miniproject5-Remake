@@ -163,6 +163,7 @@ session_start();
                                             echo "<td><a href='AdminEditProduct.php?id=" . $row['product_ID'] . "' class='edit'>แก้ไข</a></td>"; // Pass Tag_ID as parameter to the edit page
                                             echo '<td><form method="post" action="DeleteProduct.php">
                                                 <input type="hidden" name="id" value="' . $row['product_ID'] . '"> 
+                                                <input type="hidden" name="type" value="frame"> 
                                                 <input type="submit" value="ลบ" style= "border:none; background:none;"  class="delete" name="DelFrame" onclick="return confirm(\'คุณแน่ใจหรือไม่ที่ต้องการลบ?\')"></form></td>';
                                             echo '</tr>';
                                         }

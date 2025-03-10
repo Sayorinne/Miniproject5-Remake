@@ -74,7 +74,8 @@
                         <?php if (isset($_SESSION['Employee_ID'])): ?>
                             <div class="profile-button">
                                 <p class=" fa fa-user" style="margin: 10px" onclick="toggloeMenu()">
-                                    <?php echo $_SESSION['Username_employee']; ?> </p>
+                                    <?php echo $_SESSION['Username_employee']; ?>
+                                </p>
                             </div>
                             <div class="sub-menu-wrap" id="subMenu">
                                 <div class="sub-menu">
@@ -139,19 +140,22 @@
                         <form action="EditTag.php" method="post">
                             <div>
                                 <label>ชื่อหมวดหมู่</label>
-                                <input type="text" name="tagname" id="" class="text-input"
-                                    value="<?php echo $topicID['Category_name']; ?>">
+                                <input type="text" name="tagname" class="text-input"
+                                    value="<?php echo trim($topicID['Category_name']); ?>">
                             </div>
-                            <input type="hidden" name="id" value="<?php echo $topicID['Category_ID'] ?> ">
+
+                            <input type="hidden" name="id" value="<?php echo $topicID['Category_ID']; ?>">
+
                             <div>
                                 <label>รายละเอียดหมวดหมู่</label>
                                 <textarea name="detail"
-                                    id="description"><?php echo $topicID['Category_detail']; ?> </textarea>
+                                    id="description"><?php echo trim($topicID['Category_detail']); ?></textarea>
                             </div>
+
                             <div class="form-group">
-                                <button type="submit" name="edit-tag" class="btn btn-big" ->แก้หมวดหมู่</button>
+                                <button type="submit" name="edit-tag" class="btn btn-big">แก้หมวดหมู่</button>
                             </div>
-                    </form>
+                        </form>
                     </div>
                 </div>
             </div>

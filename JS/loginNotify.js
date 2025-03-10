@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
         Swal.fire({
             position: 'center',
             icon: 'success',
-            title: 'Login Successful!',
+            title: 'กระบวนการล็อคอินสำเร็จ',
             showConfirmButton: false,
             timer: 1500
         });
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
         Swal.fire({
             position: 'center',
             icon: 'success',
-            title: 'Logout Successful!',
+            title: 'ทำการออกจากระบบแล้ว',
             showConfirmButton: false,
             timer: 1500
         });

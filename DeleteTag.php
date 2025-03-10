@@ -6,15 +6,15 @@ if(isset($_POST["DelTag"])) {
     $result = mysqli_query($conn, $sql); 
 
     if($result) {
-        echo "<script>alert('Delete complete');</script>"; 
+        echo "<script>alert('ทำการลบเสร็จสิ้น');</script>"; 
         echo '<meta http-equiv="refresh" content="0;url=AdminTagPage.php"> '; 
     } else {
-        echo "<script>alert('Cannot delete');</script>"; 
+        echo "<script>alert('ไม่สามารถลบได้);</script>"; 
         echo '<meta http-equiv="refresh" content="0;url=AdminTagPage.php"> '; 
     }
 } else {
     
-    echo "<script>alert('No ID provided');</script>"; 
+    echo "<script>alert('ไม่มี ID ที่กำหนด');</script>"; 
     echo '<meta http-equiv="refresh" content="0;url=AdminTagPage.php"> '; 
 }
 ?>

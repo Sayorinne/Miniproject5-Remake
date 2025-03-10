@@ -30,14 +30,14 @@
                     </button>
                 </div>
             </form>
-            <p>Not registered?
+            <p>ยังไม่มีบัญชีใช่ไหม?
                 <a href="registration.php" style="text-decoration: none;">
-                    Create an account
+                    สมัครสมาชิกเลย
                 </a>
             </p>
-            <p>Join as Guest
+            <p>เข้าแบบไม่ระบุตัวตน
                 <a href="CustomerHomepage.php" style="text-decoration:none;">
-                    Go to Homepage
+                    ไปสู่หน้าหลัก
                 </a>
             </p>
         </div>
