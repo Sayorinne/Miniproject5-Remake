@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 session_start();
 include "database.php";
@@ -247,4 +248,3 @@ echo json_encode(['id' => $session->id]);
     </script>
 </body>
 
-</html>
