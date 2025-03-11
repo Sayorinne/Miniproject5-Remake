@@ -1,0 +1,219 @@
+/* General Styles */
+body {
+  background-color: #FEFBF6;
+  color: #000000;
+  font-family: "Mitr", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.8em;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  margin: 0;
+  padding: 0;
+}
+
+/* Headings */
+h1, h2, h3, span {
+  font-family: "Mitr", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Full Layout */
+.layout {
+  display: flex;
+}
+
+/* Right Main Content */
+.layout .right-main {
+  margin-top: 8%;
+  margin-left: 220px; /* Push content to the right to match sidebar width */
+  width: calc(100% - 220px); /* Adjust width dynamically */
+  padding: 20px;
+}
+
+/* Content Wrapper */
+.layout .right-main .content {
+  padding: 40px;
+}
+
+/* Ensure Main Content Row Does Not Overlap */
+.layout .right-main .content .row {
+  min-height: calc(100vh - 75px);
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Grid Layout for Images */
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 items per row */
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Image Card */
+.image-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  max-width: 300px;
+  text-align: center;
+  flex: 1 1 calc(33.333% - 10px);
+  box-sizing: border-box;
+  margin: 5px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.image-card a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.image-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.content-flex {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 items per row */
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+  margin-left: 10%;
+}
+
+
+
+/* Image Styling */
+.image-card img {
+  width: 80%; /* Prevents images from being too large */
+  height: 250px; 
+  object-fit:  scale-down;
+  border-radius: 10px;
+}
+
+/* Text Section Inside Image Card */
+.image-details {
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+}
+
+
+
+/* Responsive Adjustments */
+@media screen and (max-width: 1024px) {
+  .layout .left-menu {
+      width: 180px; /* Reduce sidebar size on smaller screens */
+  }
+  .layout .right-main {
+      margin-left: 180px;
+      width: calc(100% - 180px);
+  }
+  .content-grid {
+      grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .layout .left-menu {
+      width: 150px; /* Smaller sidebar */
+  }
+  .layout .right-main {
+      margin-left: 150px;
+      width: calc(100% - 150px);
+  }
+  .content-grid {
+      grid-template-columns: repeat(2, 1fr); /* 2 columns on smaller screens */
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .layout .left-menu {
+      display: none; /* Hide sidebar on mobile */
+  }
+  .layout .right-main {
+      margin-left: 0;
+      width: 100%;
+  }
+  .content-grid {
+      grid-template-columns: repeat(1, 1fr); /* 1 column on mobile */
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* ตั้งค่าพื้นหลังและจัดตำแหน่งให้อยู่กึ่งกลาง */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+/* กรอบโปรไฟล์ */
+.profile-container {
+  width: 600px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+/* รูปโปรไฟล์ */
+.profile-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+/* หัวข้อ */
+h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+/* จัดกล่อง Input */
+.form-group {
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* สไตล์ของช่อง Input */
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+/* เอฟเฟกต์เวลาคลิกที่ Input */
+input:focus {
+  border-color: #4CAF50;
+  outline: none;
+  box-shadow: 0px 0px 5px rgba(76, 175, 80, 0.5);
+}
