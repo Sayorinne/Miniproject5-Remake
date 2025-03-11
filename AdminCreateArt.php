@@ -34,6 +34,8 @@ session_start();
     <!-- JavaScript -->
     <script src="JS/profile.js" defer></script>
     <script src="JS/texteditor.js" defer></script>
+    <script src="JS/previewImage.js" defer></script>
+
 
 </head>
 
@@ -99,10 +101,10 @@ session_start();
                     <hr>
                     <div class="left-menu-content">
                         <div class="ms-auto nav">
-                            <a aria-current="page" class href="AdminPage.php">
+                            <a class href="AdminPage.php">
                                 <span class="nav-link"><span>จัดการ "สินค้ากรอบรูป"</span></span>
                             </a>
-                            <a class href="AdminArtPage.php">
+                            <a aria-current="page" class href="AdminArtPage.php">
                                 <span class="nav-link"><span>จัดการ "ภาพศิลป์"</span></span>
                             </a>
                             <a class href="AdminTagPage.php">
@@ -117,17 +119,17 @@ session_start();
 
                 <div class="admin-content">
                     <div class="button-group">
-                        <a href="AdminCreateProduct.php" class="btn btn-big">สร้างสินค้า</a>
-                        <a href="AdminPage.php" class="btn btn-big">จัดการสินค้ากรอบรูป</a>
+                        <a href="AdminCreateArt.php" class="btn btn-big">สร้างสินค้าภาพศิลป์</a>
+                        <a href="AdminArtPage.php" class="btn btn-big">จัดการภาพศิลป์</a>
                     </div>
 
                     <div class="content">
 
-                        <h2 class="page-title">ข้อมูลกรอบรูป</h2>
+                        <h2 class="page-title">ข้อมูลงานศิลป์</h2>
 
-                        <form action="CheckProduct.php" method="post" enctype="multipart/form-data">
+                        <form action="CheckArt.php" method="post" enctype="multipart/form-data">
                             <div>
-                                <label>ชื่อกรอบรูป</label>
+                                <label>ชื่อผลงาน</label>
                                 <input type="text" name="name" id="" class="text-input">
                             </div>
                             <div>
@@ -148,29 +150,16 @@ session_start();
                                 <textarea name="detail" id="description"> </textarea>
                             </div>
 
-                            <div>
-                                <label>หมวดหมู่</label>
-                                <select name="tagname">
-                                    <?php
-                                    if (mysqli_num_rows($result) > 0) {
-                                        echo "<option disabled selected>เลือกหมวดหมู่</option>";
-                                        // วนลูปผ่านผลลัพธ์ของคำสั่ง SQL SELECT เพื่อสร้างตัวเลือกใน dropdown
-                                        while ($row = mysqli_fetch_assoc($result)) {
-                                            echo "<option value='" . $row['Category_ID'] . "'>" . $row['Category_name'] . "</option>";
-                                        }
-                                    } else {
-                                        echo "<option disabled selected>ไม่สามารถใส่ข้อมูลได้</option>";
-                                    }
-                                    ?>
-                                </select>
-                            </div>
+                            
                             <?php
                             // ปิดการเชื่อมต่อกับฐานข้อมูล
                             mysqli_close($conn);
                             ?>
                             <div>
                                 <label>รูปประกอบ</label><br>
-                                <input type="file" name="image" id="picture">
+                                <img src="" id="image-preview" style="max-width: 200px; margin-bottom: 10px;">
+                                <input type="file" name="image" id="picture" class="text-input"
+                                    onchange="previewImage(event)">
                             </div>
                             <div>
                                 <button type="submit" class="btn btn-big" name="add">เพิ่มสินค้า</button>

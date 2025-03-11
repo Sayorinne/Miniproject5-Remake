@@ -46,7 +46,7 @@ session_start();
         // เชื่อมต่อกับฐานข้อมูล
         include "database.php";
         // คำสั่ง SQL SELECT เพื่อดึงข้อมูลจากตาราง "topic"
-        $sql = "SELECT * FROM review";
+        $sql = "SELECT * FROM artproduct";
         $result = mysqli_query($conn, $sql);
         ?>
 
@@ -132,7 +132,7 @@ session_start();
 
                     <div class="content">
 
-                        <h2 class="page-title">รายการกรอบรูป</h2>
+                        <h2 class="page-title">รายการภาพศิลป์</h2>
 
                         <table>
                             <thead>
@@ -146,7 +146,7 @@ session_start();
                             <tr>
                                 <?php
                                 include "database.php";
-                                $sql = "SELECT * From product";
+                                $sql = "SELECT * From artproduct";
                                 $result = mysqli_query($conn, $sql);
                                 ?>
                                 <?php $result = mysqli_query($conn, $sql);
