@@ -65,3 +65,19 @@
     outline: none;
     box-shadow: 0px 0px 5px rgba(76, 175, 80, 0.5);
   }
+  .edit-profile-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.edit-profile-btn:hover {
+    background-color: #45a049;
+}
