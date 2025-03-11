@@ -122,22 +122,20 @@ session_start();
             <!-- Main Content Row -->
             <div class="profile-container">
         <img src="https://via.placeholder.com/80" alt="Profile Image" class="profile-img">
-
-        
         <h2>Profile Information</h2>
 
         <div class="form-group">
             <label for="username">Username</label>
-            
+            <p><?php echo isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest'; ?></p>
         </div>
 
         <div class="form-group">
             <label for="email">Email</label>
-            
+            <p><?php echo isset($_SESSION['email']) ? $_SESSION['email'] : 'Not available'; ?></p>
         </div>
-    </div>
 
+        <button class="edit-profile-btn" onclick="window.location.href='edit_profile.php'">แก้ไขโปรไฟล์</button>
+    </div>
 </body>
-</html>
 
 </html>
