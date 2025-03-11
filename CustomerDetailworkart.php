@@ -1,5 +1,47 @@
 <?php
 session_start();
+include "database.php";
+require 'vendor/autoload.php';
+
+$id = $_GET['id'] ?? null;  // รับค่า id จาก URL
+if (!$id) {
+    die("Error: No product ID provided.");
+}
+
+$sql = "SELECT * FROM artproduct WHERE Art_ID = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
+$row = $result->fetch_assoc();
+
+if (!$row) {
+    die("Error: Product not found.");
+}
+
+\Stripe\Stripe::setApiKey('sk_test_51QomvwR3rIyanQnHomFEx3J6p3lztGZBJ7VmcwuEh8rM7ayIo4VSfCL0ZHHd38py9lypcq5BiLid2nMnn2tsjsLh00ST1xNI1v');
+
+$session = \Stripe\Checkout\Session::create([
+    'payment_method_types' => ['card'],
+    'line_items' => [
+        [
+            'price_data' => [
+                'currency' => 'thb',
+                'product_data' => [
+                    'name' => $row['Art_name'],
+                ],
+                'unit_amount' => $row['Art_price'] * 100,
+            ],
+            'quantity' => 1,
+        ]
+    ],
+    'mode' => 'payment',
+    'success_url' => 'http://localhost/success.php',
+    'cancel_url' => 'http://localhost/cancel.php',
+]);
+
+echo json_encode(['id' => $session->id]);
+
 ?>
 
 <!DOCTYPE html>
@@ -17,6 +59,7 @@ session_start();
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" href="CSS/post.css">
     <link rel="stylesheet" href="CSS/navbar.css">
+    <link rel="stylesheet" href="CSS/CustomerProductDetail.css">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,9 +68,9 @@ session_start();
         rel="stylesheet">
 
     <!-- JavaScript -->
-    <script src="JS/slideshow.js" defer></script>
-    <script src="JS/popular.js" defer></script>
     <script src="JS/profile.js" defer></script>
+    <script src="https://js.stripe.com/v3/"></script>
+
 </head>
 
 <body>
@@ -41,13 +84,13 @@ session_start();
                 <hr>
                 <div class="left-menu-content">
                     <div class="ms-auto nav">
-                        <a href="CustomerHomepage.php">
+                    <a href="CustomerHomepage.php">
                             <span class="nav-link"><span>หน้าหลัก</span></span>
                         </a>
-                        <a aria-current="page" href="CustomerArtFrame.php">
+                        <a href="CustomerArtFrame.php">
                             <span class="nav-link"><span>กรอบรูป</span></span>
                         </a>
-                        <a href="CustomerWokart.php">
+                        <a aria-current="page" href="CustomerWorkart.php">
                             <span class="nav-link"><span>งานศิลป์</span></span>
                         </a>
                         <a href="CustomerReservation.php">
@@ -64,7 +107,7 @@ session_start();
             <div class="top-nav">
                 <div class="inside">
                     <div class="left-section">
-                        <h1>หน้าหลัก</h1>
+                        <h1>กรอบรูป "<?php echo $row['Art_name']; ?>"</h1>
                     </div>
                     <div class="right-section">
                         <div class="shopping-cart-icon">
@@ -112,57 +155,96 @@ session_start();
             </div>
 
             <!-- Main Content Row -->
-            <!DOCTYPE html>
-            <html lang="th">
-
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>สินค้า</title>
-                <link rel="stylesheet" href="styles.css">
-            </head>
-
-            <body>
-
-                <main>
-                    <section class="product">
+            <main class="content-container">
+                <div class="product-detail-container">
+                    <!-- Left Box: Product Image -->
+                    <div class="left-box">
                         <div class="product-image">
-                            <img src="Picture/3gok.jpg" alt="รูปสินค้า">
+                            <img src="Picture/<?php echo htmlspecialchars($row['Art_image']); ?>"
+                                alt="Product Image">
                         </div>
-                        <div class="product-details">
-                            <h2>ชื่องานศิลปะ</h2>
+                    </div>
 
-                            <div class="options">
-                                <p>ขนาด: A4 </p>
+                    <!-- Right Box: Product Information -->
+                    <div class="right-box">
+                        <div class="product-info">
+                            <h2 class="product-title"><?php echo $row['Art_name']; ?></h2>
+                            <p class="product-description">รายละเอียดสินค้า: <?php echo $row['detail']; ?></p>
+                            <p class="product-specs">
+                                <?php echo "ขนาด : " . $row['Art_size'] . " | สี : " . $row['Art_color']; ?>
+                            </p>
+                        </div>
 
-                                <p class="price">ราคา: $100.00 - $200.00</p>
+                        <!-- Price and Availability -->
+                        <div class="product-pricing">
+                            <div class="price"><?php echo $row['Art_price']; ?> ฿</div>
+                        </div>
 
-                                <p>รายละเอียดแรงบัลดาลใจ : </p>
+                        <!-- Actions -->
+                        <div class="action-buttons">
+                            <button class="add-to-cart">เพิ่มตะกร้า</button>
+                            <button id="checkout-button" class="buy-now">ซื้อสินค้า</button>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- Below Box: Recommended Products -->
+                <?php
+                // ดึงสินค้าที่เกี่ยวข้อง (ยกเว้นตัวเอง) จำนวน 4 รายการ
+                $related_sql = "SELECT Art_ID, Art_name,Art_price, Art_image 
+                    FROM artproduct 
+                    WHERE Art_ID != '$id' 
+                    ORDER BY RAND() 
+                    LIMIT 4";
+                $related_result = mysqli_query($conn, $related_sql);
 
-                                <div class="actions">
-                                    <button class="buy-btn">สั่งซื้อ</button>
-                                    <button class="add-cart-btn">เพิ่มสินค้า</button>
-                                </div>
-                            </div>
-                    </section>
-                </main>
-            </body>
-
-            </html>
-
+                if ($related_result && mysqli_num_rows($related_result) > 0): ?>
+                    <div class="below-box">
+                        <h3>Recommended Products</h3>
+                        <div class="recommended-products">
+                            <?php while ($related_row = mysqli_fetch_assoc($related_result)): ?>
+                                <a href="CustomerDetailworkart.php?id=<?php echo $related_row['Art_ID']; ?>"
+                                    class="product-card">
+                                    <img src="Picture/<?php echo htmlspecialchars($related_row['Art_image']); ?>"
+                                        alt="<?php echo htmlspecialchars($related_row['Art_name']); ?>">
+                                    <h4 class="product-name"><?php echo htmlspecialchars($related_row['Art_name']); ?></h4>
+                                    <p class="product-price"><?php echo number_format($related_row['Art_price'], 2); ?>฿</p>
+                                </a>
+                            <?php endwhile; ?>
+                        </div>
+                    </div>
+                <?php else: ?>
+                    <p>No recommended products found.</p>
+                <?php endif; ?>
+            </main>
 
         </div>
     </div>
-    </div>
-    </div>
 
+    <script>
+        var stripe = Stripe('pk_test_51QomvwR3rIyanQnHkPyYWIyo5FnRCpgpenwgL03fcXqaPxeQLhkGgBu6zf0d0NqDUWwVLJ1utdFWI3nN943s16zX00OgH5GqTv');
+        var checkoutButton = document.getElementById('checkout-button');
 
-
-    </div>
-    </div>
-    </div>
+        checkoutButton.addEventListener('click', function () {
+            fetch('./create-checkout-session.php?id=<?php echo $id; ?>', {
+                method: 'POST',
+            })
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (session) {
+                    return stripe.redirectToCheckout({ sessionId: session.id });
+                })
+                .then(function (result) {
+                    if (result.error) {
+                        alert(result.error.message);
+                    }
+                })
+                .catch(function (error) {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
 </body>
 
 </html>
-</body>

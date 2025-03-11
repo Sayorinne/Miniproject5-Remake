@@ -113,52 +113,33 @@ session_start();
             </div>
 
             <!-- Main Content Row -->
-            <div class="w3-container content-container">
-                <div class="content-flex">
-                    <!-- Image 1 -->
-                    <div class="image-card">
-                        <img src="Picture/3gok.jpg" class="w3-image w3-card-4">
-                        <h5>Image 1 Name</h5>
-                        <p><strong>Price:</strong> $20</p>
-                    </div>
+            <main>
+                <div class="w3-container content-container">
+                    <div class="content-flex">
+                        <?php
+                        include "database.php";
+                        $sql = "SELECT * From artproduct";
+                        $result = mysqli_query($conn, $sql);
 
-                    <!-- Image 2 -->
-                    <div class="image-card">
-                        <img src="Picture/3gok.jpg" class="w3-image w3-card-4">
-                        <h5>Image 2 Name</h5>
-                        <p><strong>Price:</strong> $25</p>
-                    </div>
+                        if (mysqli_num_rows($result) > 0) {
 
-                    <!-- Image 3 -->
-                    <div class="image-card">
-                        <img src="Picture/3gok.jpg" class="w3-image w3-card-4">
-                        <h5>Image 3 Name</h5>
-                        <p><strong>Price:</strong> $30</p>
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo '<div class="image-card">';
+                                echo '<a href="CustomerDetailWorkart.php?id=' . $row['Art_ID'] . '">';
+                                echo '<img src="Picture/' . $row['Art_image'] . '" class="w3-image w3-card-4" alt="product Image">';
+                                echo '<h5>' . $row['Art_name'] . '</h5>';
+                                echo '<p><strong>Price:</strong> ฿' . number_format($row['Art_price'], 2) . '</p>';
+                                echo '</a>';
+                                echo '</div>';
+                            }
+                        } else {
+                            echo '<p>ไม่พบสินค้า</p>';
+                        }
+                        mysqli_close($conn);
+                        ?>
                     </div>
-                </div>
-                <div class="content-flex">
-                    <!-- Image 4 -->
-                    <div class="image-card">
-                        <img src="Picture/3gok.jpg" class="w3-image w3-card-4">
-                        <h5>Image 4 Name</h5>
-                        <p><strong>Price:</strong> $35</p>
-                    </div>
-
-                    <!-- Image 5 -->
-                    <div class="image-card">
-                        <img src="Picture/3gok.jpg" class="w3-image w3-card-4">
-                        <h5>Image 5 Name</h5>
-                        <p><strong>Price:</strong> $40</p>
-                    </div>
-
-                    <!-- Image 6 -->
-                    <div class="image-card">
-                        <img src="Picture/3gok.jpg" class="w3-image w3-card-4">
-                        <h5>Image 6 Name</h5>
-                        <p><strong>Price:</strong> $45</p>
-                    </div>
-                </div>
             </div>
+        </main>
         </div>
 
 
