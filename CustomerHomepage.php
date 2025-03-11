@@ -19,6 +19,7 @@ session_start();
     <link rel="stylesheet" href="CSS/post.css">
     <link rel="stylesheet" href="CSS/navbar.css">
     <link rel="stylesheet" href="CSS/slideshow.css">
+    <link rel="stylesheet" href="CSS/HomePage.css">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
