@@ -111,7 +111,7 @@
             <a href="login.php">กลับสู่หน้า</a>
         </p>
         <p>เข้าแบบไม่ระบุตัวตน
-            <a href="Homepage.php">ไปสู่หน้าหลัก</a>
+            <a href="CustomerHomepage.php">ไปสู่หน้าหลัก</a>
         </p>
     </div>
 
