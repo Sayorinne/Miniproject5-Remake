@@ -32,8 +32,8 @@ session_start();
     <script src="JS/popular.js" defer></script>
     <script src="JS/profile.js" defer></script>
 
-      <!-- SweetAlert2 JS -->
-      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="JS/loginNotify.js"></script>
 </head>
 
@@ -71,70 +71,30 @@ session_start();
         <div class="right-main">
             <div class="top-nav">
                 <div class="inside">
-                    <div class="left-section">
-                        <h1>หน้าหลัก</h1>
-                    </div>
-                    <div class="right-section">
-                        <div class="shopping-cart-icon">
-                            <?php if (isset($_SESSION['user_id'])): ?>
-                                <h5>คำสั่งซื้อทั้งหมด</h5>
-                            <?php endif; ?>
-                        </div>
-                        <div class="profile-icon">
-                            <!-- Account validate -->
-                            <?php if (isset($_SESSION['user_id'])): ?>
-                                <div class="profile-image">
-                                    <img src="Picture/sayo.png" onclick="toggloeMenu()">
-                                </div>
-                                <div class="sub-menu-wrap" id="subMenu">
-                                    <div class="sub-menu">
-                                        <div class="user-info">
-                                            <img src="Picture/sayo.png">
-                                            <h2><?php echo $_SESSION['username']; ?></h2>
-                                            <h3>ID:<?php echo $_SESSION['user_id']; ?></h3>
-                                        </div>
-                                        <hr>
-                                        <a href="#" class="sub-menu-link">
-                                            <img src="images/profile.png">
-                                            <p>Edit Profile</p>
-                                            <span></span>
-                                        </a>
-                                        <a href="logout.php" class="sub-menu-link">
-                                            <img src="images/profile.png">
-                                            <p>Logout</p>
-                                            <span></span>
-                                        </a>
-                                    </div>
-                                </div>
-                            <?php else: ?>
-                                <a role="button" tabindex="0" href="login.php" class="login-button btn btn-primary">
-                                    <span>Login</span>
-                                </a>
-                                <a role="button" tabindex="0" href="registration.php" class="login-button btn btn-primary">
-                                    <span>Register</span>
-                                </a>
-                            <?php endif; ?>
-                        </div>
+                    <div class="left-icon">
+                        <?php include './Template/Header/AdminHeaderContent.php'; ?>
                     </div>
                 </div>
             </div>
 
             <!-- Main Content Row -->
             <div class="profile-container">
-        <img src="https://via.placeholder.com/80" alt="Profile Image" class="profile-img">
-        <h2>Profile Information</h2>
+                <img src="https://via.placeholder.com/80" alt="Profile Image" class="profile-img">
+                <h2>Profile Information</h2>
 
-        <div class="form-group">
-            <label for="username">Username</label>
-            <p><?php echo isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest'; ?></p>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <p><?php echo isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest'; ?></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <p><?php echo isset($_SESSION['email']) ? $_SESSION['email'] : 'Not available'; ?></p>
+                </div>
+
+                <button class="edit-profile-btn" onclick="window.location.href='edit_profile.php'">แก้ไขโปรไฟล์</button>
+            </div>
         </div>
-
-        <div class="form-group">
-            <label for="email">Email</label>
-            <p><?php echo isset($_SESSION['email']) ? $_SESSION['email'] : 'Not available'; ?></p>
-        </div>
-
-        <button class="edit-profile-btn" onclick="window.location.href='edit_profile.php'">แก้ไขโปรไฟล์</button>
     </div>
 </body>
 
