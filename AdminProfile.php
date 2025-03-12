@@ -14,12 +14,10 @@ session_start();
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
     <!-- Internal CSS -->
-    <link rel="stylesheet" href="CSS/mockup.css">
-    <link rel="stylesheet" href="CSS/style.css">
-    <link rel="stylesheet" href="CSS/post.css">
-    <link rel="stylesheet" href="CSS/navbar.css">
-    <link rel="stylesheet" href="CSS/slideshow.css">
-    <link rel="stylesheet" href="CSS/ProfilePage.css">
+
+    <link rel="stylesheet" href="CSS/adminStyle.css">
+    <link rel="stylesheet" href="CSS/adminNavbar.css">
+    <link rel="stylesheet" href="CSS/adminProfilePage.css">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -72,13 +70,43 @@ session_start();
             <div class="top-nav">
                 <div class="inside">
                     <div class="left-icon">
-                        <?php include './Template/Header/AdminHeaderContent.php'; ?>
+                    <?php include './Template/Header/AdminHeaderContent.php'; ?>
                     </div>
                 </div>
             </div>
 
             <!-- Main Content Row -->
-            <div class="profile-container">
+            <div class="admin-wrapper">
+                <div class="left-menu">
+
+
+                    <div class="left-menu-content">
+                        <hr>
+                        <div class="ms-auto nav">
+                            <a aria-current="page" class href="AdminPage.php">
+                                <span class="nav-link"><span>จัดการ "สินค้ากรอบรูป"</span></span>
+                            </a>
+
+                            <a class href="AdminArtPage.php">
+                                <span class="nav-link"><span>จัดการ "ภาพศิลป์"</span></span>
+                            </a>
+
+                            <a class href="AdminTagPage.php">
+                                <span class="nav-link"><span>จัดการ "หมวดหมู่"</span></span>
+                            </a>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="admin-content">
+    
+
+<div class="profile-container">
                 <img src="https://via.placeholder.com/80" alt="Profile Image" class="profile-img">
                 <h2>Profile Information</h2>
 
@@ -93,6 +121,9 @@ session_start();
                 </div>
 
                 <button class="edit-profile-btn" onclick="window.location.href='edit_profile.php'">แก้ไขโปรไฟล์</button>
+
+            </div>
+                </div>
             </div>
         </div>
     </div>

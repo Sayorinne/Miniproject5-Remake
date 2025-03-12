@@ -17,7 +17,7 @@
                     <h3>ID:<?php echo $_SESSION['user_id']; ?></h3>
                 </div>
                 <hr>
-                <a href="#" class="sub-menu-link">
+                <a href="CustomerProfile.php" class="sub-menu-link">
                     <img src="images/profile.png">
                     <p>Edit Profile</p>
                     <span></span>

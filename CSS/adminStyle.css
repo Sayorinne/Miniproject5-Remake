@@ -13,7 +13,6 @@
 .admin-wrapper .admin-content {
 
     flex: 8;
-    min-height: calc(100vh - 75px);
     padding: 100px 75px 20px;
     margin-left: 260px;
     margin-top: 80px;

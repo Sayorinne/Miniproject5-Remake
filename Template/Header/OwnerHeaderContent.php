@@ -13,11 +13,6 @@
                                     </div>
 
                                     <hr>
-                                    <a href="#" class="sub-menu-link">
-                                        <img src="images/profile.png">
-                                        <p>Edit Profile</p>
-                                        <span></span>
-                                    </a>
 
                                     <a href="logout.php" class="sub-menu-link">
                                         <img src="images/profile.png">
