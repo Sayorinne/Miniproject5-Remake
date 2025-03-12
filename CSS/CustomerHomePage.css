@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap');
+
+.row {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    font-size: 25px;
+    font-style:inherit;
+}
+
+.leftcolumn {
+    width: 100%;
+    
+    
+}
+
+.w3-card {
+    background: #fff;
+    border-radius: 30px;
+    box-shadow: 30px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    
+}
+
+h2, h4, h5 {
+    color: #333;
+    font-size: 22px;
+}
+
+.w3-center img {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+.w3-center img:hover {
+    transform: scale(1.1);
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    font-size: 22px;
+
+}
+
+ul li {
+    background: #f8f8f8;
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background 0.9s;
+    font-size: 22px;
+}
+
+ul li:hover {
+    background: #e6e6e6;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #ddd;
+    margin: 20px 0;
+    
+}
+
+.w3-card {
+    background: url('logoframeart.jpg') no-repeat center center;
+    background-size: cover;
+    border-radius: 30px;
+    box-shadow: 30px 30px 10px rgba(0, 0, 0, 0.1);
+    padding: 100px;
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+    position: relative;
+    overflow: hidden;
+}
