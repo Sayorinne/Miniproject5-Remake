@@ -14,11 +14,9 @@ session_start();
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
     <!-- Internal CSS -->
-    <link rel="stylesheet" href="CSS/mockup.css">
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" href="CSS/post.css">
     <link rel="stylesheet" href="CSS/navbar.css">
-    <link rel="stylesheet" href="CSS/slideshow.css">
     <link rel="stylesheet" href="CSS/ProfilePage.css">
 
     <!-- Google Fonts -->
