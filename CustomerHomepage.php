@@ -79,40 +79,42 @@ session_start();
             </div>
 
             <!-- Main Content Row -->
-            <div class="row">
-                <!-- Left Column -->
-                <div class="leftcolumn">
-                    <div class="w3-container w3-padding">
-                        <div class="w3-card w3-round w3-white w3-padding">
-                            <h2 class="w3-center">About Me</h2>
-                            <div class="w3-center">
-                                <img src="Picture/frameartlogo.jpg" class="w3-circle" style="width: 150px;">
-                            </div>
-                            <h4 class="w3-center">Frameart</h4>
-                            <p class="w3-center">
-                                สวัสดี!
-                                ยินดีต้อนรับสู่ frameart! เรารวบรวมงานศิลป์ กรอบรูป และการจองคิวไว้ให้คุณ
-                            </p>
-                            <hr>
-                            <h5>ข้อมูลเพิ่มเติม</h5>
-                            <ul>
-                                <li><b>ประวัติ:</b>ร้าน "เฟรมอาร์ต" บนถนนสุขุมวิท 71 ร้านนี้ตั้งอยู่ที่ 144/36
-                                    ซอยสุขุมวิท 71 ถนนสุขุมวิท
-                                    <br>แขวงพระโขนงเหนือ เขตวัฒนา กรุงเทพมหานคร 10110
-                                    <br>โดยเปิดให้บริการตั้งแต่วันจันทร์ถึงวันศุกร์ เวลา 08:00 น. ถึง 17:00 น.
-                                    และปิดทำการในวันเสาร์และอาทิตย์
-                                </li>
+            <section class="hero">
 
-                                <li><b>Email:</b> frame.art@hotmail.com</li>
-
-                                <li><b>บริการ:</b> ขายงานศิลปะ, ขายกรอบรูป, รับซ่อมกรอบรูป, สั่งทำกรอบรูป</li>
-                                <li><b>เบอร์โทร:</b> 121212123</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                </div>
+        <div class="hero-content">
+            <h1>ยินดีต้อนรับสู่ FrameArt</h1>
+            <p>เราช่วยให้คุณเลือกซื้อกรอบรูปและงานศิลป์ได้ง่ายขึ้น
+            <li><b>ประวัติ:</b>ร้าน "เฟรมอาร์ต" บนถนนสุขุมวิท 71 ร้านนี้ตั้งอยู่ที่ 144/36
+                            ซอยสุขุมวิท 71 ถนนสุขุมวิท
+                            <br>แขวงพระโขนงเหนือ เขตวัฒนา กรุงเทพมหานคร 10110
+                            <br>โดยเปิดให้บริการตั้งแต่วันจันทร์ถึงวันศุกร์ เวลา 08:00 น. ถึง 17:00 น.
+                            และปิดทำการในวันเสาร์และอาทิตย์
+                        </li>
+                        <li><b>Email:</b> frame.art@hotmail.com</li>
+                        <li><b>บริการ:</b> ขายงานศิลปะ, ขายกรอบรูป, รับซ่อมกรอบรูป, สั่งทำกรอบรูป</li>
+                        <li><b>เบอร์โทร:</b> 121212123</li>
+            </p>
             </div>
-</body>
+            </div>
 
+
+</div>
+            <div class="features-container">
+    <section class="features">
+        <div class="feature">
+            <h2>No title</h2>
+            <p>Unknow</p>
+        </div>
+        <div class="feature">
+            <h2>No title</h2>
+            <p>Unknow</p>
+        </div>
+        <div class="feature">
+            <h2>No title</h2>
+            <p>Unknow</p>
+        </div>
+    </section>
+</div>
+
+</body>
 </html>
