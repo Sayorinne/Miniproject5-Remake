@@ -55,7 +55,6 @@
             if (mysqli_num_rows($result) > 0) {
                 // ดึงข้อมูลรีวิวออกมา
                 $product_ID = mysqli_fetch_assoc($result);
-
             } else {
                 // หากไม่พบข้อมูลรีวิวที่ตรงกับ id ที่ระบุ สามารถให้ระบบทำการ redirect ไปยังหน้าที่ต้องการได้
                 // ในที่นี้เราจะให้กลับไปยังหน้า AdminPage.php
@@ -74,7 +73,7 @@
                 <div class="inside">
                     <!-- <input type="text" name="search" placeholder="Search.."> -->
                     <div class="left-icon">
-                    <?php include './Template/Header/AdminHeaderContent.php'; ?>
+                        <?php include './Template/Header/AdminHeaderContent.php'; ?>
                     </div>
                 </div>
             </div>
@@ -145,26 +144,26 @@
                             </div>
 
                             <div class="form-group">
-    <label for="tagname">หมวดหมู่</label>
-    <select name="tagname" id="tagname">
-        <?php
-        // ดึงข้อมูลหมวดหมู่ทั้งหมดจากฐานข้อมูล
-        $sql = "SELECT * FROM product_type";
-        $result = mysqli_query($conn, $sql);
+                                <label for="tagname">หมวดหมู่</label>
+                                <select name="tagname" id="tagname">
+                                    <?php
+                                    // ดึงข้อมูลหมวดหมู่ทั้งหมดจากฐานข้อมูล
+                                    $sql = "SELECT * FROM product_type";
+                                    $result = mysqli_query($conn, $sql);
 
-        if (mysqli_num_rows($result) > 0) {
-            echo "<option disabled>เลือกหมวดหมู่</option>";
-            while ($row = mysqli_fetch_assoc($result)) {
-                // ตรวจสอบว่าเป็นหมวดหมู่ที่เลือกอยู่หรือไม่
-                $selected = ($row['Category_ID'] == $product_ID['Category_ID']) ? "selected" : "";
-                echo "<option value='" . $row['Category_ID'] . "' $selected>" . $row['Category_name'] . "</option>";
-            }
-        } else {
-            echo "<option disabled selected>ไม่สามารถใส่ข้อมูลได้</option>";
-        }
-        ?>
-    </select>
-</div>
+                                    if (mysqli_num_rows($result) > 0) {
+                                        echo "<option disabled>เลือกหมวดหมู่</option>";
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            // ตรวจสอบว่าเป็นหมวดหมู่ที่เลือกอยู่หรือไม่
+                                            $selected = ($row['Category_ID'] == $product_ID['Category_ID']) ? "selected" : "";
+                                            echo "<option value='" . $row['Category_ID'] . "' $selected>" . $row['Category_name'] . "</option>";
+                                        }
+                                    } else {
+                                        echo "<option disabled selected>ไม่สามารถใส่ข้อมูลได้</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
 
                             <div class="form-group">
                                 <label for="picture">รูปประกอบ</label><br>
@@ -173,7 +172,7 @@
                                 <input type="file" name="image" id="picture" class="text-input"
                                     onchange="previewImage(event)">
 
-                                    <p id="file-name"><?php echo "ภาพที่เลือก : " . $product_ID['product_image']; ?></p>
+                                <p id="file-name"><?php echo "ภาพที่เลือก : " . $product_ID['product_image']; ?></p>
                             </div>
 
                             <div class="form-group">

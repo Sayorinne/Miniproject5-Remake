@@ -40,13 +40,7 @@ session_start();
 
 <body>
     <div class="layout expanded home-page">
-        <?php
-        // เชื่อมต่อกับฐานข้อมูล
-        include "database.php";
 
-        $sql = "SELECT * FROM product_type";
-        $result = mysqli_query($conn, $sql);
-        ?>
         <!-- Right Main -->
         <div class="right-main">
             <div class="top-nav">
@@ -113,7 +107,13 @@ session_start();
                                 <label>เนื้อหา</label>
                                 <textarea name="detail" id="description"> </textarea>
                             </div>
+                            <?php
+                            // เชื่อมต่อกับฐานข้อมูล
+                            include "database.php";
 
+                            $sql = "SELECT * FROM product_type";
+                            $result = mysqli_query($conn, $sql);
+                            ?>
                             <div>
                                 <label>หมวดหมู่</label>
                                 <select name="tagname">
