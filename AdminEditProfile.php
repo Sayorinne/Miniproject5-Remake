@@ -1,17 +1,31 @@
 <?php
 session_start();
-
 include "database.php";
-                $employee_ID = $_SESSION['Employee_ID'];
-                $sql = "SELECT * From employee WHERE Employee_ID = '$employee_ID'";
-                $result = mysqli_query($conn, $sql);
-                if ($result && mysqli_num_rows($result) > 0) {
-                    $employee = mysqli_fetch_assoc($result);
-                } else {
-                    die(" ไม่พบข้อมูลพนักงาน!");
-                }
-            
+$sql = "SELECT * FROM employee";
+$result = mysqli_query($conn, $sql);
+// ตรวจสอบว่ามีพารามิเตอร์ Employee_ID หรือไม่
+if (isset($_GET['Employee_ID'])) {
+    $employee_id = $_GET['Employee_ID'];
+
+    // ป้องกัน SQL Injection
+    $employee_id = mysqli_real_escape_string($conn, $employee_id);
+
+    // ดึงข้อมูลจากฐานข้อมูล
+    $sql = "SELECT * FROM employee WHERE Employee_ID = '$employee_id'";
+    $result = mysqli_query($conn, $sql);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $employee = mysqli_fetch_assoc($result);
+    } else {
+        die("❌ ไม่พบข้อมูลพนักงาน!");
+    }
+} else {
+    die("❌ ไม่มีรหัสพนักงานที่ระบุ!");
+}
 ?>
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -58,7 +72,7 @@ include "database.php";
                 <hr>
                 <div class="left-menu-content">
                     <div class="ms-auto nav">
-                        <a aria-current="page" href="CustomerHomepage.php">
+                        <a href="CustomerHomepage.php">
                             <span class="nav-link"><span>หน้าหลัก</span></span>
                         </a>
                         <a href="CustomerArtFrame.php">
@@ -81,7 +95,7 @@ include "database.php";
             <div class="top-nav">
                 <div class="inside">
                     <div class="left-icon">
-                        <?php include './Template/Header/AdminHeaderContent.php'; ?>
+                    <?php include './Template/Header/AdminHeaderContent.php'; ?>
                     </div>
                 </div>
             </div>
@@ -94,7 +108,7 @@ include "database.php";
                     <div class="left-menu-content">
                         <hr>
                         <div class="ms-auto nav">
-                            <a aria-current="page" class href="AdminPage.php">
+                            <a  class href="AdminPage.php">
                                 <span class="nav-link"><span>จัดการ "สินค้ากรอบรูป"</span></span>
                             </a>
 
@@ -109,32 +123,34 @@ include "database.php";
                         <hr>
                     </div>
                 </div>
-                
+
 
                 <div class="admin-content">
+    
 
+                <div class="profile-container">
+                <form action="editProfileadmin.php" method="post" enctype="multipart/form-data">
+                    <label>Username:</label>
+                    <input type="text" name="Username_employee" class="text-input"
+                        value="<?php echo htmlspecialchars($employee['Username_employee']); ?>">
 
-                    <div class="profile-container">
+                    <label>Password:</label>
+                    <input type="password" name="password" class="text-input" placeholder="ใส่รหัสผ่านใหม่ (ถ้าต้องการเปลี่ยน)">
+
+                    <label>Email:</label>
+                    <input type="text" name="email" class="text-input"
+                        value="<?php echo htmlspecialchars($employee['email']); ?>">
+
+                    <label>รูปภาพพนักงาน:</label><br>
                     <img src="Picture/<?php echo htmlspecialchars($employee['employee_image']); ?>" id="image-preview" style="max-width: 200px;">
-                        <h2>Profile Information</h2>
+                    <input type="file" name="image" id="picture" class="text-input" onchange="previewImage(event)">
 
-                        <div class="form-group">
-                            <label for="username">Username</label>
-                            <p><?php echo isset($employee['Username_employee']) ? $employee['Username_employee'] : 'Guest'; ?></p>
-                        </div>
+                    <input type="hidden" name="Employee_ID" value="<?php echo $employee['Employee_ID']; ?>">
+                    <button type="submit" class="btn btn-big" name="addeditemp">อัปเดตข้อมูล</button>
+                </form>
 
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <p>
-                            <?php 
-                            echo isset($employee['email']) ? $employee['email'] : 'Not available'; 
-                            ?></p>
-                        </div>
+                </div>
 
-                        <a class="edit-profile-btn" href="AdminEditProfile.php?Employee_ID=<?php echo $row['Employee_ID']; ?>">
-                            <button>Edit Profile</button>
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>

@@ -30,6 +30,7 @@ $result = mysqli_query($conn, $sql);
     <!-- JavaScript -->
     <script src="JS/profile.js" defer></script>
     <script src="JS/texteditor.js" defer></script>
+    <script src="JS/previewImage.js" defer></script>
 
 </head>
 
@@ -70,7 +71,8 @@ $result = mysqli_query($conn, $sql);
 
                     <div class="content">
                         <h2 class="page-title">เพิ่มข้อมูลพนักงาน</h2>
-                        <form action="SignUp_EM.php" method="POST">
+                        <form action="SignUp_EM.php" method="POST" enctype="multipart/form-data">
+
                             <div>
                                 <label for="Username_employee">Username:</label>
                                 <input type="text" name="Username_employee" class="text-input" required><br>
@@ -82,6 +84,12 @@ $result = mysqli_query($conn, $sql);
                             <div>
                                 <label for="email">Email:</label>
                                 <input type="email" name="email" class="text-input" required><br>
+                            </div>
+                            <div>
+                                <label>รูปโปรไฟล์</label><br>
+                                <img src="" id="image-preview" style="max-width: 200px; margin-bottom: 10px;">
+                                <input type="file" name="image" id="picture" class="text-input"
+                                    onchange="previewImage(event)">
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-big" name="Add Employee">Add Employee

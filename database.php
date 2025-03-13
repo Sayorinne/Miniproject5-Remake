@@ -2,7 +2,7 @@
 $host = 'localhost';
 $db   = 'frameart_db';
 $user = 'root';
-$pass = '26102540c';
+$pass = '';
 
 // Create connection
 $conn = new mysqli($host, $user, $pass, $db);

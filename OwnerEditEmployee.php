@@ -45,6 +45,8 @@ if (isset($_GET['Employee_ID'])) {
     <!-- JavaScript -->
     <script src="JS/profile.js" defer></script>
     <script src="JS/texteditor.js" defer></script>
+    <script src="JS/previewImage.js" defer></script>
+
 </head>
 
 <body>
@@ -98,6 +100,20 @@ if (isset($_GET['Employee_ID'])) {
                                 <input type="text" name="email" id="" class="text-input"
                                     value="<?php echo $employee['email'] ?> ">
                             </div>
+                            <div class="form-group">
+                                <label for="picture">รูปประกอบ</label><br>
+                                <?php if (!empty($employee['employee_image'])): ?>
+                                    <img src="Picture/<?php echo $employee['employee_image']; ?>" id="image-preview"
+                                        style="max-width: 200px; margin-bottom: 10px;">
+                                    <p id="file-name"><?php echo "ภาพที่เลือก : " . $employee['employee_image']; ?></p>
+                                <?php else: ?>
+                                    <p id="file-name">ยังไม่มีภาพที่อัปโหลด</p>
+                                <?php endif; ?>
+                                
+                                <!-- เพิ่ม Input File สำหรับอัปโหลดรูป -->
+                                <input type="file" name="image" id="picture" class="text-input" onchange="previewImage(event)">
+                            </div>
+
                             <input type="hidden" name="Employee_ID" value="<?php echo $employee['Employee_ID'] ?> ">
                             <button type="submit" class="btn btn-big" name="addeditemp">แก้ไขข้อมูลพนักงาน</button>
                         </form>

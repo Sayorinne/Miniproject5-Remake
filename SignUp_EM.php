@@ -34,9 +34,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $employeeId = 'E001'; // ถ้าไม่มีข้อมูล ให้เริ่มที่ E001
     }
 
+   // ตรวจสอบไฟล์ภาพ
+$target_filename = ""; // ค่าเริ่มต้นเป็นว่าง
+if (!empty($_FILES["image"]["name"])) {
+    $target_dir = "Picture/"; // โฟลเดอร์เก็บรูป
+    $target_filename = basename($_FILES["image"]["name"]);
+    $target_filepath = $target_dir . $target_filename;
+    
+    // อัปโหลดไฟล์
+    if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_filepath)) {
+        echo "✔ รูปถูกอัปโหลดสำเร็จ";
+    } else {
+        echo "❌ อัปโหลดรูปไม่สำเร็จ!";
+        $target_filename = ""; // ถ้าอัปโหลดไม่สำเร็จ ให้ใช้ค่าเป็นว่าง
+    }
+}
+
+
     // บันทึกข้อมูลลงตาราง employee
-    $stmt = $conn->prepare('INSERT INTO employee (Employee_ID, Username_employee, email, password) VALUES (?, ?, ?, ?)');
-    $stmt->bind_param('ssss', $employeeId, $username, $email, $password);
+    $stmt = $conn->prepare('INSERT INTO employee (Employee_ID, Username_employee, email, password,employee_image) VALUES (?, ?, ?, ?, ?)');
+    $stmt->bind_param('sssss', $employeeId, $username, $email, $password,$target_filename);
 
     if ($stmt->execute()) {
         echo "Employee added successfully!";

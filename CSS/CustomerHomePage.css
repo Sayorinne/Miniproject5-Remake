@@ -1,31 +1,56 @@
-@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap');
 
-.row {
+body {
+    font-family: 'Mitr', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+
+
+.hero {
+    background: url('../Picture/frameartlogo.jpg') no-repeat center center/cover;
+    height: 700px;
     display: flex;
     justify-content: center;
-    padding: 20px;
-    font-size: 25px;
-    font-style:inherit;
-}
-
-.leftcolumn {
+    align-items: center;
+    text-align: center;
+    color: white;
     width: 100%;
-    
-    
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
 }
 
-.w3-card {
-    background: #fff;
-    border-radius: 30px;
-    box-shadow: 30px 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    
+
+.hero-content {
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    text-align: center;
 }
 
-h2, h4, h5 {
-    color: #333;
-    font-size: 22px;
+
+.hero img {
+    width: 100%;  
+    height: 100%; 
+    object-fit: cover; 
+    border-radius: 0; 
 }
+
 
 .w3-center img {
     border: 1px solid #ddd;
@@ -34,47 +59,31 @@ h2, h4, h5 {
     transition: transform 0.3s;
 }
 
-.w3-center img:hover {
-    transform: scale(1.1);
+.features-container {
+    background: white;
+    padding: 170px 100px;
+    margin-top: 470px; 
+    position: relative;
+    z-index: 1;
 }
 
-ul {
-    list-style: none;
-    padding: 0;
-    font-size: 22px;
-
-}
-
-ul li {
-    background: #f8f8f8;
-    margin: 8px 0;
-    padding: 10px;
-    border-radius: 8px;
-    transition: background 0.9s;
-    font-size: 22px;
-}
-
-ul li:hover {
-    background: #e6e6e6;
-}
-
-hr {
-    border: 0;
-    height: 1px;
-    background: #ddd;
-    margin: 20px 0;
-    
-}
-
-.w3-card {
-    background: url('logoframeart.jpg') no-repeat center center;
-    background-size: cover;
-    border-radius: 30px;
-    box-shadow: 30px 30px 10px rgba(0, 0, 0, 0.1);
-    padding: 100px;
-    width: 100%;
+.features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 200px;
     max-width: 1000px;
     margin: auto;
-    position: relative;
-    overflow: hidden;
+    text-align: center;
+}
+
+.feature {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.feature:hover {
+    transform: translateY(-5px);
 }
