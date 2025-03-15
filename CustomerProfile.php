@@ -1,5 +1,16 @@
 <?php
 session_start();
+
+include "database.php";
+                $User_ID = $_SESSION['user_id'];
+                $sql = "SELECT * From customer WHERE User_ID = '$User_ID'";
+                $result = mysqli_query($conn, $sql);
+                if ($result && mysqli_num_rows($result) > 0) {
+                    $user = mysqli_fetch_assoc($result);
+                } else {
+                    die(" ไม่พบข้อมูลลูกค้า!");
+                }
+            
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +58,7 @@ session_start();
                 <hr>
                 <div class="left-menu-content">
                     <div class="ms-auto nav">
-                        <a aria-current="page" href="CustomerHomepage.php">
+                        <a href="CustomerHomepage.php">
                             <span class="nav-link"><span>หน้าหลัก</span></span>
                         </a>
                         <a href="CustomerArtFrame.php">
@@ -70,7 +81,7 @@ session_start();
             <div class="top-nav">
                 <div class="inside">
                     <div class="left-section">
-                        <h1>หน้าหลัก</h1>
+                        <h1>โปรไฟล์</h1>
                     </div>
                     <div class="right-section">
                     <?php include './Template/Header/CustomerHeaderContent.php'; ?>
@@ -79,27 +90,29 @@ session_start();
             </div>
 
             <!-- Main Content Row -->
-            <div class="profile-container">
-        <img src="https://via.placeholder.com/80" alt="Profile Image" class="profile-img">
-        <h2>Profile Information</h2>
+            
 
-        <div class="form-group">
-            <label for="username">Username</label>
-            <p><?php echo isset($_SESSION['username']) ? $_SESSION['username'] : 'Guest'; ?></p>
-        </div>
+        <div class="profile-container">
+                    <img src="Picture/<?php echo htmlspecialchars($user['customer_image']); ?>" id="image-preview" style="max-width: 200px;">
+                        <h2>Profile Information</h2>
 
-        <div class="form-group">
-            <label for="email">Email</label>
-            <p><?php echo isset($_SESSION['email']) ? $_SESSION['email'] : 'Not available'; ?></p>
-        </div>
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <p><?php echo isset($user['Username']) ? $user['Username'] : 'Guest'; ?></p>
+                        </div>
 
-        <div class="form-group">
-            <label for="address">Address</label>
-            <p><?php echo isset($_SESSION['address']) ? $_SESSION['address'] : 'Not available'; ?></p>
-        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <p>
+                            <?php 
+                            echo isset($user['email']) ? $user['email'] : 'Not available'; 
+                            ?></p>
+                        </div>
 
-        <button class="edit-profile-btn" onclick="window.location.href='edit_profile.php'">แก้ไขโปรไฟล์</button>
-    </div>
+                        <a class="edit-profile-btn" href="CustomerEditProfile.php">
+                            <button>Edit Profile</button>
+                        </a>
+                    </div>
 </body>
 
 </html>

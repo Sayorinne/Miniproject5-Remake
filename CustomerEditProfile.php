@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 include "database.php";
                 $User_ID = $_SESSION['user_id'];
                 $sql = "SELECT * From customer WHERE User_ID = '$User_ID'";
@@ -7,9 +8,12 @@ include "database.php";
                 if ($result && mysqli_num_rows($result) > 0) {
                     $user = mysqli_fetch_assoc($result);
                 } else {
-                    die(" ไม่พบข้อมูลพนักงาน!");
+                    die(" ไม่พบข้อมูลลูกค้า!");
                 }
+            
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,10 +27,11 @@ include "database.php";
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
     <!-- Internal CSS -->
+
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" href="CSS/post.css">
     <link rel="stylesheet" href="CSS/navbar.css">
-    <link rel="stylesheet" href="CSS/CustomerHomePage.css">
+    <link rel="stylesheet" href="CSS/CustomerProfilePage.css">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,8 +44,8 @@ include "database.php";
     <script src="JS/popular.js" defer></script>
     <script src="JS/profile.js" defer></script>
 
-      <!-- SweetAlert2 JS -->
-      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="JS/loginNotify.js"></script>
 </head>
 
@@ -50,13 +55,13 @@ include "database.php";
         <!-- Left Menu -->
         <div class="left-menu">
             <div class="logo">
-                <a href="#">
+                <a href="CustomerHomepage.php">
                     <img src="Picture/logoframeart.png" style="width: 200px;">
                 </a>
                 <hr>
                 <div class="left-menu-content">
                     <div class="ms-auto nav">
-                        <a aria-current="page" href="CustomerHomepage.php">
+                        <a href="CustomerHomepage.php">
                             <span class="nav-link"><span>หน้าหลัก</span></span>
                         </a>
                         <a href="CustomerArtFrame.php">
@@ -79,7 +84,7 @@ include "database.php";
             <div class="top-nav">
                 <div class="inside">
                     <div class="left-section">
-                        <h1>หน้าหลัก</h1>
+                        <h1>โปรไฟล์</h1>
                     </div>
                     <div class="right-section">
                     <?php include './Template/Header/CustomerHeaderContent.php'; ?>
@@ -87,43 +92,41 @@ include "database.php";
                 </div>
             </div>
 
+
             <!-- Main Content Row -->
-            <section class="hero">
+            <div class="admin-wrapper">
+                
 
-        <div class="hero-content">
-            <h1>ยินดีต้อนรับสู่ FrameArt</h1>
-            <p>เราช่วยให้คุณเลือกซื้อกรอบรูปและงานศิลป์ได้ง่ายขึ้น
-            <li><b>ประวัติ:</b>ร้าน "เฟรมอาร์ต" บนถนนสุขุมวิท 71 ร้านนี้ตั้งอยู่ที่ 144/36
-                            ซอยสุขุมวิท 71 ถนนสุขุมวิท
-                            <br>แขวงพระโขนงเหนือ เขตวัฒนา กรุงเทพมหานคร 10110
-                            <br>โดยเปิดให้บริการตั้งแต่วันจันทร์ถึงวันศุกร์ เวลา 08:00 น. ถึง 17:00 น.
-                            และปิดทำการในวันเสาร์และอาทิตย์
-                        </li>
-                        <li><b>Email:</b> frame.art@hotmail.com</li>
-                        <li><b>บริการ:</b> ขายงานศิลปะ, ขายกรอบรูป, รับซ่อมกรอบรูป, สั่งทำกรอบรูป</li>
-                        <li><b>เบอร์โทร:</b> 121212123</li>
-            </p>
+                <div class="admin-content">
+    
+
+                <div class="profile-container">
+                <form action="editProfilecustomer.php" method="post" enctype="multipart/form-data">
+                    <label>Username:</label>
+                    <input type="text" name="Username" class="text-input"
+                        value="<?php echo htmlspecialchars($user['Username']); ?>">
+
+                    <label>Password:</label>
+                    <input type="password" name="password" class="text-input" placeholder="ใส่รหัสผ่านใหม่ (ถ้าต้องการเปลี่ยน)">
+
+                    <label>Email:</label>
+                    <input type="text" name="email" class="text-input"
+                        value="<?php echo htmlspecialchars($user['email']); ?>">
+
+                    <label>รูปภาพโปรไฟล์:</label><br>
+                    <img src="Picture/<?php echo htmlspecialchars($user['customer_image']); ?>" id="image-preview" style="max-width: 200px;">
+                    <input type="file" name="image" id="picture" class="text-input" onchange="previewImage(event)">
+
+                    <input type="hidden" name="User_ID" value="<?php echo $user['User_ID']; ?>">
+                    <button type="submit" class="btn btn-big" name="addeditemp">อัปเดตข้อมูล</button>
+                </form>
+
+                </div>
+
+                </div>
             </div>
-            </div>
-
-
-</div>
-            <div class="features-container">
-    <section class="features">
-        <div class="feature">
-            <h2>No title</h2>
-            <p>Unknow</p>
         </div>
-        <div class="feature">
-            <h2>No title</h2>
-            <p>Unknow</p>
-        </div>
-        <div class="feature">
-            <h2>No title</h2>
-            <p>Unknow</p>
-        </div>
-    </section>
-</div>
-
+    </div>
 </body>
+
 </html>
