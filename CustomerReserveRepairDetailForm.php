@@ -1,6 +1,14 @@
 <?php
 session_start();
-$user_id = $_SESSION['User_ID'];
+
+// Check if User_ID is set in the session
+if (!isset($_SESSION['user_id'])) {
+    echo "Error: User_ID is not set in the session.";
+    exit;
+}
+
+$user_id = $_SESSION['user_id'];
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $year = isset($_POST['year']) ? $_POST['year'] : null;
@@ -8,6 +16,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $day = isset($_POST['day']) ? $_POST['day'] : null;
     $time = isset($_POST['time']) ? $_POST['time'] : null;
 
+    // Debugging: Check if all required POST data is present
+    if (empty($year) || empty($month) || empty($day) || empty($time)) {
+        echo "Error: Missing reservation details.";
+        exit;
+    }
 } else {
     header('Location: CustomerReserveRepair.php');
     exit;

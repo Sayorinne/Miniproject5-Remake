@@ -1,10 +1,6 @@
 <?php
 session_start();
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 require 'database.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -17,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($user && password_verify($password, $user['password'])) {
         $_SESSION['user_id'] = $user['User_ID'];
         $_SESSION['username'] = $user['Username'];
+
         header('Location: CustomerHomepage.php?status=success');
         exit();
     }
