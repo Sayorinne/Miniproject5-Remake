@@ -40,8 +40,6 @@ include "database.php";
         rel="stylesheet">
 
     <!-- JavaScript -->
-    <script src="JS/slideshow.js" defer></script>
-    <script src="JS/popular.js" defer></script>
     <script src="JS/profile.js" defer></script>
 
     <!-- SweetAlert2 JS -->
@@ -53,31 +51,8 @@ include "database.php";
 
     <div class="layout expanded home-page">
         <!-- Left Menu -->
-        <div class="left-menu">
-            <div class="logo">
-                <a href="CustomerHomepage.php">
-                    <img src="Picture/logoframeart.png" style="width: 200px;">
-                </a>
-                <hr>
-                <div class="left-menu-content">
-                    <div class="ms-auto nav">
-                        <a href="CustomerHomepage.php">
-                            <span class="nav-link"><span>หน้าหลัก</span></span>
-                        </a>
-                        <a href="CustomerArtFrame.php">
-                            <span class="nav-link"><span>กรอบรูป</span></span>
-                        </a>
-                        <a href="CustomerWorkart.php">
-                            <span class="nav-link"><span>งานศิลป์</span></span>
-                        </a>
-                        <a href="CustomerReservation.php">
-                            <span class="nav-link"><span>จองคิว</span></span>
-                        </a>
-                    </div>
-                    <hr>
-                </div>
-            </div>
-        </div>
+        <?php include './Template/LeftNavBar/LeftNav.php'; ?>
+
 
         <!-- Right Main -->
         <div class="right-main">

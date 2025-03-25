@@ -123,6 +123,7 @@ $transactions = StripeHistory::getTransactionHistory();
                                         <td><?php echo htmlspecialchars($transaction['customer_email']); ?></td>
                                         <td><?php echo htmlspecialchars($transaction['customer_phone']); ?></td>
                                         <td><?php echo htmlspecialchars($transaction['billing_address']); ?></td>
+                                        <td><?php echo htmlspecialchars($transaction['shipping_address']); ?></td>
                                         <td><?php echo htmlspecialchars($transaction['payment_method']); ?></td>
                                         <td>
                                             <?php if (isset($transaction['receipt_url'])): ?>

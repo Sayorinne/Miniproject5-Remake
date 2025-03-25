@@ -1,18 +1,14 @@
 <?php
 require_once('vendor/autoload.php');
 
-\Stripe\Stripe::setApiKey('sk_test_51QomvwR3rIyanQnHomFEx3J6p3lztGZBJ7VmcwuEh8rM7ayIo4VSfCL0ZHHd38py9lypcq5BiLid2nMnn2tsjsLh00ST1xNI1v');
-
-
 class StripeHistory {
     public static function getTransactionHistory($limit = 50) {
         try {
-            $charges = \Stripe\Charge::all(['limit' => $limit, 'expand' => ['data.payment_intent', 'data.customer']]);
+            $stripe = new \Stripe\StripeClient('sk_test_51QomvwR3rIyanQnHomFEx3J6p3lztGZBJ7VmcwuEh8rM7ayIo4VSfCL0ZHHd38py9lypcq5BiLid2nMnn2tsjsLh00ST1xNI1v');
+            $charges = $stripe->charges->all(['limit' => $limit]);
             $transactions = [];
-            foreach ($charges->data as $charge) {
-                $paymentIntent = $charge->payment_intent;
-                $customer = $charge->customer;
 
+            foreach ($charges->data as $charge) {
                 $transactions[] = [
                     'id' => $charge->id,
                     'amount' => $charge->amount / 100,

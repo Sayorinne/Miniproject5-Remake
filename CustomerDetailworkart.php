@@ -1,13 +1,13 @@
-
 <?php
 session_start();
 include "database.php";
 require 'vendor/autoload.php';
 
-$id = $_GET['id'] ?? null;  // รับค่า id จาก URL
+$id = $_GET['id'] ?? null; 
 if (!$id) {
     die("Error: No product ID provided.");
 }
+
 
 $sql = "SELECT * FROM artproduct WHERE Art_ID = ?";
 $stmt = $conn->prepare($sql);
@@ -20,7 +20,9 @@ if (!$row) {
     die("Error: Product not found.");
 }
 
+
 \Stripe\Stripe::setApiKey('sk_test_51QomvwR3rIyanQnHomFEx3J6p3lztGZBJ7VmcwuEh8rM7ayIo4VSfCL0ZHHd38py9lypcq5BiLid2nMnn2tsjsLh00ST1xNI1v');
+
 
 $session = \Stripe\Checkout\Session::create([
     'payment_method_types' => ['card'],
@@ -29,20 +31,20 @@ $session = \Stripe\Checkout\Session::create([
             'price_data' => [
                 'currency' => 'thb',
                 'product_data' => [
-                    'name' => $row['Art_name'],
+                    'name' => htmlspecialchars($row['Art_name']), 
                 ],
-                'unit_amount' => $row['Art_price'] * 100,
+                'unit_amount' => intval(floatval($row['Art_price']) * 100),
             ],
             'quantity' => 1,
         ]
     ],
     'mode' => 'payment',
-    'success_url' => 'http://localhost/success.php',
-    'cancel_url' => 'http://localhost/cancel.php',
+    'success_url' => 'http://localhost/MiniProject5/success.php',
+    'cancel_url' => 'http://localhost/MiniProject5/cancel.php',
 ]);
 
-echo json_encode(['id' => $session->id]);
 
+$stripeSessionId = $session->id;
 ?>
 
 <!DOCTYPE html>
@@ -69,9 +71,7 @@ echo json_encode(['id' => $session->id]);
         rel="stylesheet">
 
     <!-- JavaScript -->
-    <script src="JS/profile.js" defer></script>
     <script src="https://js.stripe.com/v3/"></script>
-
 </head>
 
 <body>
@@ -85,7 +85,7 @@ echo json_encode(['id' => $session->id]);
                 <hr>
                 <div class="left-menu-content">
                     <div class="ms-auto nav">
-                    <a href="CustomerHomepage.php">
+                        <a href="CustomerHomepage.php">
                             <span class="nav-link"><span>หน้าหลัก</span></span>
                         </a>
                         <a href="CustomerArtFrame.php">
@@ -108,10 +108,10 @@ echo json_encode(['id' => $session->id]);
             <div class="top-nav">
                 <div class="inside">
                     <div class="left-section">
-                        <h1>กรอบรูป "<?php echo $row['Art_name']; ?>"</h1>
+                        <h1>งานศิลป์ "<?php echo htmlspecialchars($row['Art_name']); ?>"</h1>
                     </div>
                     <div class="right-section">
-                    <?php include './Template/Header/CustomerHeaderContent.php'; ?>
+                        <?php include './Template/Header/CustomerHeaderContent.php'; ?>
                     </div>
                 </div>
             </div>
@@ -119,30 +119,30 @@ echo json_encode(['id' => $session->id]);
             <!-- Main Content Row -->
             <main class="content-container">
                 <div class="product-detail-container">
-                    <!-- Left Box: Product Image -->
+
                     <div class="left-box">
                         <div class="product-image">
-                            <img src="Picture/<?php echo htmlspecialchars($row['Art_image']); ?>"
-                                alt="Product Image">
+                            <img src="Picture/<?php echo htmlspecialchars($row['Art_image']); ?>" 
+                                alt="<?php echo htmlspecialchars($row['Art_name']); ?>">
                         </div>
                     </div>
 
-                    <!-- Right Box: Product Information -->
+    
                     <div class="right-box">
                         <div class="product-info">
-                            <h2 class="product-title"><?php echo $row['Art_name']; ?></h2>
-                            <p class="product-description">รายละเอียดสินค้า: <?php echo $row['detail']; ?></p>
+                            <h2 class="product-title"><?php echo htmlspecialchars($row['Art_name']); ?></h2>
+                            <p class="product-description">รายละเอียดสินค้า: <?php echo $row['detail']; // ALLOW HTML ?></p>
                             <p class="product-specs">
-                                <?php echo "ขนาด : " . $row['Art_size'] . " | สี : " . $row['Art_color']; ?>
+                                <?php echo "ขนาด : " . htmlspecialchars($row['Art_size']) . 
+                                          " | สี : " . htmlspecialchars($row['Art_color']); ?>
                             </p>
                         </div>
 
-                        <!-- Price and Availability -->
                         <div class="product-pricing">
-                            <div class="price"><?php echo $row['Art_price']; ?> ฿</div>
+                            <div class="price"><?php echo number_format($row['Art_price'], 2); ?> ฿</div>
                         </div>
 
-                        <!-- Actions -->
+
                         <div class="action-buttons">
                             <button class="add-to-cart">เพิ่มตะกร้า</button>
                             <button id="checkout-button" class="buy-now">ซื้อสินค้า</button>
@@ -150,21 +150,23 @@ echo json_encode(['id' => $session->id]);
                     </div>
                 </div>
 
-                <!-- Below Box: Recommended Products -->
-                <?php
-                // ดึงสินค้าที่เกี่ยวข้อง (ยกเว้นตัวเอง) จำนวน 4 รายการ
-                $related_sql = "SELECT Art_ID, Art_name,Art_price, Art_image 
-                    FROM artproduct 
-                    WHERE Art_ID != '$id' 
-                    ORDER BY RAND() 
-                    LIMIT 4";
-                $related_result = mysqli_query($conn, $related_sql);
 
-                if ($related_result && mysqli_num_rows($related_result) > 0): ?>
+                <?php
+                $related_sql = "SELECT Art_ID, Art_name, Art_price, Art_image 
+                                FROM artproduct 
+                                WHERE Art_ID != ? 
+                                ORDER BY RAND() 
+                                LIMIT 4";
+                $stmt = $conn->prepare($related_sql);
+                $stmt->bind_param("i", $id);
+                $stmt->execute();
+                $related_result = $stmt->get_result();
+
+                if ($related_result->num_rows > 0): ?>
                     <div class="below-box">
-                        <h3>Recommended Products</h3>
+                        <h3>สินค้าแนะนำ</h3>
                         <div class="recommended-products">
-                            <?php while ($related_row = mysqli_fetch_assoc($related_result)): ?>
+                            <?php while ($related_row = $related_result->fetch_assoc()): ?>
                                 <a href="CustomerDetailworkart.php?id=<?php echo $related_row['Art_ID']; ?>"
                                     class="product-card">
                                     <img src="Picture/<?php echo htmlspecialchars($related_row['Art_image']); ?>"
@@ -176,7 +178,7 @@ echo json_encode(['id' => $session->id]);
                         </div>
                     </div>
                 <?php else: ?>
-                    <p>No recommended products found.</p>
+                    <p>ไม่มีสินค้าอื่นๆ</p>
                 <?php endif; ?>
             </main>
 
@@ -188,24 +190,14 @@ echo json_encode(['id' => $session->id]);
         var checkoutButton = document.getElementById('checkout-button');
 
         checkoutButton.addEventListener('click', function () {
-            fetch('./create-checkout-session.php?id=<?php echo $id; ?>', {
-                method: 'POST',
-            })
-                .then(function (response) {
-                    return response.json();
-                })
-                .then(function (session) {
-                    return stripe.redirectToCheckout({ sessionId: session.id });
-                })
+            stripe.redirectToCheckout({ sessionId: '<?php echo $stripeSessionId; ?>' })
                 .then(function (result) {
                     if (result.error) {
                         alert(result.error.message);
                     }
-                })
-                .catch(function (error) {
-                    console.error('Error:', error);
                 });
         });
     </script>
 </body>
 
+</html>
