@@ -209,3 +209,9 @@ button.service-btn.accept:hover {
 .btn:hover {
     background-color: #0056b3;
 }
+
+.time-btn.reserved {
+    background-color: #ccc;
+    cursor: not-allowed;
+    color: #666;
+}

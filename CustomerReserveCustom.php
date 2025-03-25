@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+$user_id = $_SESSION['user_id'];
 ?>
 
 <!DOCTYPE html>
@@ -69,7 +71,7 @@ session_start();
                         <h1>หน้าหลัก</h1>
                     </div>
                     <div class="right-section">
-                    <?php include './Template/Header/CustomerHeaderContent.php'; ?>
+                        <?php include './Template/Header/CustomerHeaderContent.php'; ?>
                     </div>
                 </div>
             </div>
@@ -127,10 +129,14 @@ session_start();
                         ย้อนกลับ
 
                     </a>
-                    <a href="CustomerReserveDetailForm.php" class="service-btn accept">
-                        ยืนยัน
-                    </a>
-
+                    <form action="CustomerReserveCustomDetailForm.php" method="post">
+                    <input type="hidden" name="customer_id" value="<?php echo $customer_id; ?>">
+                        <input type="hidden" name="year" id="selected-year">
+                        <input type="hidden" name="month" id="selected-month">
+                        <input type="hidden" name="day" id="selected-day">
+                        <input type="hidden" name="time" id="selected-time">
+                        <button type="submit" class="service-btn accept">ยืนยัน</button>
+                    </form>
                 </div>
             </main>
 

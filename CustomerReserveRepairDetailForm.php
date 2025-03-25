@@ -1,7 +1,17 @@
 <?php
 session_start();
+$user_id = $_SESSION['User_ID'];
 
-$user_id = $_SESSION['user_id'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $year = isset($_POST['year']) ? $_POST['year'] : null;
+    $month = isset($_POST['month']) ? $_POST['month'] : null;
+    $day = isset($_POST['day']) ? $_POST['day'] : null;
+    $time = isset($_POST['time']) ? $_POST['time'] : null;
+
+} else {
+    header('Location: CustomerReserveRepair.php');
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -29,8 +39,7 @@ $user_id = $_SESSION['user_id'];
 
     <!-- JavaScript -->
     <script src="JS/profile.js" defer></script>
-    <script src="JS/schedule.js" defer></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 
 <body>
@@ -71,66 +80,50 @@ $user_id = $_SESSION['user_id'];
                         <h1>หน้าหลัก</h1>
                     </div>
                     <div class="right-section">
-                        <?php include './Template/Header/CustomerHeaderContent.php'; ?>
+                    <?php include './Template/Header/CustomerHeaderContent.php'; ?>
                     </div>
                 </div>
             </div>
 
             <main>
-                <div class="service-container">
-                    <h1>จองคิว "ซ่อมแซมกรอบรูป"</h1>
+                <div class="form-container">
+                    <h2>Reserve Repair Details</h2>
+                    <form action="RepairReserveSubmit.php" method="post">
+                    <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
+        <input type="hidden" name="year" value="<?php echo $year; ?>">
+        <input type="hidden" name="month" value="<?php echo $month; ?>">
+        <input type="hidden" name="day" value="<?php echo $day; ?>">
+        <input type="hidden" name="time" value="<?php echo $time; ?>">
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="surname">Surname:</label>
+                            <input type="text" id="surname" name="surname" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="detail">Detail:</label>
+                            <textarea id="detail" name="detail" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number:</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="service-container">
+                            <a href="CustomerReservation.php" class="service-btn return">
+                                ย้อนกลับ
+
+                            </a>
+                            <button type="submit" class="service-btn accept">
+                                ยืนยัน
+                            </button>
+                        </div>
                 </div>
-
-                <div class="schedule-container">
-                    <div class="schedule-box">
-                        <h2>เลือกเดือน</h2>
-                        <div class="month-selection">
-                            <?php
-                            for ($m = 1; $m <= 12; $m++) {
-                                $monthName = date('F', mktime(0, 0, 0, $m, 10));
-                                echo "<button class='month-btn' data-month='$m'>$monthName</button>";
-                            }
-                            ?>
-                        </div>
-                        <div class="year-selection">
-                            <h3>เลือกปี</h3>
-                            <?php
-                            $currentYear = date('Y');
-                            for ($y = $currentYear; $y <= $currentYear + 2; $y++) {
-                                echo "<button class='year-btn' data-year='$y'>$y</button>";
-                            }
-                            ?>
-                        </div>
-                        <h3>เลือกวัน</h3>
-                        <div class="schedule-grid" id="days-container">
-
-
-
-                        </div>
-                    </div>
-                    <div class="time-box">
-                        <h2>เลือกเวลา</h2>
-                        <div class="time-grid" id="time-container">
-
-                        </div>
-                    </div>
-                </div>
-                <div class="service-container">
-                    <a href="CustomerReservation.php" class="service-btn return">
-                        ย้อนกลับ
-
-                    </a>
-                    <form action="CustomerReserveRepairDetailForm.php" method="post">
-                        <input type="hidden" name="year" id="selected-year">
-                        <input type="hidden" name="month" id="selected-month">
-                        <input type="hidden" name="day" id="selected-day">
-                        <input type="hidden" name="time" id="selected-time">
-                        <button type="submit" class="service-btn accept">ยืนยัน</button>
-                    </form>
-                </div>
-            </main>
-
+                </form>
         </div>
+        </main>
+    </div>
     </div>
 </body>
 
