@@ -54,25 +54,9 @@ session_start();
 
             <!-- Main Content Row -->
             <div class="admin-wrapper">
-                <div class="left-menu">
-
-                    <hr>
-                    <div class="left-menu-content">
-                        <div class="ms-auto nav">
-                            <a class href="AdminPage.php">
-                                <span class="nav-link"><span>จัดการ "สินค้ากรอบรูป"</span></span>
-                            </a>
-
-                            <a class href="AdminArtPage.php">
-                                <span class="nav-link"><span>จัดการ "ภาพศิลป์"</span></span>
-                            </a>
-
-                            <a aria-current="page" class href="AdminTagPage.php">
-                                <span class="nav-link"><span>จัดการ "หมวดหมู่"</span></span>
-                            </a>
-                        </div>
-                        <hr>
-                    </div>
+                
+            <div class="left-menu">
+                    <?php include './Template/LeftNavBar/AdminLeftNav.php'; ?>
                 </div>
 
 

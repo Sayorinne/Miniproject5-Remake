@@ -33,10 +33,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $reservation_date = "$year-$month-$day";
 
-    $sql = "INSERT INTO repair_reservations (User_ID, reservation_date, reservation_time, name, surname, detail, phone) 
-            VALUES (?, ?, ?, ?, ?, ?, ?)";
+    // Set status_ID to 1 (รอดำเนินการ) when creating a reservation
+    $status_id = 1;
+
+    $sql = "INSERT INTO repair_reservations (User_ID, reservation_date, reservation_time, name, surname, detail, phone, status_ID) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param('sssssss', $user_id, $reservation_date, $time, $name, $surname, $detail, $phone); // Use 's' for all strings
+    $stmt->bind_param('sssssssi', $user_id, $reservation_date, $time, $name, $surname, $detail, $phone, $status_id); // Use 'i' for integer
 
     if ($stmt->execute()) {
         echo "Repair reservation saved successfully!";

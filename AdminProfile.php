@@ -2,15 +2,15 @@
 session_start();
 
 include "database.php";
-                $employee_ID = $_SESSION['Employee_ID'];
-                $sql = "SELECT * From employee WHERE Employee_ID = '$employee_ID'";
-                $result = mysqli_query($conn, $sql);
-                if ($result && mysqli_num_rows($result) > 0) {
-                    $employee = mysqli_fetch_assoc($result);
-                } else {
-                    die(" ไม่พบข้อมูลพนักงาน!");
-                }
-            
+$employee_ID = $_SESSION['Employee_ID'];
+$sql = "SELECT * From employee WHERE Employee_ID = '$employee_ID'";
+$result = mysqli_query($conn, $sql);
+if ($result && mysqli_num_rows($result) > 0) {
+    $employee = mysqli_fetch_assoc($result);
+} else {
+    die(" ไม่พบข้อมูลพนักงาน!");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -37,8 +37,7 @@ include "database.php";
         rel="stylesheet">
 
     <!-- JavaScript -->
-    <script src="JS/slideshow.js" defer></script>
-    <script src="JS/popular.js" defer></script>
+
     <script src="JS/profile.js" defer></script>
 
     <!-- SweetAlert2 JS -->
@@ -49,31 +48,9 @@ include "database.php";
 <body>
 
     <div class="layout expanded home-page">
-        <!-- Left Menu -->
+
         <div class="left-menu">
-            <div class="logo">
-                <a href="#">
-                    <img src="Picture/logoframeart.png" style="width: 200px;">
-                </a>
-                <hr>
-                <div class="left-menu-content">
-                    <div class="ms-auto nav">
-                        <a aria-current="page" href="CustomerHomepage.php">
-                            <span class="nav-link"><span>หน้าหลัก</span></span>
-                        </a>
-                        <a href="CustomerArtFrame.php">
-                            <span class="nav-link"><span>กรอบรูป</span></span>
-                        </a>
-                        <a href="CustomerWorkart.php">
-                            <span class="nav-link"><span>งานศิลป์</span></span>
-                        </a>
-                        <a href="CustomerReservation.php">
-                            <span class="nav-link"><span>จองคิว</span></span>
-                        </a>
-                    </div>
-                    <hr>
-                </div>
-            </div>
+            <?php include './Template/LeftNavBar/AdminLeftNav.php'; ?>
         </div>
 
         <!-- Right Main -->
@@ -91,47 +68,37 @@ include "database.php";
                 <div class="left-menu">
 
 
-                    <div class="left-menu-content">
-                        <hr>
-                        <div class="ms-auto nav">
-                            <a aria-current="page" class href="AdminPage.php">
-                                <span class="nav-link"><span>จัดการ "สินค้ากรอบรูป"</span></span>
-                            </a>
-
-                            <a class href="AdminArtPage.php">
-                                <span class="nav-link"><span>จัดการ "ภาพศิลป์"</span></span>
-                            </a>
-
-                            <a class href="AdminTagPage.php">
-                                <span class="nav-link"><span>จัดการ "หมวดหมู่"</span></span>
-                            </a>
-                        </div>
-                        <hr>
-                    </div>
+                <div class="left-menu">
+                    <?php include './Template/LeftNavBar/AdminLeftNav.php'; ?>
                 </div>
-                
+                </div>
+
 
                 <div class="admin-content">
 
 
                     <div class="profile-container">
-                    <img src="Picture/<?php echo htmlspecialchars($employee['employee_image']); ?>" id="image-preview" style="max-width: 200px;">
+                        <img src="Picture/<?php echo htmlspecialchars($employee['employee_image']); ?>"
+                            id="image-preview" style="max-width: 200px;">
                         <h2>Profile Information</h2>
 
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <p><?php echo isset($employee['Username_employee']) ? $employee['Username_employee'] : 'Guest'; ?></p>
+                            <p><?php echo isset($employee['Username_employee']) ? $employee['Username_employee'] : 'Guest'; ?>
+                            </p>
                         </div>
 
                         <div class="form-group">
                             <label for="email">Email</label>
                             <p>
-                            <?php 
-                            echo isset($employee['email']) ? $employee['email'] : 'Not available'; 
-                            ?></p>
+                                <?php
+                                echo isset($employee['email']) ? $employee['email'] : 'Not available';
+                                ?>
+                            </p>
                         </div>
 
-                        <a class="edit-profile-btn" href="AdminEditProfile.php?Employee_ID=<?php echo $row['Employee_ID']; ?>">
+                        <a class="edit-profile-btn"
+                            href="AdminEditProfile.php?Employee_ID=<?php echo $row['Employee_ID']; ?>">
                             <button>Edit Profile</button>
                         </a>
                     </div>

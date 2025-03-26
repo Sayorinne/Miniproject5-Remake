@@ -35,7 +35,7 @@ $user_id = $_SESSION['user_id'];
 
 <body>
 
-    <div class="layout expanded home-page">
+<div class="layout expanded home-page">
         <!-- Left Menu -->
         <?php include './Template/LeftNavBar/LeftNav.php'; ?>
 
@@ -44,7 +44,6 @@ $user_id = $_SESSION['user_id'];
             <div class="top-nav">
                 <div class="inside">
                     <div class="left-section">
-                        <h1>หน้าหลัก</h1>
                     </div>
                     <div class="right-section">
                         <?php include './Template/Header/CustomerHeaderContent.php'; ?>

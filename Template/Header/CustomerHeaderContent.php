@@ -22,6 +22,12 @@ if (isset($_SESSION['user_id'])) {
 $header_conn->close();
 ?>
 
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
 <div class="shopping-cart-icon">
     <?php if (isset($_SESSION['user_id'])): ?>
         <h5>คำสั่งซื้อทั้งหมด</h5>
@@ -42,11 +48,11 @@ $header_conn->close();
                 </div>
                 <hr>
                 <a href="CustomerProfile.php" class="sub-menu-link">
-                    <img src="/MiniProject5/images/profile.png">
+                <i class="fa fa-edit" style="margin-right: 20px" ></i>
                     <p>Edit Profile</p>
                 </a>
                 <a href="logout.php" class="sub-menu-link">
-                    <img src="/MiniProject5/images/logout.png">
+                <i class="fa fa-sign-out" style="margin-right: 20px"></i>
                     <p>Logout</p>
                 </a>
             </div>

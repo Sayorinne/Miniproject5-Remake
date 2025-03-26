@@ -31,7 +31,7 @@ include "database.php";
 
 <body>
 
-    <div class="layout expanded home-page">
+<div class="layout expanded home-page">
         <!-- Left Menu -->
         <?php include './Template/LeftNavBar/LeftNav.php'; ?>
 
@@ -40,10 +40,9 @@ include "database.php";
             <div class="top-nav">
                 <div class="inside">
                     <div class="left-section">
-                        <h1>หน้าหลัก</h1>
                     </div>
                     <div class="right-section">
-                    <?php include './Template/Header/CustomerHeaderContent.php'; ?>
+                        <?php include './Template/Header/CustomerHeaderContent.php'; ?>
                     </div>
                 </div>
             </div>

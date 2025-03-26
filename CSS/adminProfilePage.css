@@ -1,11 +1,4 @@
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-  }
-  
   /* ตั้งค่าพื้นหลังและจัดตำแหน่งให้อยู่กึ่งกลาง */
   body {
     min-height: 100vh;

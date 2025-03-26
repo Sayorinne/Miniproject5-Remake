@@ -46,7 +46,6 @@
     overflow: visible;
     text-align: center;
     box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
-    padding-top: 20px;
     
 }
 
@@ -74,7 +73,7 @@
 }
 
 .layout .left-menu .left-menu-content .nav [aria-current] {
-    background-color: #8CB9BD;
+    background-color: #84f5ff;
 }
 
 .layout .left-menu .left-menu-content .nav [aria-current]:hover {
@@ -155,6 +154,41 @@ a:-webkit-any-link {
     margin: 1px 10px 10px 10px;
     box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.1);
 }
+
+
+.sub-menu hr {
+    border: 0;
+    height: 1px;
+    width: 100%;
+    background: #ccc;
+    margin: 10px 0;
+}
+
+.sub-menu-link {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    text-decoration: none;
+    color: #525252;
+    margin: 12px 0;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+
+.sub-menu-link:hover {
+    background-color: #69bbff;
+    color: #ffffff;
+}
+
+.sub-menu-link:hover img {
+    filter: brightness(0) invert(1); 
+}
+
+.sub-menu-link p {
+    margin: 0;
+}
+
 
 .user-info {
     display: flex;

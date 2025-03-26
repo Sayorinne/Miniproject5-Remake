@@ -80,7 +80,6 @@ if ($selected_category) {
             <div class="top-nav">
                 <div class="inside">
                     <div class="left-section">
-                        <h1>หน้าหลัก</h1>
                     </div>
                     <div class="right-section">
                         <?php include './Template/Header/CustomerHeaderContent.php'; ?>

@@ -89,40 +89,16 @@ $stripeSessionId = $session->id;
 </head>
 
 <body>
-    <div class="layout expanded home-page">
+    
+<div class="layout expanded home-page">
         <!-- Left Menu -->
-        <div class="left-menu">
-            <div class="logo">
-                <a href="#">
-                    <img src="Picture/logoframeart.png" style="width: 200px;">
-                </a>
-                <hr>
-                <div class="left-menu-content">
-                    <div class="ms-auto nav">
-                        <a href="CustomerHomepage.php">
-                            <span class="nav-link"><span>หน้าหลัก</span></span>
-                        </a>
-                        <a aria-current="page" href="CustomerArtFrame.php">
-                            <span class="nav-link"><span>กรอบรูป</span></span>
-                        </a>
-                        <a href="CustomerWorkart.php">
-                            <span class="nav-link"><span>งานศิลป์</span></span>
-                        </a>
-                        <a href="CustomerReservation.php">
-                            <span class="nav-link"><span>จองคิว</span></span>
-                        </a>
-                    </div>
-                    <hr>
-                </div>
-            </div>
-        </div>
+        <?php include './Template/LeftNavBar/LeftNav.php'; ?>
 
         <!-- Right Main -->
         <div class="right-main">
             <div class="top-nav">
                 <div class="inside">
                     <div class="left-section">
-                        <h1>กรอบรูป "<?php echo htmlspecialchars($row['product_name']); ?>"</h1>
                     </div>
                     <div class="right-section">
                         <?php include './Template/Header/CustomerHeaderContent.php'; ?>

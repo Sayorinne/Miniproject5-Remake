@@ -1,8 +1,9 @@
 <?php
 include 'database.php';
+session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $customer_id = $_POST['customer_id'];
+    $user_id = $_POST['user_id']; // Ensure this is set
     $year = $_POST['year'];
     $month = $_POST['month'];
     $day = $_POST['day'];
@@ -12,15 +13,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $detail = $_POST['detail'];
     $phone = $_POST['phone'];
 
+    // Validate User_ID
+    if (empty($user_id)) {
+        echo "Error: User_ID is missing.";
+        exit;
+    }
+
+    // Validate that User_ID exists in the customer table
+    $checkUserQuery = "SELECT User_ID FROM customer WHERE User_ID = ?";
+    $stmt = $conn->prepare($checkUserQuery);
+    $stmt->bind_param('s', $user_id); // Use 's' for string
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows === 0) {
+        echo "Error: User_ID does not exist in the customer table.";
+        exit;
+    }
+
     $reservation_date = "$year-$month-$day";
 
-    $sql = "INSERT INTO custom_reservations (customer_id, reservation_date, reservation_time, name, surname, detail, phone) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    // Set status_ID to 1 (รอดำเนินการ) when creating a reservation
+    $status_id = 1;
+
+    $sql = "INSERT INTO custom_reservations (User_ID, reservation_date, reservation_time, name, surname, detail, phone, status_ID) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param('issssss', $customer_id, $reservation_date, $time, $name, $surname, $detail, $phone);
+    $stmt->bind_param('sssssssi', $user_id, $reservation_date, $time, $name, $surname, $detail, $phone, $status_id); // Use 'i' for integer
 
     if ($stmt->execute()) {
-        echo "Custom reservation saved successfully!";
-        header('Location: successPage.php');
+        echo "Repair reservation saved successfully!";
+        header('Location: successPage.php'); // Redirect to a success page
     } else {
         echo "Error: " . $stmt->error;
     }

@@ -63,32 +63,10 @@ if (isset($_GET['Employee_ID'])) {
 <body>
 
     <div class="layout expanded home-page">
-        <!-- Left Menu -->
-        <div class="left-menu">
-            <div class="logo">
-                <a href="#">
-                    <img src="Picture/logoframeart.png" style="width: 200px;">
-                </a>
-                <hr>
-                <div class="left-menu-content">
-                    <div class="ms-auto nav">
-                        <a href="CustomerHomepage.php">
-                            <span class="nav-link"><span>หน้าหลัก</span></span>
-                        </a>
-                        <a href="CustomerArtFrame.php">
-                            <span class="nav-link"><span>กรอบรูป</span></span>
-                        </a>
-                        <a href="CustomerWorkart.php">
-                            <span class="nav-link"><span>งานศิลป์</span></span>
-                        </a>
-                        <a href="CustomerReservation.php">
-                            <span class="nav-link"><span>จองคิว</span></span>
-                        </a>
-                    </div>
-                    <hr>
+        
+    <div class="left-menu">
+                    <?php include './Template/LeftNavBar/AdminLeftNav.php'; ?>
                 </div>
-            </div>
-        </div>
 
         <!-- Right Main -->
         <div class="right-main">

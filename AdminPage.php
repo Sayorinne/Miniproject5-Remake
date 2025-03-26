@@ -34,8 +34,8 @@ session_start();
     <!-- JavaScript -->
     <script src="JS/profile.js" defer></script>
     <script src="JS/texteditor.js" defer></script>
-      <!-- SweetAlert2 JS -->
-      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="JS/loginNotify.js"></script>
 
 </head>
@@ -58,33 +58,16 @@ session_start();
             <div class="top-nav">
                 <div class="inside">
                     <div class="left-icon">
-                    <?php include './Template/Header/AdminHeaderContent.php'; ?>
+                        <?php include './Template/Header/AdminHeaderContent.php'; ?>
                     </div>
                 </div>
             </div>
 
             <!-- Main Content Row -->
             <div class="admin-wrapper">
+
                 <div class="left-menu">
-
-
-                    <div class="left-menu-content">
-                        <hr>
-                        <div class="ms-auto nav">
-                            <a aria-current="page" class href="AdminPage.php">
-                                <span class="nav-link"><span>จัดการ "สินค้ากรอบรูป"</span></span>
-                            </a>
-
-                            <a class href="AdminArtPage.php">
-                                <span class="nav-link"><span>จัดการ "ภาพศิลป์"</span></span>
-                            </a>
-
-                            <a class href="AdminTagPage.php">
-                                <span class="nav-link"><span>จัดการ "หมวดหมู่"</span></span>
-                            </a>
-                        </div>
-                        <hr>
-                    </div>
+                    <?php include './Template/LeftNavBar/AdminLeftNav.php'; ?>
                 </div>
 
 

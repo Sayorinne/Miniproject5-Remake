@@ -2,8 +2,15 @@
 session_start();
 include "database.php";
 
+// Check if User_ID is set in the session
+if (!isset($_SESSION['user_id'])) {
+    echo "Error: User_ID is not set in the session.";
+    exit;
+}
+
+$user_id = $_SESSION['user_id'];
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $user_id = $_POST['user_id'];
     $year = isset($_POST['year']) ? $_POST['year'] : null;
     $month = isset($_POST['month']) ? $_POST['month'] : null;
     $day = isset($_POST['day']) ? $_POST['day'] : null;
@@ -50,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
 
-    <div class="layout expanded home-page">
+<div class="layout expanded home-page">
         <!-- Left Menu -->
         <?php include './Template/LeftNavBar/LeftNav.php'; ?>
 
@@ -59,10 +66,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="top-nav">
                 <div class="inside">
                     <div class="left-section">
-                        <h1>หน้าหลัก</h1>
                     </div>
                     <div class="right-section">
-                    <?php include './Template/Header/CustomerHeaderContent.php'; ?>
+                        <?php include './Template/Header/CustomerHeaderContent.php'; ?>
                     </div>
                 </div>
             </div>
