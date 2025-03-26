@@ -49,20 +49,20 @@ $header_conn->close();
                 <hr>
                 <a href="CustomerProfile.php" class="sub-menu-link">
                 <i class="fa fa-edit" style="margin-right: 20px" ></i>
-                    <p>Edit Profile</p>
+                    <p>แก้ไขโปรไฟล์</p>
                 </a>
                 <a href="logout.php" class="sub-menu-link">
                 <i class="fa fa-sign-out" style="margin-right: 20px"></i>
-                    <p>Logout</p>
+                    <p>ออกจากระบบ</p>
                 </a>
             </div>
         </div>
     <?php else: ?>
         <a role="button" tabindex="0" href="login.php" class="login-button btn btn-primary">
-            <span>Login</span>
+            <span>ล็อคอิน</span>
         </a>
         <a role="button" tabindex="0" href="registration.php" class="login-button btn btn-primary">
-            <span>Register</span>
+            <span>สมัครสมาชิก</span>
         </a>
     <?php endif; ?>
 </div>

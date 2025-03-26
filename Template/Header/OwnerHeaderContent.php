@@ -16,16 +16,16 @@
 
                                     <a href="logout.php" class="sub-menu-link">
                                         <img src="images/profile.png">
-                                        <p>Logout</p>
+                                        <p>ออกจากระบบ</p>
                                         <span></span>
                                     </a>
                                 </div>
                             </div>
                         <?php else: ?>
                             <a role="button" tabindex="0" href="login.php" class="login-button btn btn-primary">
-                                <span>Login</span>
+                                <span>เข้าสู่ระบบ</span>
                             </a>
                             <a role="button" tabindex="0" href="registration.php" class="login-button btn btn-primary">
-                                <span>Register</span>
+                                <span>สมัครสมาชิก</span>
                             </a>
                         <?php endif; ?>

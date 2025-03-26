@@ -65,13 +65,11 @@ if ($result && mysqli_num_rows($result) > 0) {
 
             <!-- Main Content Row -->
             <div class="admin-wrapper">
-                <div class="left-menu">
-
 
                 <div class="left-menu">
                     <?php include './Template/LeftNavBar/AdminLeftNav.php'; ?>
                 </div>
-                </div>
+
 
 
                 <div class="admin-content">
@@ -98,8 +96,8 @@ if ($result && mysqli_num_rows($result) > 0) {
                         </div>
 
                         <a class="edit-profile-btn"
-                            href="AdminEditProfile.php?Employee_ID=<?php echo $row['Employee_ID']; ?>">
-                            <button>Edit Profile</button>
+                            href="AdminEditProfile.php?Employee_ID=<?php echo $admin_row['Employee_ID']; ?>">
+                            <p>Edit Profile</p>
                         </a>
                     </div>
                 </div>

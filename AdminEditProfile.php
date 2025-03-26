@@ -64,42 +64,21 @@ if (isset($_GET['Employee_ID'])) {
 
     <div class="layout expanded home-page">
         
-    <div class="left-menu">
-                    <?php include './Template/LeftNavBar/AdminLeftNav.php'; ?>
-                </div>
-
         <!-- Right Main -->
         <div class="right-main">
             <div class="top-nav">
                 <div class="inside">
                     <div class="left-icon">
-                    <?php include './Template/Header/AdminHeaderContent.php'; ?>
+                        <?php include './Template/Header/AdminHeaderContent.php'; ?>
                     </div>
                 </div>
             </div>
 
             <!-- Main Content Row -->
             <div class="admin-wrapper">
+
                 <div class="left-menu">
-
-
-                    <div class="left-menu-content">
-                        <hr>
-                        <div class="ms-auto nav">
-                            <a  class href="AdminPage.php">
-                                <span class="nav-link"><span>จัดการ "สินค้ากรอบรูป"</span></span>
-                            </a>
-
-                            <a class href="AdminArtPage.php">
-                                <span class="nav-link"><span>จัดการ "ภาพศิลป์"</span></span>
-                            </a>
-
-                            <a class href="AdminTagPage.php">
-                                <span class="nav-link"><span>จัดการ "หมวดหมู่"</span></span>
-                            </a>
-                        </div>
-                        <hr>
-                    </div>
+                    <?php include './Template/LeftNavBar/AdminLeftNav.php'; ?>
                 </div>
 
 

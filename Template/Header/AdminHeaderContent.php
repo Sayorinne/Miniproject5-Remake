@@ -29,13 +29,13 @@
             <!-- Edit Profile Link -->
             <a href="AdminProfile.php" class="sub-menu-link">
                 <i class="fa fa-edit"></i>
-                <p style="margin-left: 20px">Edit Profile</p>
+                <p style="margin-left: 20px">แก้ไขโปรไฟล์</p>
             </a>
 
             <!-- Logout Link -->
             <a href="logout.php" class="sub-menu-link">
                 <i class="fa fa-sign-out"></i>
-                <p style="margin-left: 20px">Logout</p>
+                <p style="margin-left: 20px">ออกจากระบบ</p>
             </a>
         </div>
     </div>
