@@ -15,6 +15,7 @@ include "database.php";
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
     <!-- Internal CSS -->
+    <link rel="stylesheet" href="CSS/CustomerReserveSelection.css">
     <link rel="stylesheet" href="CSS/CustomerReserve.css">
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" href="CSS/post.css">
@@ -49,20 +50,36 @@ include "database.php";
             </div>
 
             <main>
-                <h1 style="text-align: center;">จองบริการ</h1>
-                <div class="service-container">
-                    <button class="service-btn">
-                        <a href="CustomerReserveRepair.php">
-                            ซ่อมกรอบรูป
-                        </a>
-                    </button>
-                    <button class="service-btn">
-                        <a href="CustomerReserveCustom.php">
-                            ทำกรอบแบบสั่งทำ
-                        </a>
-                    </button>
-                </div>
-            </main>
+    <h1 style="text-align: center;">จองบริการ</h1>
+    <div class="big-cards-container">
+        <a href="CustomerReserveRepair.php" class="big-card repair-card">
+        <div class="repair-image">
+            <img src="Picture/crackedFrameReserve.jpg" alt="Custom Frame Service">
+            </div>
+            <div>
+            <h2><i class="fa fa-wrench"></i>
+             สั่งซ่อมกรอบรูป 
+             <i class="fa fa-wrench"></i>
+            </h2>
+            <p>กรอบรูปเสียหาย จองคิวตรงนี้</p> 
+            </div>
+        </a>
+        <a href="CustomerReserveCustom.php" class="big-card custom-card">
+            <div class="custom-image">
+            <img src="Picture/framecustomreserve.jpg" alt="Custom Frame Service">
+            </div>
+            <div>
+            <h2><i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+            ทำกรอบแบบสั่งทำ 
+            <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+            </h2>
+            <p>บริการออกแบบและทำกรอบรูปตามความต้องการ</p>
+            </div>
+        </a>
+    </div>
+</main>
+
+
         </div>
     </div>
 </body>

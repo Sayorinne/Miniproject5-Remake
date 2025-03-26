@@ -1,0 +1,97 @@
+/* Big Cards Section */
+.big-cards-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px;
+    margin: 0 auto;
+    max-width: 1200px;
+    gap: 20px;
+}
+
+.big-card {
+    flex: 1;
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+
+.big-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Repair Card */
+.repair-card .repair-image {
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.repair-card img {
+    width: 100%;
+    height: auto;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.repair-card .repair-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../Picture/fullyfixFrameReserve.jpeg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 10px;
+}
+
+.repair-card:hover .repair-image::before {
+    opacity: 1;
+}
+
+/* Custom Card */
+.custom-card .custom-image {
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.custom-card img {
+    width: 100%;
+    height: auto;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.custom-card .custom-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../Picture/customframe2.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 10px;
+}
+
+.custom-card:hover .custom-image::before {
+    opacity: 1;
+}
