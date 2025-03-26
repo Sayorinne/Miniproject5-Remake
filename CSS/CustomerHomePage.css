@@ -1,68 +1,77 @@
-/* ตั้งค่าฟอนต์และสไตล์พื้นฐาน */
-body {
-    font-family: 'Mitr', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-}
-
-
-/* สไตล์ Hero Section */
+/* Hero Section */
 .hero {
-    background: url('../Picture/frameartlogo.jpg') no-repeat center center/cover;
-    height: 700px;
+    background: url('../Picture/homepagebackground.jpg') no-repeat center center/cover;
+    position: relative; /* Make the hero section absolutely positioned */
+    top: 0;
+    left: 0;
+    width:  100%; /* Full width */
+    height: 77vh; /* Full viewport height */
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     color: white;
-    width: 100%;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    position: absolute;
-    top: 0;
-    left: 0;
+    z-index: 0; /* Ensure it stays behind other content */
 }
+
+/* Hero Content */
+.hero-content {
+    position: relative;
+    z-index: 2; /* Ensure the content stays above the background */
+    text-align: center;
+    color: white;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.hero-content p {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.hero-content .cta-button {
+    background-color: #ff9900;
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.hero-content .cta-button:hover {
+    background-color: #cc7a00;
+}
+
+/* Overlay Effect */
 .hero::before {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay for better text visibility */
+    z-index: 1;
 }
 
-
-.hero-content {
-    position: absolute; /* ป้องกันการเลื่อนออกจากกลาง */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); /* ย้ายไปตรงกลางจริง ๆ */
-    text-align: center;
-}
-
-
-.hero img {
-    width: 100%;  /* ปรับขนาดให้เต็ม */
-    height: 100%; /* ปรับความสูงให้เต็ม */
-    object-fit: cover; /* ป้องกันภาพผิดสัดส่วน */
-    border-radius: 0; /* เอาขอบมนออก */
-}
-
-/* สไตล์รูปภาพ */
-.w3-center img {
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 50%;
-    transition: transform 0.3s;
-}
-
+/* Features Section */
 .features-container {
     background: white;
-    padding: 170px 100px;
-    margin-top: 470px; /* ลดค่านี้เพื่อลดระยะห่าง */
+    padding: 100px 50px;
+    margin: 0;
     position: relative;
     z-index: 1;
 }
@@ -70,22 +79,43 @@ body {
 .features {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 200px;
-    max-width: 1000px;
-    margin: auto;
+    gap: 100px;
+    max-width: 1300px;
+    margin: 0 auto;
     text-align: center;
+    margin-right: 150px;
 }
 
 .feature {
     background: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
 }
 
+
+.feature img {
+    margin-top: 5%;
+ width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
 .feature:hover {
     transform: translateY(-5px);
 }
 
+.feature h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
 
+.feature p {
+    font-size: 1.2rem;
+    color: #555;
+}
