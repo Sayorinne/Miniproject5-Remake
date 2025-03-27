@@ -76,11 +76,11 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 <div class="dropdown-content">
                     <a href="#"
                         class="<?php echo basename($_SERVER['PHP_SELF']) === 'AdminReservePage.php' ? 'active' : ''; ?>">
-                        <span class="nav-link">ประวัติการจองคิว</span>
+                        <span class="nav-link">การจองคิว</span>
                     </a>
                     <a href="#"
                         class="<?php echo basename($_SERVER['PHP_SELF']) === 'AdminReserveHistory.php' ? 'active' : ''; ?>">
-                        <span class="nav-link">ประวัติการสั่งซื้อ</span>
+                        <span class="nav-link">การสั่งซื้อ</span>
                     </a>
                 </div>
             </div>

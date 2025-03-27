@@ -35,11 +35,6 @@
                     สมัครสมาชิกเลย
                 </a>
             </p>
-            <p>เข้าแบบไม่ระบุตัวตน
-                <a href="CustomerHomepage.php" style="text-decoration:none;">
-                    ไปสู่หน้าหลัก
-                </a>
-            </p>
         </div>
     </form>
 </body>

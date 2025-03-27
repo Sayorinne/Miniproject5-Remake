@@ -87,31 +87,28 @@
 </head>
 <body>
     <div class="main">
-        <h2>Registration Form</h2>
+        <h2>สมัครสมาชิก</h2>
         <form id="signupForm" method="POST" action="signup.php" onsubmit="return validateForm()">
-            <label for="username">Username:</label>
+            <label for="username">ชื่อผู้ใช้:</label>
             <input type="text" id="username" name="Username" required />
 
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required />
 
-            <label for="password">Password:</label>
+            <label for="password">รหัสผ่าน:</label>
             <input type="password" id="password" name="password" required />
 
-            <label for="repassword">Re-type Password:</label>
+            <label for="repassword">ยืนยันรหัสผ่าน:</label>
             <input type="password" id="repassword" name="repassword" required />
 
-            <label for="Tel">Telephone number:</label>
+            <label for="Tel">เบอร์โทร:</label>
             <input type="text" id="Tel" name="Tel" required pattern="\d{10}"
-                title="Enter a valid 10-digit phone number">
-            <button type="submit">Register</button>
+                title="กรอกเบอร์โทรศัพท์ให้ถูกต้อง (10 ตัวเลข)" />
+            <button type="submit">สมัครสมาชิก</button>
         </form>
 
         <p>มีบัญชีแล้วใช่ไหม?
-            <a href="login.php">กลับสู่หน้า</a>
-        </p>
-        <p>เข้าแบบไม่ระบุตัวตน
-            <a href="CustomerHomepage.php">ไปสู่หน้าหลัก</a>
+            <a href="login.php">ล็อคอิน</a>
         </p>
     </div>
 
@@ -122,17 +119,17 @@
             const tel = document.getElementById('Tel').value;
 
             if (!/^\d{10}$/.test(tel)) {
-                alert('Enter a valid 10-digit phone number.');
+                alert('กรอกเบอร์โทรศัพท์ให้ถูกต้อง');
                 return false;
             }
 
             if (!/^[a-zA-Z0-9]+$/.test(password)) {
-                alert('Password must contain only alphabets and numbers.');
+                alert('รหัสจะต้องมีตัวอักษร (a-z) หรือตัวเลข (0-9) เท่านั้น');
                 return false;
             }
 
             if (password !== repassword) {
-                alert('Passwords do not match.');
+                alert('รหัสผ่านไม่ตรงกัน');
                 return false;
             }
 
@@ -147,8 +144,8 @@
             if (urlParams.has('status') && urlParams.get('status') === 'success') {
                 document.body.style.overflow = 'hidden';
                 Swal.fire({
-                    title: 'Registration Successful!',
-                    text: 'Your account has been created successfully.',
+                    title: 'สมัครสมาชิกเสร็จสิ้น',
+                    text: 'บัญได้ถูกสร้างขึ้นเรียบร้อยแล้ว',
                     icon: 'success',
                     confirmButtonText: 'OK',
                     allowOutsideClick: true

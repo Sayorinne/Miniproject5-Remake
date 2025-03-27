@@ -71,6 +71,10 @@ $stripeSessionId = $session->id;
         rel="stylesheet">
 
     <!-- JavaScript -->
+    <script 
+    src="JS/profile.js" defer>
+    </script>
+    
     <script src="https://js.stripe.com/v3/"></script>
 </head>
 

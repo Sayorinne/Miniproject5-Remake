@@ -83,7 +83,7 @@ include "database.php";
                         </div>
 
                         <a class="edit-profile-btn" href="CustomerEditProfile.php">
-                            <button>Edit Profile</button>
+                            <p>Edit Profile</p>
                         </a>
                     </div>
 </body>

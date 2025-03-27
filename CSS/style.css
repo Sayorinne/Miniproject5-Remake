@@ -1,6 +1,6 @@
 /* General Styles */
 body {
-  background-color: #FEFBF6;
+  background-color: #fff;
   color: #000000;
   font-family: "Mitr", sans-serif;
   font-weight: 400;
@@ -9,6 +9,10 @@ body {
   scrollbar-width: thin;
   margin: 0;
   padding: 0;
+
+  background-image: linear-gradient(180deg, transparent, #183B4E 95%);
+  background-repeat: repeat;
+  background-attachment: fixed;
 }
 
 /* Headings */
@@ -25,7 +29,7 @@ h1, h2, h3, span {
 
 /* Right Main Content */
 .layout .right-main {
-  margin-top: 8%;
+  margin-top: 4%;
   margin-left: 220px; /* Push content to the right to match sidebar width */
   width: calc(100% - 220px); /* Adjust width dynamically */
 }
@@ -42,7 +46,9 @@ h1, h2, h3, span {
   position: relative;
   z-index: 1;
 }
-
+main {
+  padding-top: 4%;
+}
 /* Grid Layout for Images */
 .content-grid {
   display: grid;
