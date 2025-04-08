@@ -1,0 +1,137 @@
+/* ทำให้ Layout แบ่งเป็น 2 ฝั่ง */
+.cart-layout {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px;
+    padding: 40px;
+    background: linear-gradient(to bottom, #ffffff, #ffffff); /* ละมุน ๆ */
+    font-family: 'Mitr', sans-serif;
+  }
+  
+  /* คอลัมน์สินค้าด้านซ้าย */
+  .cart-items {
+    flex: 2;
+    min-width: 300px;
+  }
+  
+  /* กล่องสินค้าแต่ละชิ้น */
+  .cart-item {
+    display: flex;
+    gap: 20px;
+    background: white;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    align-items: center;
+  }
+  
+  .cart-item img {
+    width: 160px;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .item-details {
+    flex: 1;
+  }
+  
+  .item-details h4 {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+  
+  .qty-edit {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+  }
+  
+  .qty-edit input {
+    width: 40px;
+    text-align: center;
+    padding: 4px;
+  }
+  
+  .qty-edit button {
+    padding: 4px 10px;
+    font-size: 1rem;
+    background-color: #eee;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+  }
+  
+  .remove-btn {
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  /* คอลัมน์สรุปคำสั่งซื้อด้านขวา */
+  .order-summary {
+    flex: 1;
+    min-width: 280px;
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  
+  .order-summary h2 {
+    margin-bottom: 16px;
+  }
+  
+  .summary-detail p,
+  .total-summary p {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    font-weight: 500;
+  }
+  
+  .promo-code {
+    margin: 20px 0;
+  }
+  
+  .promo-code input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+  }
+  
+  .apply-btn {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    background-color: #f8f8f8;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .checkout-button {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    padding: 12px;
+    background-color: #28a745;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 8px;
+  }
+  
+  .checkout-button:hover {
+    background-color: #218838;
+  }
+  
