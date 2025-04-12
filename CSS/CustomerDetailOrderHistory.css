@@ -1,0 +1,136 @@
+body {
+    font-family: 'Mitr', sans-serif;
+    background-color: #f2f4f8;
+    margin: 0;
+  }
+  
+  .order-detail-container {
+    padding: 30px 40px;
+    background-color: #f2f4f8;
+  }
+  
+  .section-title {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #333;
+  }
+  
+  .order-summary {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.04);
+    display: grid;
+    gap: 10px;
+  }
+  
+  .status {
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 14px;
+    color: #fff;
+  }
+  
+  .status.completed {
+    background-color: #10b981;
+  }
+  
+  .status.pending {
+    background-color: #f59e0b;
+  }
+  
+  .status.cancelled {
+    background-color: #ef4444;
+  }
+  
+  .product-list {
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.04);
+  }
+  
+  .product-header, .product-row {
+    display: grid;
+    grid-template-columns: 40% 20% 20% 20%;
+    padding: 16px 20px;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 16px;
+  }
+  
+  .product-header {
+    background-color: #f1f5f9;
+    font-weight: bold;
+  }
+  
+  .total-section {
+    margin-top: 20px;
+    text-align: right;
+    font-size: 20px;
+    font-weight: 500;
+    color: #1f2937;
+  }
+  
+  .total-price {
+    color: #2563eb;
+  }
+  
+  .action-buttons {
+    margin-top: 30px;
+  }
+  
+  .btn-back {
+    text-decoration: none;
+    background-color: #3b82f6;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-back:hover {
+    background-color: #2563eb;
+  }
+
+  .product-list {
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.04);
+  }
+  
+  /* ปรับตารางให้มี 5 คอลัมน์ */
+  .product-header, .product-row {
+    display: grid;
+    grid-template-columns: 15% 25% 20% 20% 20%;
+    padding: 16px 20px;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 16px;
+    align-items: center;
+  }
+  
+  .product-header {
+    background-color: #f1f5f9;
+    font-weight: bold;
+  }
+  
+  /* สไตล์รูปภาพ */
+  .product-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  
