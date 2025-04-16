@@ -70,16 +70,16 @@ $current_page = basename($_SERVER['PHP_SELF']);
             
             <div class="dropdown">
                 <a
-                    class="dropdown-header <?php echo in_array(basename($_SERVER['PHP_SELF']), ['AdminReservePage.php', 'AdminReserveHistory.php']) ? 'active' : ''; ?>">
+                    class="dropdown-header <?php echo in_array(basename($_SERVER['PHP_SELF']), ['CustomerHistoryReserve.php']) ? 'active' : ''; ?>">
                     <span class="nav-link"><i class="fa fa-calendar"></i> ประวัติ</span>
                 </a>
                 <div class="dropdown-content">
-                    <a href="#"
-                        class="<?php echo basename($_SERVER['PHP_SELF']) === 'AdminReservePage.php' ? 'active' : ''; ?>">
+                    <a href="CustomerReserveHistory.php"
+                        class="<?php echo basename($_SERVER['PHP_SELF']) === 'CustomerReserveHistory.php' ? 'active' : ''; ?>">
                         <span class="nav-link">การจองคิว</span>
                     </a>
-                    <a href="#"
-                        class="<?php echo basename($_SERVER['PHP_SELF']) === 'AdminReserveHistory.php' ? 'active' : ''; ?>">
+                    <a href="CustomerOrderHistory.php"
+                        class="<?php echo basename($_SERVER['PHP_SELF']) === 'CustomerOrderHistory.php' ? 'active' : ''; ?>">
                         <span class="nav-link">การสั่งซื้อ</span>
                     </a>
                 </div>
