@@ -67,17 +67,31 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 </span>
             </a>
             <hr>
-            
+
             <div class="dropdown">
-                <a
-                    class="dropdown-header <?php echo in_array(basename($_SERVER['PHP_SELF']), ['CustomerReserveHistory.php', 'CustomerOrderHistory.php' , 'CustomerOrderDetailHistory.php' , 'CustomerReserveDetailHistory.php']) ? 'active' : ''; ?>">
+                <a class="dropdown-header <?php echo in_array(
+                    basename($_SERVER['PHP_SELF']),
+                    [
+                        'CustomerReserveRepairHistory.php',
+                        'CustomerReserveCustomHistory.php',
+                        'CustomerReserveDetailHistory.php',
+                        'CustomerOrderHistory.php',
+                        'CustomerOrderHistoryDetail.php',
+                    ]
+                ) ? 'active' : ''; ?>">
                     <span class="nav-link"><i class="fa fa-calendar"></i> ประวัติ</span>
                 </a>
                 <div class="dropdown-content">
-                    <a href="CustomerReserveHistory.php"
-                        class="<?php echo basename($_SERVER['PHP_SELF']) === 'CustomerReserveHistory.php' ? 'active' : ''; ?>">
-                        <span class="nav-link">การจองคิว</span>
+                    <a href="CustomerReserveRepairHistory.php"
+                        class="<?php echo basename($_SERVER['PHP_SELF']) === 'CustomerReserveRepairHistory.php' ? 'active' : ''; ?>">
+                        <span class="nav-link">การจองคิว(ซ่อม)</span>
                     </a>
+
+                    <a href="CustomerReserveCustomHistory.php"
+                        class="<?php echo basename($_SERVER['PHP_SELF']) === 'CustomerReserveCustomHistory.php' ? 'active' : ''; ?>">
+                        <span class="nav-link">การจองคิว(สั่งทำ)</span>
+                    </a>
+
                     <a href="CustomerOrderHistory.php"
                         class="<?php echo basename($_SERVER['PHP_SELF']) === 'CustomerOrderHistory.php' ? 'active' : ''; ?>">
                         <span class="nav-link">การสั่งซื้อ</span>
@@ -162,6 +176,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
     .category-item:hover {
         color: rgb(0, 0, 0);
     }
+
     /* General styles for the dropdown */
     .dropdown {
         position: relative;
@@ -203,7 +218,8 @@ $current_page = basename($_SERVER['PHP_SELF']);
     }
 
     .dropdown:hover .dropdown-content {
-        max-height: 200px; /* Adjust based on the content height */
+        max-height: 200px;
+        /* Adjust based on the content height */
         opacity: 1;
         transform: translateY(0);
     }

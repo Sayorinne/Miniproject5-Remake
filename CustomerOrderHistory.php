@@ -60,7 +60,7 @@ include "database.php";
           </div>
 
           <div class="order-footer">
-          <a href="CustomerDetailOrderHistory.php?order_id=12345" class="btn-detail">
+          <a href="CustomerOrderHistoryDetail.php" class="btn-detail">
       <i class="fas fa-eye"></i> ดูรายละเอียด
     </a>
 
