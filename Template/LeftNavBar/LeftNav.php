@@ -70,7 +70,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
             
             <div class="dropdown">
                 <a
-                    class="dropdown-header <?php echo in_array(basename($_SERVER['PHP_SELF']), ['CustomerHistoryReserve.php']) ? 'active' : ''; ?>">
+                    class="dropdown-header <?php echo in_array(basename($_SERVER['PHP_SELF']), ['CustomerReserveHistory.php', 'CustomerOrderHistory.php' , 'CustomerOrderDetailHistory.php' , 'CustomerReserveDetailHistory.php']) ? 'active' : ''; ?>">
                     <span class="nav-link"><i class="fa fa-calendar"></i> ประวัติ</span>
                 </a>
                 <div class="dropdown-content">
