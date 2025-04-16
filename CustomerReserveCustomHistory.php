@@ -28,6 +28,7 @@ $user_id = $_SESSION['user_id'];
     <link rel="stylesheet" href="CSS/post.css" />
     <link rel="stylesheet" href="CSS/navbar.css" />
     <link rel="stylesheet" href="CSS/CustomerHistoryReserve.css" />
+    <link rel="stylesheet" href="CSS/CustomerReserveHistoryStatus.css" />
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -112,6 +113,7 @@ $user_id = $_SESSION['user_id'];
                                     <td colspan="6">ไม่มีประวัติการจอง</td>
                                 </tr>
                             <?php endif; ?>
+                            
                         </tbody>
                     </table>
                 </div>

@@ -19,6 +19,7 @@ include "database.php";
   <link rel="stylesheet" href="CSS/style.css" />
   <link rel="stylesheet" href="CSS/navbar.css" />
   <link rel="stylesheet" href="CSS/CustomerDetailOrderHistory.css" />
+  
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500;600&display=swap" rel="stylesheet" />
