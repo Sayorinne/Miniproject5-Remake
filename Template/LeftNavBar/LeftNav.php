@@ -68,13 +68,19 @@ $current_page = basename($_SERVER['PHP_SELF']);
             </a>
             <hr>
 
+            <?php
+            // Get the current page name without query parameters
+            $current_page = basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+            ?>
+            
+            <!-- Example for the "ประวัติ" dropdown -->
             <div class="dropdown">
                 <a class="dropdown-header <?php echo in_array(
-                    basename($_SERVER['PHP_SELF']),
+                    $current_page,
                     [
                         'CustomerReserveRepairHistory.php',
                         'CustomerReserveCustomHistory.php',
-                        'CustomerReserveDetailHistory.php',
+                        'CustomerReserveRepairHistoryDetail.php',
                         'CustomerOrderHistory.php',
                         'CustomerOrderHistoryDetail.php',
                     ]
@@ -83,17 +89,17 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 </a>
                 <div class="dropdown-content">
                     <a href="CustomerReserveRepairHistory.php"
-                        class="<?php echo basename($_SERVER['PHP_SELF']) === 'CustomerReserveRepairHistory.php' ? 'active' : ''; ?>">
-                        <span class="nav-link">การจองคิว(ซ่อม)</span>
+                        class="<?php echo $current_page === 'CustomerReserveRepairHistory.php' ? 'active' : ''; ?>">
+                        <span class="nav-link">จองคิว (ซ่อม)</span>
                     </a>
-
+            
                     <a href="CustomerReserveCustomHistory.php"
-                        class="<?php echo basename($_SERVER['PHP_SELF']) === 'CustomerReserveCustomHistory.php' ? 'active' : ''; ?>">
-                        <span class="nav-link">การจองคิว(สั่งทำ)</span>
+                        class="<?php echo $current_page === 'CustomerReserveCustomHistory.php' ? 'active' : ''; ?>">
+                        <span class="nav-link">จองคิว (สั่งทำ)</span>
                     </a>
-
+            
                     <a href="CustomerOrderHistory.php"
-                        class="<?php echo basename($_SERVER['PHP_SELF']) === 'CustomerOrderHistory.php' ? 'active' : ''; ?>">
+                        class="<?php echo $current_page === 'CustomerOrderHistory.php' ? 'active' : ''; ?>">
                         <span class="nav-link">การสั่งซื้อ</span>
                     </a>
                 </div>
@@ -198,12 +204,12 @@ $current_page = basename($_SERVER['PHP_SELF']);
     .dropdown-header.active {
         font-weight: bold;
         color: #ffffff;
-        background-color: #0078D7;
+        background-color:rgb(63, 167, 252);
     }
 
     .dropdown-header:hover {
         color: #ffffff;
-        background-color: #0056a3;
+        background-color:rgb(29, 150, 255);
     }
 
     .dropdown-content {
@@ -218,7 +224,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
     }
 
     .dropdown:hover .dropdown-content {
-        max-height: 200px;
+        max-height: 400px;
         /* Adjust based on the content height */
         opacity: 1;
         transform: translateY(0);
@@ -237,7 +243,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
     .dropdown-content a.active {
         font-weight: bold;
         color: #ffffff;
-        background-color: #0078D7;
+        background-color:rgb(103, 186, 255);
         border-left: 3px solid #0078D7;
     }
 

@@ -62,7 +62,7 @@ $user_id = $_SESSION['user_id'];
                     FROM custom_reservations cr
                     JOIN reserve_status_type rst ON cr.status_ID = rst.status_ID
                     WHERE cr.User_ID = '$user_id'
-                    ORDER BY cr.reservation_date DESC";
+                    ORDER BY cr.reservation_date ASC";
                     $result = mysqli_query($conn, $sql);
                     ?>
                     <table>
@@ -70,7 +70,6 @@ $user_id = $_SESSION['user_id'];
                             <tr>
                                 <th>วันที่</th>
                                 <th>เวลา</th>
-                                <th>รายละเอียด</th>
                                 <th>สถานะ</th>
                                 <th>การจัดการ</th>
                             </tr>
@@ -81,7 +80,6 @@ $user_id = $_SESSION['user_id'];
                                     <tr>
                                         <td><?php echo htmlspecialchars($reserveCustom['reservation_date']); ?></td>
                                         <td><?php echo htmlspecialchars($reserveCustom['reservation_time']); ?></td>
-                                        <td><?php echo htmlspecialchars($reserveCustom['detail']); ?></td>
                                         <td>
                                             <?php
                                             $statusClass = '';
@@ -99,7 +97,7 @@ $user_id = $_SESSION['user_id'];
                                         </td>
                                         <td>
                                             <a
-                                                href="CustomerReserveHistoryDetail.php?repair_id=<?php echo $reserveCustom['custom_id']; ?>">
+                                                href="CustomerReserveCustomHistoryDetail.php?custom_id=<?php echo $reserveCustom['custom_id']; ?>">
                                                 <button class="btn-detail"><i class="fas fa-eye"></i> รายละเอียด</button>
                                             </a>
                                             <?php if ($reserveCustom['status_ID'] == 1): ?>

@@ -61,58 +61,44 @@ $user_id = $_SESSION['user_id'];
                   FROM repair_reservations rr
                   JOIN reserve_status_type rst ON rr.status_ID = rst.status_ID
                   WHERE rr.User_ID = '$user_id'
-                  ORDER BY rr.reservation_date DESC";
+                  ORDER BY rr.reservation_date ASC";
           $result = mysqli_query($conn, $sql);
           ?>
           <table>
             <thead>
               <tr>
-                <th>รหัส</th>
                 <th>วันที่</th>
                 <th>เวลา</th>
-                <th>รายละเอียด</th>
                 <th>สถานะ</th>
                 <th>การจัดการ</th>
               </tr>
             </thead>
             <tbody>
-    <?php if ($result && mysqli_num_rows($result) > 0): ?>
-        <?php while ($reserveRepair = mysqli_fetch_assoc($result)): ?>
-            <tr>
-                <td><?php echo htmlspecialchars($reserveRepair['reservation_date']); ?></td>
-                <td><?php echo htmlspecialchars($reserveRepair['reservation_time']); ?></td>
-                <td><?php echo htmlspecialchars($reserveRepair['detail']); ?></td>
-                <td>
-                    <?php 
-                    $statusClass = '';
-                    if ($reserveRepair['status_name'] == 'รอดำเนินการ') {
-                        $statusClass = 'status-pending';
-                    } elseif ($reserveRepair['status_name'] == 'ยืนยัน') {
-                        $statusClass = 'status-confirmed';
-                    } elseif ($reserveRepair['status_name'] == 'ยกเลิก') {
-                        $statusClass = 'status-cancelled';
-                    }
-                    ?>
-                    <span class="<?php echo $statusClass; ?>">
+              <?php if ($result && mysqli_num_rows($result) > 0): ?>
+                <?php while ($reserveRepair = mysqli_fetch_assoc($result)): ?>
+                  <tr>
+                    <td><?php echo htmlspecialchars($reserveRepair['reservation_date']); ?></td>
+                    <td><?php echo htmlspecialchars($reserveRepair['reservation_time']); ?></td>
+                    <td> <span class="<?php echo $statusClass; ?>">
                         <?php echo htmlspecialchars($reserveRepair['status_name']); ?>
-                    </span>
-                </td>
-                <td>
-                    <a href="CustomerReserveHistoryDetail.php?repair_id=<?php echo $reserveRepair['repair_id']; ?>">
+                      </span>
+                    </td>
+                    <td>
+                      <a href="CustomerReserveRepairHistoryDetail.php?repair_id=<?php echo $reserveRepair['repair_id']; ?>">
                         <button class="btn-detail"><i class="fas fa-eye"></i> รายละเอียด</button>
-                    </a>
-                    <?php if ($reserveRepair['status_ID'] == 1): ?>
+                      </a>
+                      <?php if ($reserveRepair['status_ID'] == 0): ?>
                         <button class="btn-cancel"><i class="fas fa-times"></i> ยกเลิก</button>
-                    <?php endif; ?>
-                </td>
-            </tr>
-        <?php endwhile; ?>
-    <?php else: ?>
-        <tr>
-            <td colspan="6">ไม่มีประวัติการจอง</td>
-        </tr>
-    <?php endif; ?>
-</tbody>
+                      <?php endif; ?>
+                    </td>
+                  </tr>
+                <?php endwhile; ?>
+              <?php else: ?>
+                <tr>
+                  <td colspan="6">ไม่มีประวัติการจอง</td>
+                </tr>
+              <?php endif; ?>
+            </tbody>
 
           </table>
         </div>
