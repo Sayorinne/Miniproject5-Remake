@@ -58,7 +58,7 @@ $user_id = $_SESSION['user_id'];
                 <div class="booking-table">
                     <?php
                     // Fetch custom reservation history for the logged-in user
-                    $sql = "SELECT cr.custom_id, cr.reservation_date, cr.reservation_time, cr.detail, rst.status_name 
+                    $sql = "SELECT cr.custom_id, cr.reservation_date, cr.reservation_time, cr.status_ID ,cr.detail, rst.status_name 
                     FROM custom_reservations cr
                     JOIN reserve_status_type rst ON cr.status_ID = rst.status_ID
                     WHERE cr.User_ID = '$user_id'

@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 ?>
 
-<!DOCTYPE html>Q
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -57,7 +57,7 @@ $user_id = $_SESSION['user_id'];
         <h2><i class="fas fa-clock"></i> ประวัติการจองคิว</h2>
         <div class="booking-table">
           <?php // Fetch repair reservation history for the logged-in user
-          $sql = "SELECT rr.repair_id, rr.reservation_date, rr.reservation_time, rr.detail, rst.status_name 
+          $sql = "SELECT rr.repair_id, rr.reservation_date, rr.reservation_time, rr.detail, rr.status_ID, rst.status_name 
                   FROM repair_reservations rr
                   JOIN reserve_status_type rst ON rr.status_ID = rst.status_ID
                   WHERE rr.User_ID = '$user_id'
