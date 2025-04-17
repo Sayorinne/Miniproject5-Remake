@@ -87,7 +87,7 @@ $user_id = $_SESSION['user_id'];
                       <a href="CustomerReserveRepairHistoryDetail.php?repair_id=<?php echo $reserveRepair['repair_id']; ?>">
                         <button class="btn-detail"><i class="fas fa-eye"></i> รายละเอียด</button>
                       </a>
-                      <?php if ($reserveRepair['status_ID'] == 0): ?>
+                      <?php if ($reserveRepair['status_ID'] == 1): ?>
                         <button class="btn-cancel"><i class="fas fa-times"></i> ยกเลิก</button>
                       <?php endif; ?>
                     </td>
