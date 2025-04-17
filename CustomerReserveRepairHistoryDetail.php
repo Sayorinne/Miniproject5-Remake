@@ -115,11 +115,11 @@ $reserveRepair = $result->fetch_assoc();
                   <?php 
                   // Map status_name to CSS class
                   $statusClass = '';
-                  if ($reservation['status_name'] == 'รอดำเนินการ') {
+                  if ($reserveRepair['status_name'] == 'รอดำเนินการ') {
                       $statusClass = 'status-pending';
-                  } elseif ($reservation['status_name'] == 'ยืนยัน') {
+                  } elseif ($reserveRepair['status_name'] == 'ยืนยัน') {
                       $statusClass = 'status-confirmed';
-                  } elseif ($reservation['status_name'] == 'ยกเลิก') {
+                  } elseif ($reserveRepair['status_name'] == 'ยกเลิก') {
                       $statusClass = 'status-cancelled';
                   }
                   ?>
