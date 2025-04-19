@@ -89,8 +89,8 @@ $stripeSessionId = $session->id;
 </head>
 
 <body>
-    
-<div class="layout expanded home-page">
+
+    <div class="layout expanded home-page">
         <!-- Left Menu -->
         <?php include './Template/LeftNavBar/LeftNav.php'; ?>
 
@@ -112,7 +112,7 @@ $stripeSessionId = $session->id;
 
                     <div class="left-box">
                         <div class="product-image">
-                            <img src="Picture/<?php echo htmlspecialchars($row['product_image']); ?>" 
+                            <img src="Picture/<?php echo htmlspecialchars($row['product_image']); ?>"
                                 alt="<?php echo htmlspecialchars($row['product_name']); ?>">
                         </div>
                     </div>
@@ -123,9 +123,9 @@ $stripeSessionId = $session->id;
                             <h2 class="product-title"><?php echo htmlspecialchars($row['product_name']); ?></h2>
                             <p class="product-description">รายละเอียดสินค้า: <?php echo $row['detail']; ?></p>
                             <p class="product-specs">
-                                <?php echo "ขนาด : " . htmlspecialchars($row['product_size']) . 
-                                          " | สี : " . htmlspecialchars($row['product_color']) . 
-                                          " | ประเภท : " . htmlspecialchars($row['Category_name']); ?>
+                                <?php echo "ขนาด : " . htmlspecialchars($row['product_size']) .
+                                    " | สี : " . htmlspecialchars($row['product_color']) .
+                                    " | ประเภท : " . htmlspecialchars($row['Category_name']); ?>
                             </p>
                         </div>
 
@@ -136,7 +136,11 @@ $stripeSessionId = $session->id;
 
 
                         <div class="action-buttons">
-                            <button class="add-to-cart">เพิ่มตะกร้า</button>
+                            <form method="POST" action="AddToCart.php">
+                            <input type="hidden" name="product_id" value="<?php echo $row['product_ID']; ?>">
+                            <input type="hidden" name="product_type" value="product"> 
+                            <button type="submit" class="add-to-cart">เพิ่มตะกร้า</button>
+                            </form>
                             <button id="checkout-button" class="buy-now">ซื้อสินค้า</button>
                         </div>
                     </div>
@@ -171,15 +175,17 @@ $stripeSessionId = $session->id;
             </main>
 
         </div>
-    </div>
+    </div>  
 
     <script>
         var stripe = Stripe('pk_test_51QomvwR3rIyanQnHkPyYWIyo5FnRCpgpenwgL03fcXqaPxeQLhkGgBu6zf0d0NqDUWwVLJ1utdFWI3nN943s16zX00OgH5GqTv');
         var checkoutButton = document.getElementById('checkout-button');
 
-        checkoutButton.addEventListener('click', function () {
-            stripe.redirectToCheckout({ sessionId: '<?php echo $stripeSessionId; ?>' })
-                .then(function (result) {
+        checkoutButton.addEventListener('click', function() {
+            stripe.redirectToCheckout({
+                    sessionId: '<?php echo $stripeSessionId; ?>'
+                })
+                .then(function(result) {
                     if (result.error) {
                         alert(result.error.message);
                     }

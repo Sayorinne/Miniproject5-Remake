@@ -3,7 +3,7 @@ session_start();
 include "database.php";
 require 'vendor/autoload.php';
 
-$id = $_GET['id'] ?? null; 
+$id = $_GET['id'] ?? null;
 if (!$id) {
     die("Error: No product ID provided.");
 }
@@ -31,7 +31,7 @@ $session = \Stripe\Checkout\Session::create([
             'price_data' => [
                 'currency' => 'thb',
                 'product_data' => [
-                    'name' => htmlspecialchars($row['Art_name']), 
+                    'name' => htmlspecialchars($row['Art_name']),
                 ],
                 'unit_amount' => intval(floatval($row['Art_price']) * 100),
             ],
@@ -71,17 +71,17 @@ $stripeSessionId = $session->id;
         rel="stylesheet">
 
     <!-- JavaScript -->
-    <script 
-    src="JS/profile.js" defer>
+    <script
+        src="JS/profile.js" defer>
     </script>
-    
+
     <script src="https://js.stripe.com/v3/"></script>
 </head>
 
 <body>
 
 
-<div class="layout expanded home-page">
+    <div class="layout expanded home-page">
         <!-- Left Menu -->
         <?php include './Template/LeftNavBar/LeftNav.php'; ?>
 
@@ -103,19 +103,20 @@ $stripeSessionId = $session->id;
 
                     <div class="left-box">
                         <div class="product-image">
-                            <img src="Picture/<?php echo htmlspecialchars($row['Art_image']); ?>" 
+                            <img src="Picture/<?php echo htmlspecialchars($row['Art_image']); ?>"
                                 alt="<?php echo htmlspecialchars($row['Art_name']); ?>">
                         </div>
                     </div>
 
-    
+
                     <div class="right-box">
                         <div class="product-info">
                             <h2 class="product-title"><?php echo htmlspecialchars($row['Art_name']); ?></h2>
-                            <p class="product-description">รายละเอียดสินค้า: <?php echo $row['detail']; // ALLOW HTML ?></p>
+                            <p class="product-description">รายละเอียดสินค้า: <?php echo $row['detail']; // ALLOW HTML 
+                                                                                ?></p>
                             <p class="product-specs">
-                                <?php echo "ขนาด : " . htmlspecialchars($row['Art_size']) . 
-                                          " | สี : " . htmlspecialchars($row['Art_color']); ?>
+                                <?php echo "ขนาด : " . htmlspecialchars($row['Art_size']) .
+                                    " | สี : " . htmlspecialchars($row['Art_color']); ?>
                             </p>
                         </div>
 
@@ -125,7 +126,11 @@ $stripeSessionId = $session->id;
 
 
                         <div class="action-buttons">
-                            <button class="add-to-cart">เพิ่มตะกร้า</button>
+                            <form method="POST" action="AddToCart.php">
+                                <input type="hidden" name="product_id" value="<?php echo $row['Art_ID']; ?>">
+                                <input type="hidden" name="product_type" value="artproduct">
+                                <button type="submit" class="add-to-cart">เพิ่มตะกร้า</button>
+                            </form>
                             <button id="checkout-button" class="buy-now">ซื้อสินค้า</button>
                         </div>
                     </div>
@@ -170,9 +175,11 @@ $stripeSessionId = $session->id;
         var stripe = Stripe('pk_test_51QomvwR3rIyanQnHkPyYWIyo5FnRCpgpenwgL03fcXqaPxeQLhkGgBu6zf0d0NqDUWwVLJ1utdFWI3nN943s16zX00OgH5GqTv');
         var checkoutButton = document.getElementById('checkout-button');
 
-        checkoutButton.addEventListener('click', function () {
-            stripe.redirectToCheckout({ sessionId: '<?php echo $stripeSessionId; ?>' })
-                .then(function (result) {
+        checkoutButton.addEventListener('click', function() {
+            stripe.redirectToCheckout({
+                    sessionId: '<?php echo $stripeSessionId; ?>'
+                })
+                .then(function(result) {
                     if (result.error) {
                         alert(result.error.message);
                     }

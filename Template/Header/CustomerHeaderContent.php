@@ -2,7 +2,7 @@
 $user = null; // Initialize $user as null
 
 // Create a separate database connection for the header
-$header_conn = new mysqli("localhost", "root", "26102540c", "frameart_db");
+$header_conn = new mysqli("localhost", "root", "", "frameart_db");
 
 if ($header_conn->connect_error) {
     die("Connection failed: " . $header_conn->connect_error);
@@ -30,7 +30,9 @@ $header_conn->close();
 
 <div class="shopping-cart-icon">
     <?php if (isset($_SESSION['user_id'])): ?>
+        <a href="CustomerAddtoCart.php">
         <h5>คำสั่งซื้อทั้งหมด</h5>
+    </a>
     <?php endif; ?>
 </div>
 <div class="profile-icon">
