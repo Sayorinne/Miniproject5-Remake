@@ -124,6 +124,13 @@
 }
 
 
+.time-btn.reserved {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
+
 /* ปุ่มยกเลิก ยืนยัน */
 a.service-btn.accept {
     background-color: #28a745;

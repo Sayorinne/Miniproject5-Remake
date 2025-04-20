@@ -32,7 +32,7 @@ include "database.php";
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
-<body>
+<<body data-reservation-type="repair">>
 
 <div class="layout expanded home-page">
         <!-- Left Menu -->

@@ -1,6 +1,10 @@
 <?php
 session_start();
 include "database.php";
+require 'vendor/autoload.php';
+\Stripe\Stripe::setApiKey(
+  'sk_test_51QomvwR3rIyanQnHomFEx3J6p3lztGZBJ7VmcwuEh8rM7ayIo4VSfCL0ZHHd38py9lypcq5BiLid2nMnn2tsjsLh00ST1xNI1v'
+);
 
 // ตรวจสอบว่าผู้ใช้เข้าสู่ระบบหรือยัง
 if (!isset($_SESSION['user_id'])) {
@@ -27,7 +31,8 @@ if (!isset($_SESSION['user_id'])) {
   <link rel="stylesheet" href="CSS/CustomerAddtoCart.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;400;500;600;700&display=swap"
+    rel="stylesheet" />
   <script src="JS/profile.js" defer></script>
 </head>
 
@@ -69,7 +74,7 @@ if (!isset($_SESSION['user_id'])) {
             FROM cart_item ci
             JOIN shopping_cart sc ON ci.Cart_ID = sc.Cart_ID
             LEFT JOIN product p ON ci.Product_ID = p.product_ID
-            WHERE sc.User_ID = ? AND sc.Status = 'pending'
+            WHERE sc.User_ID = ? AND sc.Status = 'pending' AND ci.Product_ID IS NOT NULL
             
             UNION
             
@@ -78,23 +83,38 @@ if (!isset($_SESSION['user_id'])) {
             FROM cart_item ci
             JOIN shopping_cart sc ON ci.Cart_ID = sc.Cart_ID
             LEFT JOIN artproduct a ON ci.Art_ID = a.Art_ID
-            WHERE sc.User_ID = ? AND sc.Status = 'pending'
+            WHERE sc.User_ID = ? AND sc.Status = 'pending' AND ci.Art_ID IS NOT NULL
             ";
-            
+
 
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("ss", $user_id, $user_id); // ใช้ bind_param เพื่อป้องกัน SQL Injection
             $stmt->execute();
             $result = $stmt->get_result(); // ใช้ get_result() เพื่อดึงผลลัพธ์
-
+            
             // วนลูปแสดงรายการสินค้าทั้งจาก product และ artproduct
             while ($row = mysqli_fetch_assoc($result)):
               $subtotal = $row['product_price'] * $row['Quantity'];
               $total += $subtotal;
               $item_count++;
-            ?>
+
+              $line_items[] = [
+                'price_data' => [
+                  'currency' => 'thb',
+                  'unit_amount' => intval($row['product_price'] * 100), // Convert to cents and ensure it's an integer
+                  'product_data' => [
+                    'name' => $row['product_name'],
+                    'images' => ["Picture/" . $row['product_image']],
+                  ],
+                ],
+                'quantity' => $row['Quantity'],
+              ];
+              ?>
+
+
               <div class="cart-item">
-                <img src="Picture/<?php echo htmlspecialchars($row['product_image']); ?>" alt="<?php echo htmlspecialchars($row['product_name']); ?>" />
+                <img src="Picture/<?php echo htmlspecialchars($row['product_image']); ?>"
+                  alt="<?php echo htmlspecialchars($row['product_name']); ?>" />
                 <div class="item-details">
                   <h4><?php echo htmlspecialchars($row['product_name']); ?></h4>
                   <p>฿<?php echo number_format($row['product_price'], 2); ?></p>
@@ -126,11 +146,79 @@ if (!isset($_SESSION['user_id'])) {
               <p>Total Cost <span>฿<?php echo number_format($total + 5, 2); ?></span></p>
             </div>
 
-            <?php if ($item_count > 0): ?>
-              <a href="Checkout.php" class="checkout-button">Checkout</a>
+                       <?php if ($item_count > 0): ?>
+              <button id="checkout-button" class="checkout-button">Checkout</button>
+            
+              <script src="https://js.stripe.com/v3/"></script>
+              <script>
+                var stripe = Stripe('pk_test_51QomvwR3rIyanQnHkPyYWIyo5FnRCpgpenwgL03fcXqaPxeQLhkGgBu6zf0d0NqDUWwVLJ1utdFWI3nN943s16zX00OgH5GqTv');
+                var checkoutButton = document.getElementById('checkout-button');
+            
+                checkoutButton.addEventListener('click', function() {
+                  // Create an array of product IDs and quantities
+                  var items = [
+                    <?php
+                    mysqli_data_seek($result, 0); // Reset the result pointer
+                    while ($row = mysqli_fetch_assoc($result)) {
+                      echo "{id: '" . $row['Product_ID'] . "', quantity: " . $row['Quantity'] . "},";
+                    }
+                    ?>
+                  ];
+            
+                  // Send the cart data to create-checkout-session.php
+                  fetch('create-checkout-session.php', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ items: items })
+                  })
+                  .then(function(response) {
+                    return response.json();
+                  })
+                  .then(function(session) {
+                    return stripe.redirectToCheckout({ sessionId: session.id });
+                  })
+                  .then(function(result) {
+                    if (result.error) {
+                      alert(result.error.message);
+                    }
+                  })
+                  .catch(function(error) {
+                    console.error('Error:', error);
+                  });
+                });
+              </script>
             <?php endif; ?>
           </div>
         </div>
+
+        <?php
+        $stripeSessionId = '';
+        if (isset($_POST['checkout']) && !empty($line_items)) {
+          try {
+            $session = \Stripe\Checkout\Session::create([
+              'payment_method_types' => ['card'],
+              'line_items' => $line_items,
+              'mode' => 'payment',
+              'success_url' => 'http://localhost/MiniProject5/payment-success.php',
+              'cancel_url' => 'http://localhost/MiniProject5/payment-cancel.php',
+              'shipping_address_collection' => [
+                'allowed_countries' => ['TH'],
+              ],
+              'phone_number_collection' => [
+                'enabled' => true,
+              ],
+            ]);
+            $stripeSessionId = $session->id;
+          } catch (\Stripe\Exception\ApiErrorException $e) {
+            // Handle error
+            echo 'Error: ' . $e->getMessage();
+          }
+        }
+        ?>
+
+
       </main>
     </div>
   </div>

@@ -33,7 +33,7 @@ $user_id = $_SESSION['user_id'];
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
-<body>
+<body data-reservation-type="custom">
 
 <div class="layout expanded home-page">
         <!-- Left Menu -->
@@ -78,9 +78,6 @@ $user_id = $_SESSION['user_id'];
                         </div>
                         <h3>เลือกวัน</h3>
                         <div class="schedule-grid" id="days-container">
-
-
-
                         </div>
                     </div>
                     <div class="time-box">

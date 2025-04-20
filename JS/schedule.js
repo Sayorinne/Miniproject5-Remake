@@ -37,6 +37,11 @@ function updateDays() {
 }
 
 function updateTimes() {
+    if (!selectedDate) {
+        console.error("Error: selectedDate is null. Please select a date first.");
+        return; // Exit the function if selectedDate is not set
+    }
+
     const timeGrid = document.querySelector('.time-grid');
     const now = new Date();
 
@@ -47,23 +52,41 @@ function updateTimes() {
     end.setHours(18, 0, 0, 0);
     const interval = 30; // 30 minutes
 
-    for (let time = new Date(start); time <= end; time.setMinutes(time.getMinutes() + interval)) {
-        const button = document.createElement('button');
-        button.className = 'time-btn';
-        button.textContent = time.toTimeString().slice(0, 5); // Format time as HH:mm
+    // Determine the reservation type (repair or custom)
+    const reservationType = document.body.dataset.reservationType;
 
-        if (selectedDate && selectedDate.toDateString() === now.toDateString() && time < now) {
-            button.disabled = true;
-        } else {
-            button.addEventListener('click', () => {
-                document.querySelectorAll('.time-btn').forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-                document.getElementById('selected-time').value = button.textContent.trim(); // Update hidden input for the time
-                console.log(`Selected Date: ${selectedDate}, Selected Time: ${button.textContent}`);
-            });
-        }
-        timeGrid.appendChild(button);
-    }
+    // Format the selected date as YYYY-MM-DD in the correct timezone
+    const selectedDateString = selectedDate.toLocaleDateString('en-CA'); // Format as YYYY-MM-DD
+
+    fetch(`getReservedTime.php?date=${selectedDateString}&type=${reservationType}`)
+        .then(response => response.json())
+        .then(reservedTimes => {
+            console.log("Reserved Times:", reservedTimes); // Debugging: Log reserved times
+            for (let time = new Date(start); time <= end; time.setMinutes(time.getMinutes() + interval)) {
+                const button = document.createElement('button');
+                button.className = 'time-btn';
+                button.textContent = time.toTimeString().slice(0, 5); // Format time as HH:mm
+
+                const timeString = time.toTimeString().slice(0, 5); // Format time as HH:mm
+                if (reservedTimes.includes(timeString)) {
+                    button.disabled = true; // Disable reserved times
+                    button.classList.add('reserved'); // Optional: Add a class for styling
+                } else if (selectedDate && selectedDate.toDateString() === now.toDateString() && time < now) {
+                    button.disabled = true; // Disable past times for today
+                } else {
+                    button.addEventListener('click', () => {
+                        document.querySelectorAll('.time-btn').forEach(btn => btn.classList.remove('active'));
+                        button.classList.add('active');
+                        document.getElementById('selected-time').value = button.textContent.trim(); // Update hidden input for the time
+                        console.log(`Selected Date: ${selectedDate}, Selected Time: ${button.textContent}`);
+                    });
+                }
+                timeGrid.appendChild(button);
+            }
+        })
+        .catch(error => {
+            console.error("Error fetching reserved times:", error);
+        });
 }
 
 function setActiveButton(buttons, activeButton) {
@@ -90,9 +113,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('selected-month').value = activeMonthButton.getAttribute('data-month');
     document.getElementById('selected-year').value = activeYearButton.getAttribute('data-year');
 
-    // Update days and times based on the default selections
+    // Update days based on the default selections
     updateDays();
-    updateTimes();
+
+    // Do not call updateTimes() here because selectedDate is not set yet
 
     // Add event listeners for month buttons
     monthButtons.forEach(button => {

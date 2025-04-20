@@ -2,7 +2,7 @@
 $user = null; // Initialize $user as null
 
 // Create a separate database connection for the header
-$header_conn = new mysqli("localhost", "root", "", "frameart_db");
+$header_conn = new mysqli("localhost", "root", "26102540c", "frameart_db");
 
 if ($header_conn->connect_error) {
     die("Connection failed: " . $header_conn->connect_error);
