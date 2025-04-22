@@ -43,12 +43,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($stmt->execute()) {
         echo "Repair reservation saved successfully!";
+
+
+        $stmt->close();
+
+        $sql = "INSERT INTO notifications (User_ID, title, content, type) VALUES (?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $title = "มีการกำหนดวันนัดหมายใหม่";
+        $content = $detail;
+        $type = "repair";
+        $stmt->bind_param('ssss', $user_id, $title, $content, $type); // Use 's' for string
+        $stmt->execute();
+        $stmt->close();
+        $conn->close();
+
         header('Location: successPage.php'); // Redirect to a success page
     } else {
         echo "Error: " . $stmt->error;
+        $stmt->close();
     }
-
-    $stmt->close();
     $conn->close();
 }
 ?>

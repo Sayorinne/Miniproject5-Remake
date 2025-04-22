@@ -8,6 +8,7 @@ if (!$id) {
     die("Error: No product ID provided.");
 }
 
+$user_id = $_SESSION['user_id'];
 
 $sql = "SELECT * FROM artproduct WHERE Art_ID = ?";
 $stmt = $conn->prepare($sql);
@@ -39,8 +40,17 @@ $session = \Stripe\Checkout\Session::create([
         ]
     ],
     'mode' => 'payment',
-    'success_url' => 'http://localhost/MiniProject5/success.php',
-    'cancel_url' => 'http://localhost/MiniProject5/cancel.php',
+    'success_url' => 'https://91e3-134-236-161-121.ngrok-free.app/MiniProject5/payment-success.php',  // Update this URL for production or ngrok
+    'cancel_url' => 'https://91e3-134-236-161-121.ngrok-free.app/MiniProject5/payment-failed.php',
+    'metadata' => [
+        'user_id' => $_SESSION['user_id']
+    ],
+    'shipping_address_collection' => [
+        'allowed_countries' => ['TH'], // Add other country codes as needed
+    ],
+    'phone_number_collection' => [
+        'enabled' => true,
+    ],
 ]);
 
 
@@ -71,8 +81,7 @@ $stripeSessionId = $session->id;
         rel="stylesheet">
 
     <!-- JavaScript -->
-    <script
-        src="JS/profile.js" defer>
+    <script src="JS/profile.js" defer>
     </script>
 
     <script src="https://js.stripe.com/v3/"></script>
@@ -113,7 +122,7 @@ $stripeSessionId = $session->id;
                         <div class="product-info">
                             <h2 class="product-title"><?php echo htmlspecialchars($row['Art_name']); ?></h2>
                             <p class="product-description">รายละเอียดสินค้า: <?php echo $row['detail']; // ALLOW HTML 
-                                                                                ?></p>
+                            ?></p>
                             <p class="product-specs">
                                 <?php echo "ขนาด : " . htmlspecialchars($row['Art_size']) .
                                     " | สี : " . htmlspecialchars($row['Art_color']); ?>
@@ -175,11 +184,11 @@ $stripeSessionId = $session->id;
         var stripe = Stripe('pk_test_51QomvwR3rIyanQnHkPyYWIyo5FnRCpgpenwgL03fcXqaPxeQLhkGgBu6zf0d0NqDUWwVLJ1utdFWI3nN943s16zX00OgH5GqTv');
         var checkoutButton = document.getElementById('checkout-button');
 
-        checkoutButton.addEventListener('click', function() {
+        checkoutButton.addEventListener('click', function () {
             stripe.redirectToCheckout({
-                    sessionId: '<?php echo $stripeSessionId; ?>'
-                })
-                .then(function(result) {
+                sessionId: '<?php echo $stripeSessionId; ?>'
+            })
+                .then(function (result) {
                     if (result.error) {
                         alert(result.error.message);
                     }

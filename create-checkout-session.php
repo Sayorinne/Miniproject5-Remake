@@ -3,6 +3,8 @@ session_start();
 include "database.php";
 require 'vendor/autoload.php';
 
+$user_id = $_SESSION['user_id'];
+
 \Stripe\Stripe::setApiKey('sk_test_51QomvwR3rIyanQnHomFEx3J6p3lztGZBJ7VmcwuEh8rM7ayIo4VSfCL0ZHHd38py9lypcq5BiLid2nMnn2tsjsLh00ST1xNI1v');
 $input = json_decode(file_get_contents('php://input'), true);
 $items = $input['items'];
@@ -13,11 +15,14 @@ foreach ($items as $item) {
     $id = intval($item['id']);
     $quantity = intval($item['quantity']);
 
-    $sql = "SELECT product_name, product_price FROM product WHERE product_ID = '$id'";
-    $result = mysqli_query($conn, $sql);
+    // Use prepared statements to avoid SQL injection
+    $stmt = $conn->prepare("SELECT product_name, product_price FROM product WHERE product_ID = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    if (mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
         $line_items[] = [
             'price_data' => [
                 'currency' => 'thb',
@@ -29,6 +34,8 @@ foreach ($items as $item) {
             'quantity' => $quantity,
         ];
     }
+
+    $stmt->close();
 }
 
 if (!empty($line_items)) {
@@ -37,8 +44,11 @@ if (!empty($line_items)) {
             'payment_method_types' => ['card'],
             'line_items' => $line_items,
             'mode' => 'payment',
-            'success_url' => 'http://localhost/MiniProject5/payment-success.php',
-            'cancel_url' => 'http://localhost/MiniProject5/payment-cancel.php',
+            'success_url' => 'https://91e3-134-236-161-121.ngrok-free.app/MiniProject5/payment-success.php',  // Update this URL for production or ngrok
+            'cancel_url' => 'https://91e3-134-236-161-121.ngrok-free.app/MiniProject5/payment-failed.php',  // Same here
+            'metadata' => [
+                'user_id' => $user_id,
+                ],
             'billing_address_collection' => 'required',
             'shipping_address_collection' => [
                 'allowed_countries' => ['TH'],

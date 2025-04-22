@@ -3,6 +3,8 @@ session_start();
 include "database.php";
 require 'vendor/autoload.php';
 
+$user_id = $_SESSION['user_id'];
+
 if (isset($_GET["id"])) {
     $id = intval($_GET["id"]);
 
@@ -45,8 +47,11 @@ $session = \Stripe\Checkout\Session::create([
         ]
     ],
     'mode' => 'payment',
-    'success_url' => 'http://localhost/payment-success.php',
-    'cancel_url' => 'http://localhost/payment-cancel.php',
+    'success_url' => 'https://91e3-134-236-161-121.ngrok-free.app/MiniProject5/payment-success.php',  // Update this URL for production or ngrok
+    'cancel_url' => 'https://91e3-134-236-161-121.ngrok-free.app/MiniProject5/payment-failed.php',
+    'metadata' => [
+        'user_id' => $user_id
+    ],
     'shipping_address_collection' => [
         'allowed_countries' => ['TH'], // Add other country codes as needed
     ],
@@ -137,9 +142,9 @@ $stripeSessionId = $session->id;
 
                         <div class="action-buttons">
                             <form method="POST" action="AddToCart.php">
-                            <input type="hidden" name="product_id" value="<?php echo $row['product_ID']; ?>">
-                            <input type="hidden" name="product_type" value="product"> 
-                            <button type="submit" class="add-to-cart">เพิ่มตะกร้า</button>
+                                <input type="hidden" name="product_id" value="<?php echo $row['product_ID']; ?>">
+                                <input type="hidden" name="product_type" value="product">
+                                <button type="submit" class="add-to-cart">เพิ่มตะกร้า</button>
                             </form>
                             <button id="checkout-button" class="buy-now">ซื้อสินค้า</button>
                         </div>
@@ -175,17 +180,17 @@ $stripeSessionId = $session->id;
             </main>
 
         </div>
-    </div>  
+    </div>
 
     <script>
         var stripe = Stripe('pk_test_51QomvwR3rIyanQnHkPyYWIyo5FnRCpgpenwgL03fcXqaPxeQLhkGgBu6zf0d0NqDUWwVLJ1utdFWI3nN943s16zX00OgH5GqTv');
         var checkoutButton = document.getElementById('checkout-button');
 
-        checkoutButton.addEventListener('click', function() {
+        checkoutButton.addEventListener('click', function () {
             stripe.redirectToCheckout({
-                    sessionId: '<?php echo $stripeSessionId; ?>'
-                })
-                .then(function(result) {
+                sessionId: '<?php echo $stripeSessionId; ?>'
+            })
+                .then(function (result) {
                     if (result.error) {
                         alert(result.error.message);
                     }

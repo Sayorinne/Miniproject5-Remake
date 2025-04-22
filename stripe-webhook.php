@@ -1,8 +1,16 @@
 <?php
+session_start();
 require 'vendor/autoload.php';
 include "database.php";
 
-$endpoint_secret = 'whsec_...';
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+
+error_log("Webhook script started");
+
+$endpoint_secret = 'whsec_LX2aCSJQz67q5x9Cp6lwyc6w8KXS3nrE';
 
 $payload = @file_get_contents('php://input');
 $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
@@ -11,47 +19,61 @@ $event = null;
 try {
     $event = \Stripe\Webhook::constructEvent(
         $payload, $sig_header, $endpoint_secret
-    );
+    );  
+    error_log("Event constructed successfully: " . $event->type);
 } catch(\UnexpectedValueException $e) {
+    error_log("Invalid payload: " . $e->getMessage());
     http_response_code(400);
     exit();
 } catch(\Stripe\Exception\SignatureVerificationException $e) {
+    error_log("Invalid signature: " . $e->getMessage());
     http_response_code(400);
     exit();
 }
 
-if ($event->type == 'checkout.session.completed') {
-    $session = $event->data->object;
-    
-    // Update the transaction in your database
-    $sql = "UPDATE transactions SET 
-            status = ?, 
-            stripe_payment_intent_id = ?,
-            shipping_name = ?,
-            shipping_address_line1 = ?,
-            shipping_address_line2 = ?,
-            shipping_city = ?,
-            shipping_state = ?,
-            shipping_postal_code = ?,
-            shipping_country = ?,
-            phone_number = ?
-            WHERE stripe_session_id = ?";
-    
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssssssssss", 
-        'completed',
-        $session->payment_intent,
-        $session->shipping->name,
-        $session->shipping->address->line1,
-        $session->shipping->address->line2,
-        $session->shipping->address->city,
-        $session->shipping->address->state,
-        $session->shipping->address->postal_code,
-        $session->shipping->address->country,
-        $session->customer_details->phone,
-        $session->id
-    );
-    $stmt->execute();
+// Debug database connection
+if ($conn->connect_error) {
+    error_log("Database connection failed: " . $conn->connect_error);
+    http_response_code(500);
+    exit();
+} else {
+    error_log("Database connection successful");
 }
 
+
+error_log("Webhook received. Event type: " . $event->type);
+
+if ($event->type == 'payment_intent.succeeded') {
+    $paymentIntent = $event->data->object;
+    error_log("PaymentIntent ID: " . $paymentIntent->id);
+
+    $metadata = $paymentIntent->metadata;
+    error_log("Metadata received: " . json_encode($metadata));
+
+    $user_id = $metadata->user_id ?? 'unknown';
+    error_log("Extracted User ID: $user_id");
+
+    // Insert notification into database
+    $title = "การทำธุรกรรมสำเร็จ";
+    $content = "ขอบคุณสำหรับการชำระเงินของคุณ! การสั่งซื้อของคุณได้รับการยืนยันแล้ว";
+    $type = "shopping";
+
+    $sql = "INSERT INTO notifications (User_ID, title, content, type) VALUES (?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    if ($stmt) {
+        $stmt->bind_param('ssss', $user_id, $title, $content, $type);
+        if ($stmt->execute()) {
+            error_log("Notification inserted successfully for user: $user_id");
+        } else {
+            error_log("Failed to insert notification: " . $stmt->error);
+        }
+        $stmt->close();
+    } else {
+        error_log("Failed to prepare statement: " . $conn->error);
+    }
+} else {
+    error_log("Received event type: " . $event->type);
+}
+
+error_log("Webhook processing completed");
 http_response_code(200);
