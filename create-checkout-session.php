@@ -5,6 +5,12 @@ require 'vendor/autoload.php';
 
 $user_id = $_SESSION['user_id'];
 
+$stmt = $conn->prepare("SELECT Cart_ID FROM shopping_cart WHERE User_ID = ? AND Status = 'pending' LIMIT 1");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$cart_id = $result->fetch_assoc()['Cart_ID'];
+
 \Stripe\Stripe::setApiKey('sk_test_51QomvwR3rIyanQnHomFEx3J6p3lztGZBJ7VmcwuEh8rM7ayIo4VSfCL0ZHHd38py9lypcq5BiLid2nMnn2tsjsLh00ST1xNI1v');
 $input = json_decode(file_get_contents('php://input'), true);
 $items = $input['items'];
@@ -44,11 +50,15 @@ if (!empty($line_items)) {
             'payment_method_types' => ['card'],
             'line_items' => $line_items,
             'mode' => 'payment',
-            'success_url' => 'https://91e3-134-236-161-121.ngrok-free.app/MiniProject5/payment-success.php',  // Update this URL for production or ngrok
-            'cancel_url' => 'https://91e3-134-236-161-121.ngrok-free.app/MiniProject5/payment-failed.php',  // Same here
-            'metadata' => [
-                'user_id' => $user_id,
+            'success_url' => 'https://2837-134-236-161-121.ngrok-free.app/MiniProject5/payment-success.php',  // Update this URL for production or ngrok
+            'cancel_url' => 'https://2837-134-236-161-121.ngrok-free.app/MiniProject5/payment-failed.php',  // Same here
+            'payment_intent_data' => [
+                'metadata' => [
+                    'user_id' => $user_id,
+                    'from_cart' => 'yes',
+                    'cart_id' => $cart_id,
                 ],
+            ],
             'billing_address_collection' => 'required',
             'shipping_address_collection' => [
                 'allowed_countries' => ['TH'],

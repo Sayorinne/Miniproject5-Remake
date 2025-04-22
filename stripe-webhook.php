@@ -3,13 +3,6 @@ session_start();
 require 'vendor/autoload.php';
 include "database.php";
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-
-error_log("Webhook script started");
-
 $endpoint_secret = 'whsec_LX2aCSJQz67q5x9Cp6lwyc6w8KXS3nrE';
 
 $payload = @file_get_contents('php://input');
@@ -55,7 +48,7 @@ if ($event->type == 'payment_intent.succeeded') {
 
     // Insert notification into database
     $title = "การทำธุรกรรมสำเร็จ";
-    $content = "ขอบคุณสำหรับการชำระเงินของคุณ! การสั่งซื้อของคุณได้รับการยืนยันแล้ว";
+    $content = "มีการทำธุรกรรมสำเร็จสำหรับการสั่งซื้อของคุณ โปรดตรวจสอบรายละเอียดการสั่งซื้อ";
     $type = "shopping";
 
     $sql = "INSERT INTO notifications (User_ID, title, content, type) VALUES (?, ?, ?, ?)";
