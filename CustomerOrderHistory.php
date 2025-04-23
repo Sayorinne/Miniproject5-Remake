@@ -2,6 +2,10 @@
 session_start();
 header("Content-Type: text/html; charset=UTF-8");
 include "database.php";
+
+
+
+$user_id = $_SESSION['user_id'];
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +23,6 @@ include "database.php";
   <link rel="stylesheet" href="CSS/style.css" />
   <link rel="stylesheet" href="CSS/navbar.css" />
   <link rel="stylesheet" href="CSS/CustomerOrderHistory.css" />
-  
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -40,60 +43,58 @@ include "database.php";
         </div>
       </div>
 
-      <!-- Order History Section -->
+      <!-- Purchase History Section -->
       <div class="order-history-container">
         <h2 class="section-title"><i class="fas fa-box-open"></i> ประวัติการสั่งซื้อ</h2>
 
-        <!-- ตัวอย่างคำสั่งซื้อ -->
-        <div class="order-card">
-          <div class="order-header">
-            <div>
-              <p class="order-id"><i class="fas fa-receipt"></i> คำสั่งซื้อ #12345</p>
-              <p class="order-date"><i class="fa-regular fa-calendar-days"></i> 10 เม.ย. 2025</p>
-            </div>
-            <div class="order-status completed">สำเร็จ</div>
-          </div>
+        <?php
+        // Fetch purchase data with customer details
+        $sql = "
+          SELECT 
+            p.purchase_id, 
+            p.purchase_date, 
+            p.total_amount, 
+            p.status, 
+            p.Shipping_Phone,
+            p.Shipping_Address,
+            c.Username AS customer_name 
+          FROM purchases p
+          LEFT JOIN customer c ON p.User_ID = c.User_ID
+          WHERE p.User_ID = '$user_id'
+          ORDER BY p.purchase_id DESC
+        ";
 
-          <div class="order-details">
-            <p><strong>สินค้า:</strong> กรอบรูป A, B, C</p>
-            <p><strong>จำนวน:</strong> 3 ชิ้น</p>
-            <p><strong>ราคารวม:</strong> 1,250 บาท</p>
-          </div>
+        $result = mysqli_query($conn, $sql);
 
-          <div class="order-footer">
-          <a href="CustomerOrderHistoryDetail.php" class="btn-detail">
-      <i class="fas fa-eye"></i> ดูรายละเอียด
-    </a>
+        if (mysqli_num_rows($result) > 0) {
+            while ($order = mysqli_fetch_assoc($result)) {
+                echo '<div class="order-card">';
+                echo '<div class="order-header">';
+                echo '<div>';
+                echo '<p class="order-id"><i class="fas fa-receipt"></i> คำสั่งซื้อ #' . $order['purchase_id'] . '</p>';
+                echo '<p class="order-date"><i class="fa-regular fa-calendar-days"></i> ' . date("d M Y", strtotime($order['purchase_date'])) . '</p>';
+                echo '</div>';
+                echo '<div class="order-status ' . ($order['status'] === 'paid' ? 'completed' : 'pending') . '">' . ($order['status'] === 'paid' ? 'ชำระเงินแล้ว' : 'รอดำเนินการ') . '</div>';
+                echo '</div>';
 
-          </div>
-        </div>
+                echo '<div class="order-details">';
+                echo '<p><strong>ชื่อผู้ซื้อ:</strong> ' . $order['customer_name'] . '</p>';
+                echo '<p><strong>เบอร์โทร:</strong> ' . $order['Shipping_Phone'] . '</p>';
+                echo '<p><strong>ที่อยู่:</strong> ' . $order['Shipping_Address'] . '</p>';
+                echo '<p><strong>ราคารวม:</strong> ' . number_format($order['total_amount'], 2) . ' บาท</p>';
+                echo '</div>';
 
-        <!-- เพิ่ม order-card ซ้ำได้ในลูป -->
-
-        <!-- คำสั่งซื้อใหม่ -->
-        <div class="order-card">
-           <div class="order-header">
-          <div>
-            <p class="order-id"><i class="fas fa-receipt"></i> คำสั่งซื้อ #12346</p>
-            <p class="order-date"><i class="fa-regular fa-calendar-days"></i> 12 เม.ย. 2025</p>
-          </div>
-           <div class="order-status pending">รอดำเนินการ</div>
-          </div>
-
-          <div class="order-details">
-            <p><strong>สินค้า:</strong> กรอบรูป D, E</p>
-            <p><strong>จำนวน:</strong> 2 ชิ้น</p>
-            <p><strong>ราคารวม:</strong> 850 บาท</p>
-          </div>
-
-    <div class="order-footer">
-    <a href="CustomerDetailOrderHistory.php?order_id=12345" class="btn-detail">
-      <i class="fas fa-eye"></i> ดูรายละเอียด
-    </a>
-
-
-        </div>
-        </div>
+                echo '<div class="order-footer">';
+                echo '<a href="CustomerOrderHistoryDetail.php?purchase_id=' . $order['purchase_id'] . '" class="btn-detail">';
+                echo '<i class="fas fa-eye"></i> ดูรายละเอียด';
+                echo '</a>';
+                echo '</div>';
+                echo '</div>';
+            }
+        } else {
+            echo '<p class="no-orders">ไม่มีประวัติการสั่งซื้อ</p>';
+        }
+        ?>
       </div>
     </div>
   </div>

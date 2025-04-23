@@ -4,37 +4,55 @@ $user = null; // Initialize $user as null
 // Create a separate database connection for the header
 $header_conn = new mysqli("localhost", "root", "26102540c", "frameart_db");
 
-if ($header_conn->connect_error) {
-    die("Connection failed: " . $header_conn->connect_error);
-}
+$cart_count = 0; // Initialize cart count
 
 if (isset($_SESSION['user_id'])) {
     $User_ID = $_SESSION['user_id'];
-    $sql = "SELECT * FROM customer WHERE User_ID = '$User_ID'";
-    $result = $header_conn->query($sql);
+    
+    // Fetch user details
+    $sql_user = "SELECT * FROM customer WHERE User_ID = '$User_ID'";
+    $result_user = $header_conn->query($sql_user);
 
-    if ($result && $result->num_rows > 0) {
-        $user = $result->fetch_assoc();
+    if ($result_user && $result_user->num_rows > 0) {
+        $user = $result_user->fetch_assoc();
+    }
+
+    // Fetch cart item count for the user's active cart
+    $sql_cart = "
+        SELECT COUNT(ci.Item_ID) AS cart_count 
+        FROM cart_item ci
+        INNER JOIN shopping_cart sc ON ci.Cart_ID = sc.Cart_ID
+        WHERE sc.User_ID = '$User_ID' AND (sc.Status IS NULL OR sc.Status = 'pending')
+    ";
+    $result_cart = $header_conn->query($sql_cart);
+
+    if ($result_cart && $result_cart->num_rows > 0) {
+        $cart_data = $result_cart->fetch_assoc();
+        $cart_count = $cart_data['cart_count'];
     }
 }
-
 // Close the header connection to avoid conflicts
-$header_conn->close();
+$header_conn->close()
+
+
 ?>
-
-
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-
+<script src="JS/profile.js" defer></script>
 
 <div class="shopping-cart-icon">
     <?php if (isset($_SESSION['user_id'])): ?>
-        <a href="CustomerAddtoCart.php">
-        <h5>คำสั่งซื้อทั้งหมด</h5>
-    </a>
+        <a href="CustomerAddtoCart.php" class="cart-link">
+            <i class="fa fa-shopping-cart" style="font-size: 24px; position: relative;">
+                <?php if ($cart_count > 0): ?>
+                    <span class="cart-count"><?php echo $cart_count; ?></span>
+                <?php endif; ?>
+            </i>
+        </a>
     <?php endif; ?>
 </div>
+
 <div class="profile-icon">
     <!-- Account validate -->
     <?php if ($user): ?>
@@ -68,3 +86,29 @@ $header_conn->close();
         </a>
     <?php endif; ?>
 </div>
+
+<style>
+/* Style for the cart icon and count */
+.shopping-cart-icon {
+    position: relative;
+    display: inline-block;
+}
+
+.cart-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 2px 6px;
+    line-height: 1;
+}
+</style>

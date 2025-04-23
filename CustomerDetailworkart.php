@@ -40,8 +40,8 @@ $session = \Stripe\Checkout\Session::create([
         ]
     ],
     'mode' => 'payment',
-    'success_url' => 'https://2837-134-236-161-121.ngrok-free.app/MiniProject5/payment-success.php',  // Update this URL for production or ngrok
-    'cancel_url' => 'https://2837-134-236-161-121.ngrok-free.app/MiniProject5/payment-failed.php',
+    'success_url' => 'https://071a-110-77-198-93.ngrok-free.app/MiniProject5/payment-success.php',  // Update this URL for production or ngrok
+    'cancel_url' => 'https://071a-110-77-198-93.ngrok-free.app/MiniProject5/payment-failed.php',
     'payment_intent_data' => [
         'metadata' => [
             'user_id' => $user_id,
@@ -50,8 +50,14 @@ $session = \Stripe\Checkout\Session::create([
             'product_type' => 'artproduct', // or 'artproduct'
             'quantity' => 1
         ]
-
     ],
+        'metadata' => [
+            'user_id' => $user_id,
+            'from_cart' => 'no',
+            'product_id' => $row['Art_ID'], // or Art_ID
+            'product_type' => 'artproduct', // or 'artproduct'
+            'quantity' => 1
+        ],
     'shipping_address_collection' => [
         'allowed_countries' => ['TH'], // Add other country codes as needed
     ],

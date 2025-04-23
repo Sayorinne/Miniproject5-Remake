@@ -1,11 +1,14 @@
-<?php  
+<?php
 session_start();
 header("Content-Type: text/html; charset=UTF-8");
 include "database.php";
+
+$user_id = $_SESSION['User_ID'];
 ?>
 
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,7 +22,7 @@ include "database.php";
   <link rel="stylesheet" href="CSS/style.css" />
   <link rel="stylesheet" href="CSS/navbar.css" />
   <link rel="stylesheet" href="CSS/CustomerDetailOrderHistory.css" />
-  
+
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -40,18 +43,68 @@ include "database.php";
       </div>
 
       <!-- Order Detail Section -->
+       <?php
+       // Get the purchase ID from the query parameter
+$purchase_id = isset($_GET['purchase_id']) ? intval($_GET['purchase_id']) : 0;
+
+// Fetch purchase details
+$sql_purchase = "
+          SELECT 
+            p.purchase_id, 
+            p.purchase_date, 
+            p.total_amount, 
+            p.status, 
+            p.Shipping_Phone,
+            p.Shipping_Address,
+            c.Username AS customer_name 
+          FROM purchases p
+          LEFT JOIN customer c ON p.User_ID = c.User_ID
+    WHERE p.purchase_id = $purchase_id
+";
+$result_purchase = mysqli_query($conn, $sql_purchase);
+$purchase = mysqli_fetch_assoc($result_purchase);
+
+// Fetch purchase items (from both artproduct and product tables)
+$sql_items = "
+    SELECT 
+        pi.Quantity, 
+        ap.Art_name AS item_name, 
+        ap.Art_price AS item_price, 
+        ap.Art_image AS item_image 
+    FROM purchase_items pi
+    LEFT JOIN artproduct ap ON pi.Art_ID = ap.Art_ID
+    WHERE pi.Purchase_ID = $purchase_id AND pi.Art_ID IS NOT NULL
+
+    UNION
+
+    SELECT 
+        pi.Quantity, 
+        p.product_name AS item_name, 
+        p.product_price AS item_price, 
+        p.product_image AS item_image 
+    FROM purchase_items pi
+    LEFT JOIN product p ON pi.product_ID = p.product_ID
+    WHERE pi.Purchase_ID = $purchase_id AND pi.product_ID IS NOT NULL
+";
+$result_items = mysqli_query($conn, $sql_items);
+?>
       <div class="order-detail-container">
-        <h2 class="section-title"><i class="fas fa-file-invoice"></i> รายละเอียดคำสั่งซื้อ #12345</h2>
+        <h2 class="section-title"><i class="fas fa-file-invoice"></i> รายละเอียดคำสั่งซื้อ
+          #<?php echo $purchase['purchase_id']; ?></h2>
 
         <div class="order-summary">
-          <div><strong>วันที่สั่งซื้อ:</strong> 10 เม.ย. 2025</div>
-          <div><strong>สถานะ:</strong> <span class="status completed">สำเร็จ</span></div>
-          <div><strong>วิธีชำระเงิน:</strong> โอนผ่านธนาคาร</div>
-          <div><strong>ที่อยู่จัดส่ง:</strong> 123/45 หมู่บ้านสุขใจ เขตเมืองสุข จังหวัดกรุงเทพฯ</div>
+          <div><strong>วันที่สั่งซื้อ:</strong> <?php echo date("d M Y", strtotime($purchase['purchase_date'])); ?>
+          </div>
+          <div><strong>สถานะ:</strong> <span
+              class="status <?php echo $purchase['status'] === 'paid' ? 'completed' : 'pending'; ?>">
+              <?php echo $purchase['status'] === 'paid' ? 'สำเร็จ' : 'รอดำเนินการ'; ?>
+            </span></div>
+          <div><strong>ที่อยู่จัดส่ง:</strong> <?php echo $purchase['Shipping_Address']; ?></div>
+          <div><strong>เบอร์โทร:</strong> <?php echo $purchase['Shipping_Phone']; ?></div>
         </div>
 
         <div class="product-list">
-         <div class="product-header">
+          <div class="product-header">
             <div>รูปภาพ</div>
             <div>สินค้า</div>
             <div>จำนวน</div>
@@ -59,27 +112,23 @@ include "database.php";
             <div>รวม</div>
           </div>
 
-  <!-- สินค้า 1 -->
-        <div class="product-row">
-            <div><img src="Picture/sayo-1.png" alt="กรอบรูป A" class="product-img"></div>
-            <div>กรอบรูป A</div>
-            <div>1</div>
-            <div>350 บาท</div>
-            <div>350 บาท</div>
-          </div>
-
-  <!-- สินค้า 2 -->
-        <div class="product-row">
-          <div><img src="Picture/sayo.png" alt="กรอบรูป B" class="product-img"></div>
-          <div>กรอบรูป B</div>
-          <div>2</div>
-          <div>450 บาท</div>
-          <div>900 บาท</div>
+          <?php while ($item = mysqli_fetch_assoc($result_items)) { ?>
+            <div class="product-row">
+              <div>
+                <img src="Picture/<?php echo !empty($item['item_image']) ? $item['item_image'] : 'default-image.png'; ?>"
+                  alt="<?php echo $item['item_name']; ?>" class="product-img">
+              </div>
+              <div><?php echo $item['item_name']; ?></div>
+              <div><?php echo $item['Quantity']; ?></div>
+              <div><?php echo number_format($item['item_price'], 2); ?> บาท</div>
+              <div><?php echo number_format($item['Quantity'] * $item['item_price'], 2); ?> บาท</div>
+            </div>
+          <?php } ?>
         </div>
-      </div>
 
         <div class="total-section">
-          <div><strong>ราคารวมทั้งหมด:</strong> <span class="total-price">1,250 บาท</span></div>
+          <div><strong>ราคารวมทั้งหมด:</strong> <span
+              class="total-price"><?php echo number_format($purchase['total_amount'], 2); ?> บาท</span></div>
         </div>
 
         <div class="action-buttons">
@@ -89,4 +138,5 @@ include "database.php";
     </div>
   </div>
 </body>
+
 </html>

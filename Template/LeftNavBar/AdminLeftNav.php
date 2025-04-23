@@ -1,5 +1,5 @@
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <link rel="stylesheet" href="CSS/adminStyle.css">
 <link rel="stylesheet" href="CSS/adminNavbar.css">
@@ -35,6 +35,14 @@
                 </a>
             </div>
         </div>
+        <a href="AdminNotification.php" class="<?php echo basename($_SERVER['PHP_SELF']) === 'AdminNotification.php' ? 'active' : ''; ?>">
+            <span class="nav-link"><i class="fa fa-bell"></i> การแจ้งเตือน</span>
+        </a>
+
+        <a href="AdminOrderHistory.php" class="<?php echo in_array(basename($_SERVER['PHP_SELF']),['AdminOrderHistory.php', 'AdminOrderHistoryDetail.php']) ? 'active' : ''; ?>">
+            <span class="nav-link"><i class="fa fa-shopping-cart"></i> ประวัติการสั่งซื้อทั้งหมด</span>
+        </a>
+
     </div>
     <hr>
 </div>

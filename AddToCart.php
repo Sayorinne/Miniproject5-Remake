@@ -1,8 +1,8 @@
 <?php
 session_start();
-ob_start(); 
+ob_start();
 include 'database.php';
-$user_id = $_SESSION['user_id']; 
+$user_id = $_SESSION['user_id'];
 
 $product_id = isset($_POST['product_id']) ? $_POST['product_id'] : null;
 $product_type = isset($_POST['product_type']) ? $_POST['product_type'] : null;
@@ -44,25 +44,20 @@ function addToCart($user_id, $product_id, $product_type, $conn)
 
         if ($stmt->num_rows > 0) {
             // เช็คว่ามีสินค้านี้ในตะกร้าแล้วหรือยัง
-            $sql = "SELECT Item_ID, Quantity FROM cart_item WHERE Cart_ID = ? AND Product_ID = ?";
+            $sql = "SELECT Item_ID FROM cart_item WHERE Cart_ID = ? AND Product_ID = ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("ii", $cart_id, $product_id);
             $stmt->execute();
             $result = $stmt->get_result();
 
             if ($row = $result->fetch_assoc()) {
-                // ถ้ามีสินค้าแล้ว, เพิ่มจำนวนสินค้า
-                $new_quantity = $row['Quantity'] ;
-                $update_sql = "UPDATE cart_item SET Quantity = ? WHERE Item_ID = ?";
-                $update_stmt = $conn->prepare($update_sql);
-                $update_stmt->bind_param("ii", $new_quantity, $row['Item_ID']);
-                $update_stmt->execute();
-                return "เพิ่มจำนวนสินค้านี้ในตะกร้าแล้ว";
+                // ถ้ามีสินค้าแล้ว, ไม่เพิ่มจำนวนสินค้า (ไม่ทำอะไร)
+                return "สินค้ามีอยู่ในตะกร้าแล้ว";
             } else {
                 // ถ้ายังไม่มีสินค้าในตะกร้า, เพิ่มสินค้าใหม่ (1 ชิ้น)
-                $sql = "INSERT INTO cart_item (Cart_ID, Product_ID, Quantity) VALUES (?, ?, 1)";
+                $sql = "INSERT INTO cart_item (Cart_ID, Product_ID, Quantity, type) VALUES (?, ?, 1, ?)";
                 $stmt = $conn->prepare($sql);
-                $stmt->bind_param("ii", $cart_id, $product_id);
+                $stmt->bind_param("iis", $cart_id, $product_id, $product_type);
                 $stmt->execute();
                 return "เพิ่มสินค้าลงในตะกร้าสำเร็จ";
             }
@@ -79,25 +74,20 @@ function addToCart($user_id, $product_id, $product_type, $conn)
 
         if ($stmt->num_rows > 0) {
             // เช็คว่ามีงานศิลปะนี้ในตะกร้าแล้วหรือยัง
-            $sql = "SELECT Item_ID, Quantity FROM cart_item WHERE Cart_ID = ? AND Art_ID = ?";
+            $sql = "SELECT Item_ID FROM cart_item WHERE Cart_ID = ? AND Art_ID = ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("ii", $cart_id, $product_id);
             $stmt->execute();
             $result = $stmt->get_result();
 
             if ($row = $result->fetch_assoc()) {
-                // ถ้ามีงานศิลปะแล้ว, เพิ่มจำนวน
-                $new_quantity = $row['Quantity'] ;
-                $update_sql = "UPDATE cart_item SET Quantity = ? WHERE Item_ID = ?";
-                $update_stmt = $conn->prepare($update_sql);
-                $update_stmt->bind_param("ii", $new_quantity, $row['Item_ID']);
-                $update_stmt->execute();
-                return "เพิ่มจำนวนงานศิลปะนี้ในตะกร้าแล้ว";
+                // ถ้ามีงานศิลปะแล้ว, ไม่เพิ่มจำนวนสินค้า (ไม่ทำอะไร)
+                return "งานศิลปะนี้มีอยู่ในตะกร้าแล้ว";
             } else {
                 // ถ้ายังไม่มีงานศิลปะในตะกร้า, เพิ่มงานศิลปะใหม่ (1 ชิ้น)
-                $sql = "INSERT INTO cart_item (Cart_ID, Art_ID, Quantity) VALUES (?, ?, 1)";
+                $sql = "INSERT INTO cart_item (Cart_ID, Art_ID, Quantity, type) VALUES (?, ?, 1, ?)";
                 $stmt = $conn->prepare($sql);
-                $stmt->bind_param("ii", $cart_id, $product_id);
+                $stmt->bind_param("iis", $cart_id, $product_id, $product_type);
                 $stmt->execute();
                 return "เพิ่มงานศิลปะลงในตะกร้าสำเร็จ";
             }

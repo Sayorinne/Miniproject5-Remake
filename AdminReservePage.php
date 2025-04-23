@@ -293,6 +293,7 @@ $customReservations = mysqli_fetch_all($resultCustom, MYSQLI_ASSOC);
                         </div>
 
                     </div>
+                    <?php include './Template/popup/notificationPopup.php'; ?>
                 </div>
             </div>
         </div>

@@ -257,6 +257,7 @@ if ($filterStatus !== 0) {
                         </div>
 
                     </div>
+                    <?php include './Template/popup/notificationPopup.php'; ?>
                 </div>
             </div>
         </div>

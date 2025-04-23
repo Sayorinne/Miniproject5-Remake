@@ -128,10 +128,12 @@ session_start();
                     </div>
 
 
-
+                    <?php include './Template/popup/notificationPopup.php'; ?>
                 </div>
+
             </div>
         </div>
+
     </div>
     </div>
 </body>
